@@ -83,8 +83,8 @@ ipch/
 _ReSharper*
 
 # nCrunch
-*.ncrunchproject
-*.ncrunchsolution
+#*.ncrunchproject
+#*.ncrunchsolution
 
 # Installshield output folder 
 [Ee]xpress
