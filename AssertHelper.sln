@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssertHelper.Core", "AssertHelper.Core\AssertHelper.Core.csproj", "{83774446-708D-4400-9330-2CB2B3FE01DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssertHelper.Core.Tests", "AssertHelper.Core.Tests\AssertHelper.Core.Tests.csproj", "{2C8B5454-D230-4F4C-8110-1124B459B641}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{83774446-708D-4400-9330-2CB2B3FE01DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83774446-708D-4400-9330-2CB2B3FE01DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83774446-708D-4400-9330-2CB2B3FE01DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83774446-708D-4400-9330-2CB2B3FE01DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C8B5454-D230-4F4C-8110-1124B459B641}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C8B5454-D230-4F4C-8110-1124B459B641}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C8B5454-D230-4F4C-8110-1124B459B641}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C8B5454-D230-4F4C-8110-1124B459B641}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
