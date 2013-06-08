@@ -84,6 +84,7 @@ _ReSharper*
 
 # nCrunch
 *.ncrunchproject
+*.ncrunchsolution
 
 # Installshield output folder 
 [Ee]xpress
