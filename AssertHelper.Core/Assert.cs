@@ -1,82 +1,61 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Reflection;
+using System.Linq;
 
 namespace AssertHelper.Core
 {
     public static class Assert
     {
-        private static readonly MethodInfo IsFalse = typeof(NUnit.Framework.Assert).GetMethod("IsFalse", new[] { typeof(bool) });
-        private static readonly MethodInfo IsTrue = typeof(NUnit.Framework.Assert).GetMethod("IsTrue", new[] { typeof(bool) });
-        private static readonly MethodInfo AreEqual = typeof(NUnit.Framework.Assert).GetMethod("AreEqual", new[] { typeof(object), typeof(object) });
-        private static readonly MethodInfo AreNotEqual = typeof(NUnit.Framework.Assert).GetMethod("AreNotEqual", new[] { typeof(object), typeof(object) });
-
+        private static readonly List<IExpressionTypeToAction> _actionConverters;
+        private static readonly IExpressionTypeToAction _defaultActionConverter = new AssertTrueAction();
+        static Assert()
+        {
+            _actionConverters = new List<IExpressionTypeToAction>
+            {
+                new UnaryNotExpressionToAction(),
+                new BinaryExpressionWithConstantRightAction(),
+                new BinaryExpressionWithConstantLeftAction(),
+                new BinaryExpressionEquals(),
+                new BinaryExpressionNotEquals(),
+                new InstanceOfExpression()
+            };
+        }
 
         public static void This(Expression<Func<bool>> predicate)
         {
             var expression = predicate.Body;
 
-            Expression<Action> assert;
-
-            var unaryExpression = expression as UnaryExpression;
-            if (unaryExpression != null && unaryExpression.NodeType == ExpressionType.Not)
+            var actionConverter = _actionConverters.FirstOrDefault(action => action.IsValid(expression));
+            if (actionConverter == null)
             {
-                assert = GetNotExpression(unaryExpression);
+                actionConverter = _defaultActionConverter;
             }
-            else
-            {
-                var binaryExpression = expression as BinaryExpression;
-                if (binaryExpression != null)
-                {
-                    var constantExpressionRight = binaryExpression.Right as ConstantExpression;
 
-                    if (constantExpressionRight != null)
-                    {
-                        assert = CreateBooleanAssertExpression(constantExpressionRight, binaryExpression.Left, binaryExpression.NodeType);
-                    }
-                    else
-                    {
-                        var constantExpressionLeft = binaryExpression.Left as ConstantExpression;
-
-                        if (constantExpressionLeft != null)
-                        {
-                            assert = CreateBooleanAssertExpression(constantExpressionLeft, binaryExpression.Right, binaryExpression.NodeType);
-                        }
-                        else
-                        {
-                            var methodInfo = binaryExpression.NodeType == ExpressionType.Equal ? AreEqual : AreNotEqual;
-
-                            assert = Expression.Lambda<Action>(Expression.Call(methodInfo, binaryExpression.Left, binaryExpression.Right));
-                        }
-                    }
-                }
-                else
-                {
-                    assert = Expression.Lambda<Action>(Expression.Call(IsTrue, expression));
-                }
-            }
+            var assert = actionConverter.GetAction(expression);
 
             assert.Compile().Invoke();
         }
+    }
 
-        private static Expression<Action> GetNotExpression(UnaryExpression unaryExpression)
+    internal class InstanceOfExpression : ExpressionTypeToAction<TypeBinaryExpression>
+    {
+        protected override bool IsValidInternal(TypeBinaryExpression typedExpression)
         {
-            var operand = unaryExpression.Operand;
-
-            return Expression.Lambda<Action>(Expression.Call(IsFalse, operand));
+            return typedExpression.NodeType == ExpressionType.TypeIs;
         }
 
-        private static Expression<Action> CreateBooleanAssertExpression(ConstantExpression constantExpressionRight, Expression resultExpression, ExpressionType nodeType)
+        protected override Expression<Action> GetActionInternal(TypeBinaryExpression typedExpression)
         {
-            var value = (bool)constantExpressionRight.Value;
-            if (nodeType == ExpressionType.NotEqual)
-            {
-                value = !value;
-            }
+            return AssertBuilder.GetIsInstanceOf(typedExpression.TypeOperand, typedExpression.Expression);
+        }
+    }
 
-            var expression = value ? Expression.Call(IsTrue, resultExpression) : Expression.Call(IsFalse, resultExpression);
-
-            return Expression.Lambda<Action>(expression);
+    internal class NotInstanceOfExpression : ExpressionTypeToAction<TypeBinaryExpression>
+    {
+        protected override Expression<Action> GetActionInternal(TypeBinaryExpression typedExpression)
+        {
+            return AssertBuilder.GetIsInstanceOf(typedExpression.TypeOperand, typedExpression.Expression);
         }
     }
 }

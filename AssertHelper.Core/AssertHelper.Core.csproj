@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="nunit.framework, Version=2.6.2.12296, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -43,7 +39,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assert.cs" />
+    <Compile Include="AssertBuilder.cs" />
+    <Compile Include="ExpressionConverters\AssertTrueAction.cs" />
+    <Compile Include="ExpressionConverters\BinaryExpressionEquals.cs" />
+    <Compile Include="ExpressionConverters\BinaryExpressionNotEquals.cs" />
+    <Compile Include="ExpressionConverters\BinaryExpressionWithConstantBase.cs" />
+    <Compile Include="ExpressionConverters\BinaryExpressionWithConstantLeftAction.cs" />
+    <Compile Include="ExpressionConverters\BinaryExpressionWithConstantRightAction.cs" />
+    <Compile Include="ExpressionConverters\ExpressionTypeToAction.cs" />
+    <Compile Include="ExpressionConverters\IExpressionTypeToAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnaryNotExpressionToAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -130,5 +130,29 @@ namespace AssertHelper.Core.Tests
 
             Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsTrue(value));
         }
+        
+        [Test]
+        public void This_PassRightFalseOrValue_AssertTrueIsCalled()
+        {
+            var value = GetBooleanValue();
+
+            Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
+
+            Assert.This(() => value || false);
+
+            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsTrue(false || value));
+        }
+        
+        [Test]
+        public void This_PassRightValueOrFalse_AssertTrueIsCalled()
+        {
+            var value = GetBooleanValue();
+
+            Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
+
+            Assert.This(() => false || value);
+
+            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsTrue(false || value));
+        }
     }
 }

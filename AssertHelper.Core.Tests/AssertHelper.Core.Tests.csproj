@@ -52,6 +52,8 @@
   <ItemGroup>
     <Compile Include="AssertTestsBooleanConstants.cs" />
     <Compile Include="AssertTestsEquality.cs" />
+    <Compile Include="AssertTestsInstance.cs" />
+    <Compile Include="DummyCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
