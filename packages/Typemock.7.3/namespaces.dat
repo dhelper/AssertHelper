@@ -1,6 +1,7 @@
 nunit
 vstesthost.exe
 MbUnit
+ArmadilloBare
 TestDriven.TestRunner.dll
 TestDriven
 JetBrains.ReSharper.UnitTestRunner.exe
@@ -17,6 +18,8 @@ QTAgent32.exe
 QTAgent.exe
 QTAgent32_35.exe
 QTAgent_35.exe
+QTAgent32_40.exe
+QTAgent_40.exe
 Gallio.Host.exe
 Gallio.Icarus.exe
 TypeMock.dll

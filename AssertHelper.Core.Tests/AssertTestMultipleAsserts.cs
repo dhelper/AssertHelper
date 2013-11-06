@@ -36,7 +36,7 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
-        public void Assert_HaveTwoBooleanInsideAssertBlockOnFail_BothConditionsAreTested()
+        public void Assert_HaveTwoBooleanInsideAssertBlockOneFail_BothConditionsAreTested()
         {
             Isolate.WhenCalled(() => NUnit.Framework.Assert.IsTrue(false)).WillThrow(new NUnit.Framework.AssertionException("This is a test"));
 
@@ -47,6 +47,22 @@ namespace AssertHelper.Core.Tests
 
             Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsTrue(b1));
             Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsTrue(b2));
+        }
+
+        [Test]
+        public void Assert_HaveThreeBooleanInsideAssertBlock_BothConditionsAreTested()
+        {
+            Isolate.WhenCalled(() => NUnit.Framework.Assert.IsTrue(false)).IgnoreCall();
+
+            var b1 = DummyCreator.GetBooleanValue();
+            var b2 = DummyCreator.GetBooleanValue();
+            var b3 = DummyCreator.GetBooleanValue();
+
+            Assert.This(() => b1 && b2 && b3);
+
+            int timesCalled = Isolate.Verify.GetTimesCalled(() => NUnit.Framework.Assert.IsTrue(false));
+
+            NUnit.Framework.Assert.AreEqual(3, timesCalled);
         }
     }
 }

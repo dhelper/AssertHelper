@@ -117,5 +117,8 @@
     <Profiler Name="OpenCover" Clsid="{1542C21D-80C3-45E6-A56C-A9C1E4BEB7B8}" DirectLaunch="false">
       <EnvironmentList />
     </Profiler>
+	<Profiler Name="OpenCover4" Clsid="{1542C21D-80C3-45E6-A56C-A9C1E4BEB7BF}" DirectLaunch="false">
+      <EnvironmentList />
+    </Profiler>
   </ProfilerList>
 </Profilers>

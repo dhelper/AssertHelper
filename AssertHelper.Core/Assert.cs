@@ -29,23 +29,15 @@ namespace AssertHelper.Core
         {
             var expression = predicate.Body;
 
-            if (expression.NodeType == ExpressionType.AndAlso)
+            IEnumerable<Expression<Action>> assertExpressions = GetAllAssertExpressions(expression).ToArray();
+            if (assertExpressions.Count() > 1)
             {
-                var logicalBinaryExpression = (BinaryExpression) expression;
-
-                var assertExpressionRight = GetAssertExpression(logicalBinaryExpression.Right);
-                var assertExpressionLeft = GetAssertExpression(logicalBinaryExpression.Left);
-
-                var compileRight = assertExpressionRight.Compile();
-                var compileLeft = assertExpressionLeft.Compile();
-
-                All(new[] {compileRight, compileLeft});
+                var actions = assertExpressions.Select(expression1 => expression1.Compile());
+                All(actions.ToArray());
             }
             else
             {
-                var assertExpression = GetAssertExpression(expression);
-
-                assertExpression.Compile().Invoke();
+                assertExpressions.Single().Compile().Invoke();
             }
         }
 
@@ -89,7 +81,20 @@ namespace AssertHelper.Core
             return e;
         }
 
-        
+        private static IEnumerable<Expression<Action>> GetAllAssertExpressions(Expression expression)
+        {
+            if (expression.NodeType == ExpressionType.AndAlso)
+            {
+                var logicalBinaryExpression = (BinaryExpression)expression;
+                var rightSide = GetAllAssertExpressions(logicalBinaryExpression.Right);
+                var leftSide = GetAllAssertExpressions(logicalBinaryExpression.Left);
+
+                return leftSide.Concat(rightSide);
+            }
+
+            return new[] { GetAssertExpression(expression) };
+        }
+
         private static Expression<Action> GetAssertExpression(Expression expression)
         {
             var actionConverter = _actionConverters.FirstOrDefault(action => action.IsValid(expression));
