@@ -6,15 +6,10 @@ namespace AssertHelper.Core.Tests
     [TestFixture, Isolated]
     public class AssertTestsBooleanConstants
     {
-        private static bool GetBooleanValue()
-        {
-            return true;
-        }
-
         [Test]
         public void This_PassSingleValue_AssertTrueIsCalled()
         {
-            var value = GetBooleanValue();
+            var value = DummyCreator.GetBooleanValue();
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
@@ -26,7 +21,7 @@ namespace AssertHelper.Core.Tests
         [Test]
         public void This_PassNot_AssertFalseIsCalled()
         {
-            var value = GetBooleanValue();
+            var value = DummyCreator.GetBooleanValue();
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
@@ -38,7 +33,7 @@ namespace AssertHelper.Core.Tests
         [Test]
         public void This_PassLeftValueEqualToTrue_AssertTrueIsCalled()
         {
-            bool value = GetBooleanValue();
+            bool value = DummyCreator.GetBooleanValue();
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
@@ -50,7 +45,7 @@ namespace AssertHelper.Core.Tests
         [Test]
         public void This_PassLeftValueEqualToFalse_AssertFalseIsCalled()
         {
-            var value = GetBooleanValue();
+            var value = DummyCreator.GetBooleanValue();
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
@@ -62,7 +57,7 @@ namespace AssertHelper.Core.Tests
         [Test]
         public void This_PassRightValueEqualToTrue_AssertTrueIsCalled()
         {
-            bool value = GetBooleanValue();
+            bool value = DummyCreator.GetBooleanValue();
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
@@ -74,7 +69,7 @@ namespace AssertHelper.Core.Tests
         [Test]
         public void This_PassRightValueEqualToFalse_AssertFalseIsCalled()
         {
-            var value = GetBooleanValue();
+            var value = DummyCreator.GetBooleanValue();
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
@@ -86,7 +81,7 @@ namespace AssertHelper.Core.Tests
         [Test]
         public void This_PassLeftValueNotEqualToTrue_AssertFalseIsCalled()
         {
-            bool value = GetBooleanValue();
+            bool value = DummyCreator.GetBooleanValue();
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
@@ -98,7 +93,7 @@ namespace AssertHelper.Core.Tests
         [Test]
         public void This_PassLeftValueNotEqualToFalse_AssertTrueIsCalled()
         {
-            var value = GetBooleanValue();
+            var value = DummyCreator.GetBooleanValue();
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
@@ -110,7 +105,7 @@ namespace AssertHelper.Core.Tests
         [Test]
         public void This_PassRightValueNotEqualToTrue_AssertFalseIsCalled()
         {
-            bool value = GetBooleanValue();
+            bool value = DummyCreator.GetBooleanValue();
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
@@ -122,7 +117,7 @@ namespace AssertHelper.Core.Tests
         [Test]
         public void This_PassRightValueNotEqualToFalse_AssertTrueIsCalled()
         {
-            var value = GetBooleanValue();
+            var value = DummyCreator.GetBooleanValue();
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
@@ -134,7 +129,7 @@ namespace AssertHelper.Core.Tests
         [Test]
         public void This_PassRightFalseOrValue_AssertTrueIsCalled()
         {
-            var value = GetBooleanValue();
+            var value = DummyCreator.GetBooleanValue();
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
@@ -146,7 +141,7 @@ namespace AssertHelper.Core.Tests
         [Test]
         public void This_PassRightValueOrFalse_AssertTrueIsCalled()
         {
-            var value = GetBooleanValue();
+            var value = DummyCreator.GetBooleanValue();
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 

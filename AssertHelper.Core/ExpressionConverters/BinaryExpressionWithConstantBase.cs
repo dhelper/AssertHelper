@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace AssertHelper.Core
+namespace AssertHelper.Core.ExpressionConverters
 {
     internal abstract class BinaryExpressionWithConstantBase : ExpressionTypeToAction<BinaryExpression>
     {
         protected override bool IsValidInternal(BinaryExpression typedExpression)
         {
-            return typedExpression.NodeType == ExpressionType.Equal || typedExpression.NodeType == ExpressionType.NotEqual;
+            return typedExpression.NodeType == ExpressionType.Equal ||
+                   typedExpression.NodeType == ExpressionType.NotEqual;
         }
 
-        protected Expression<Action> GetActionForConstant(ConstantExpression constantExpression, Expression resultExpression, ExpressionType expressionType)
+        protected Expression<Action> GetActionForConstant(ConstantExpression constantExpression,
+                                                          Expression resultExpression, ExpressionType expressionType)
         {
             var value = (bool) constantExpression.Value;
             if (expressionType == ExpressionType.NotEqual)
@@ -18,7 +20,9 @@ namespace AssertHelper.Core
                 value = !value;
             }
 
-            return value ? AssertBuilder.GetIsTrueAction(resultExpression) : AssertBuilder.GetIsFalseAction(resultExpression);
+            return value
+                       ? AssertBuilder.GetIsTrueAction(resultExpression)
+                       : AssertBuilder.GetIsFalseAction(resultExpression);
         }
     }
 }

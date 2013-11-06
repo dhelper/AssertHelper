@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using AssertHelper.Core.ExpressionConverters;
 
 namespace AssertHelper.Core
 {

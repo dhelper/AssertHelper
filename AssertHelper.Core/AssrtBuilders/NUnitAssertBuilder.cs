@@ -3,9 +3,9 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Linq;
 
-namespace AssertHelper.Core
+namespace AssertHelper.Core.AssrtBuilders
 {
-    internal class AssertBuilder
+    internal class NUnitAssertBuilder : IAssertBuilder
     {
         private static readonly MethodInfo IsFalse;
         private static readonly MethodInfo IsTrue;
@@ -13,8 +13,9 @@ namespace AssertHelper.Core
         private static readonly MethodInfo AreNotEqual;
         private static readonly MethodInfo IsInstanceOfType;
         private static readonly MethodInfo IsNotInstanceOfType;
+        private static readonly MethodInfo Fail;
 
-        static AssertBuilder()
+        static NUnitAssertBuilder()
         {
             var assertType = AppDomain.CurrentDomain.GetAssemblies()
                                       .Where(a => a.GetName().Name == "nunit.framework")
@@ -27,6 +28,7 @@ namespace AssertHelper.Core
             AreNotEqual = assertType.GetMethod("AreNotEqual", new[] { typeof(object), typeof(object) });
             IsInstanceOfType = assertType.GetMethod("IsInstanceOf", new[] { typeof(Type), typeof(object) });
             IsNotInstanceOfType = assertType.GetMethod("IsNotInstanceOf", new[] { typeof(Type), typeof(object) });
+            Fail = assertType.GetMethod("Fail", new[] { typeof(string) });
         }
 
         public Expression<Action> GetAreEqualAction(Expression left, Expression right)
@@ -49,9 +51,14 @@ namespace AssertHelper.Core
             return Expression.Lambda<Action>(Expression.Call(IsFalse, expression));
         }
 
-       public Expression<Action> GetIsInstanceOf(Type typeOperand, Expression expression)
+        public Expression<Action> GetIsInstanceOf(Type typeOperand, Expression expression)
         {
             return Expression.Lambda<Action>(Expression.Call(IsInstanceOfType, Expression.Constant(typeOperand), expression));
+        }
+
+        public Expression<Action> GetFail(string message)
+        {
+            return Expression.Lambda<Action>(Expression.Call(Fail, Expression.Constant(message)));
         }
     }
 }

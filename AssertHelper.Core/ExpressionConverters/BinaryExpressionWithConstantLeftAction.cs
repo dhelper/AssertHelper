@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq.Expressions;
 
-namespace AssertHelper.Core
+namespace AssertHelper.Core.ExpressionConverters
 {
     internal class BinaryExpressionWithConstantLeftAction : BinaryExpressionWithConstantBase
     {

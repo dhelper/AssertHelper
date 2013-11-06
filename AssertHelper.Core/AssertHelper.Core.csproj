@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AssertHelper.Core</RootNamespace>
     <AssemblyName>AssertHelper.Core</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -39,7 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assert.cs" />
-    <Compile Include="AssertBuilder.cs" />
+    <Compile Include="AssrtBuilders\IAssertBuilder.cs" />
+    <Compile Include="AssrtBuilders\NUnitAssertBuilder.cs" />
     <Compile Include="ExpressionConverters\AssertTrueAction.cs" />
     <Compile Include="ExpressionConverters\BinaryExpressionEquals.cs" />
     <Compile Include="ExpressionConverters\BinaryExpressionNotEquals.cs" />
@@ -47,6 +51,7 @@
     <Compile Include="ExpressionConverters\BinaryExpressionWithConstantLeftAction.cs" />
     <Compile Include="ExpressionConverters\BinaryExpressionWithConstantRightAction.cs" />
     <Compile Include="ExpressionConverters\ExpressionTypeToAction.cs" />
+    <Compile Include="ExpressionConverters\ExpressionTypeToActionBase.cs" />
     <Compile Include="ExpressionConverters\IExpressionTypeToAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnaryNotExpressionToAction.cs" />
@@ -54,6 +59,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

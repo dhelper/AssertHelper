@@ -4,6 +4,21 @@ namespace AssertHelper.Core.Tests
 {
     public static class DummyCreator
     {
+        public static bool GetBooleanValue()
+        {
+            return true;
+        }
+
+        public static bool GetTrueValue()
+        {
+            return true;
+        }
+
+        public static bool GetFalseValue()
+        {
+            return false;
+        }
+
         public static object GetReferenceObject()
         {
             return new object();
