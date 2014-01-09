@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq.Expressions;
-using AssertHelper.Core.AssrtBuilders;
+using AssertHelper.Core.AssertBuilders;
 
 namespace AssertHelper.Core.ExpressionConverters
 {
     internal abstract class ExpressionTypeToActionBase : IExpressionTypeToAction
     {
-        private readonly IAssertBuilder _assertBuilder = AssertBuilderFaxctory.GetAssertBuilder();
+        private readonly IAssertBuilder _assertBuilder = AssertBuilderFactory.GetAssertBuilder();
 
         protected IAssertBuilder AssertBuilder
         {

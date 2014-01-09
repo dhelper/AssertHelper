@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Linq;
 using System.Text;
-using AssertHelper.Core.AssrtBuilders;
+using AssertHelper.Core.AssertBuilders;
 using AssertHelper.Core.ExpressionConverters;
 
 namespace AssertHelper.Core
@@ -21,7 +21,9 @@ namespace AssertHelper.Core
                 new BinaryExpressionWithConstantLeftAction(),
                 new BinaryExpressionEquals(),
                 new BinaryExpressionNotEquals(),
-                new InstanceOfExpression()
+                new InstanceOfExpression(),
+                new EnumerableContains(),
+                new CollectionContains()
             };
         }
 
@@ -67,7 +69,7 @@ namespace AssertHelper.Core
                 errorText.Append(digestStackTrace(e));
             }
 
-            IAssertBuilder assertBuilder = AssertBuilderFaxctory.GetAssertBuilder();
+            IAssertBuilder assertBuilder = AssertBuilderFactory.GetAssertBuilder();
 
             string errorMessage = string.Format("{0}/{1} conditions failed:{2}{2}{3}", errorMessages.Count, assertionsToRun.Length, Environment.NewLine, errorText);
 

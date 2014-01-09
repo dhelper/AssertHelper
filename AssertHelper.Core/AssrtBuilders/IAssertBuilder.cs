@@ -1,13 +1,13 @@
 using System;
 using System.Linq.Expressions;
 
-namespace AssertHelper.Core.AssrtBuilders
+namespace AssertHelper.Core.AssertBuilders
 {
-    internal static class AssertBuilderFaxctory
+    internal static class AssertBuilderFactory
     {
         private static readonly NUnitAssertBuilder _assertBuilder;
 
-        static AssertBuilderFaxctory()
+        static AssertBuilderFactory()
         {
             _assertBuilder = new NUnitAssertBuilder();
         }
@@ -28,5 +28,6 @@ namespace AssertHelper.Core.AssrtBuilders
         Expression<Action> GetIsFalseAction(Expression expression);
         Expression<Action> GetIsInstanceOf(Type typeOperand, Expression expression);
         Expression<Action> GetFail(string message);
+        Expression<Action> GetCollectionContains(Expression collection, Expression value);
     }
 }

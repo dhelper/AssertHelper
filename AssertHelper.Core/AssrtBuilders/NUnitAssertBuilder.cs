@@ -2,8 +2,9 @@
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Linq;
+using System.Collections;
 
-namespace AssertHelper.Core.AssrtBuilders
+namespace AssertHelper.Core.AssertBuilders
 {
     internal class NUnitAssertBuilder : IAssertBuilder
     {
@@ -14,13 +15,13 @@ namespace AssertHelper.Core.AssrtBuilders
         private static readonly MethodInfo IsInstanceOfType;
         private static readonly MethodInfo IsNotInstanceOfType;
         private static readonly MethodInfo Fail;
+        private static readonly MethodInfo CollectionContains;
 
         static NUnitAssertBuilder()
         {
-            var assertType = AppDomain.CurrentDomain.GetAssemblies()
-                                      .Where(a => a.GetName().Name == "nunit.framework")
-                                      .SelectMany(a => a.GetTypes())
-                                      .Single(t => t.Name == "Assert");
+            var nunitAssembly = AppDomain.CurrentDomain.GetAssemblies().Where(a => a.GetName().Name == "nunit.framework");
+            var assertType = nunitAssembly.SelectMany(a => a.GetTypes()).Single(t => t.Name == "Assert");
+             var collectionAssertType = nunitAssembly.SelectMany(a => a.GetTypes()).Single(t => t.Name == "CollectionAssert");
 
             IsFalse = assertType.GetMethod("IsFalse", new[] { typeof(bool) });
             IsTrue = assertType.GetMethod("IsTrue", new[] { typeof(bool) });
@@ -29,6 +30,8 @@ namespace AssertHelper.Core.AssrtBuilders
             IsInstanceOfType = assertType.GetMethod("IsInstanceOf", new[] { typeof(Type), typeof(object) });
             IsNotInstanceOfType = assertType.GetMethod("IsNotInstanceOf", new[] { typeof(Type), typeof(object) });
             Fail = assertType.GetMethod("Fail", new[] { typeof(string) });
+
+           CollectionContains = collectionAssertType.GetMethod("Contains", new[]{typeof(IEnumerable), typeof(object)});
         }
 
         public Expression<Action> GetAreEqualAction(Expression left, Expression right)
@@ -59,6 +62,11 @@ namespace AssertHelper.Core.AssrtBuilders
         public Expression<Action> GetFail(string message)
         {
             return Expression.Lambda<Action>(Expression.Call(Fail, Expression.Constant(message)));
+        }
+
+        public Expression<Action> GetCollectionContains(Expression collection, Expression value)
+        {
+            return Expression.Lambda<Action>(Expression.Call(CollectionContains, Expression.Convert(collection, typeof(IEnumerable)), Expression.Convert(value, typeof(object))));
         }
     }
 }
