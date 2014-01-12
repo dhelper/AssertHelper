@@ -16,12 +16,15 @@ namespace AssertHelper.Core.AssertBuilders
         private static readonly MethodInfo IsNotInstanceOfType;
         private static readonly MethodInfo Fail;
         private static readonly MethodInfo CollectionContains;
+        private static readonly MethodInfo StringContains;         
 
         static NUnitAssertBuilder()
         {
-            var nunitAssembly = AppDomain.CurrentDomain.GetAssemblies().Where(a => a.GetName().Name == "nunit.framework");
-            var assertType = nunitAssembly.SelectMany(a => a.GetTypes()).Single(t => t.Name == "Assert");
-             var collectionAssertType = nunitAssembly.SelectMany(a => a.GetTypes()).Single(t => t.Name == "CollectionAssert");
+            var nunitTypes = AppDomain.CurrentDomain.GetAssemblies()
+                .Where(a => a.GetName().Name == "nunit.framework")
+                .SelectMany(a => a.GetTypes());
+
+            var assertType = nunitTypes.Single(t => t.Name == "Assert");
 
             IsFalse = assertType.GetMethod("IsFalse", new[] { typeof(bool) });
             IsTrue = assertType.GetMethod("IsTrue", new[] { typeof(bool) });
@@ -31,7 +34,12 @@ namespace AssertHelper.Core.AssertBuilders
             IsNotInstanceOfType = assertType.GetMethod("IsNotInstanceOf", new[] { typeof(Type), typeof(object) });
             Fail = assertType.GetMethod("Fail", new[] { typeof(string) });
 
+            var collectionAssertType = nunitTypes.Single(type => type.Name == "CollectionAssert");
            CollectionContains = collectionAssertType.GetMethod("Contains", new[]{typeof(IEnumerable), typeof(object)});
+
+            var stringAssertType = nunitTypes.Single(type => type.Name == "StringAssert");
+            StringContains = stringAssertType.GetMethod("Contains", new[] {typeof (string), typeof (string)});
+
         }
 
         public Expression<Action> GetAreEqualAction(Expression left, Expression right)
@@ -67,6 +75,10 @@ namespace AssertHelper.Core.AssertBuilders
         public Expression<Action> GetCollectionContains(Expression collection, Expression value)
         {
             return Expression.Lambda<Action>(Expression.Call(CollectionContains, Expression.Convert(collection, typeof(IEnumerable)), Expression.Convert(value, typeof(object))));
+        }
+        public Expression<Action> GetStringContains(Expression expected, Expression actual)
+        {
+            return Expression.Lambda<Action>(Expression.Call(StringContains, expected, actual));
         }
     }
 }

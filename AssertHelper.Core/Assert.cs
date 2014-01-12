@@ -23,7 +23,8 @@ namespace AssertHelper.Core
                 new BinaryExpressionNotEquals(),
                 new InstanceOfExpression(),
                 new EnumerableContains(),
-                new CollectionContains()
+                new CollectionContains(),
+                new StringContainsExpression()
             };
         }
 
@@ -107,27 +108,6 @@ namespace AssertHelper.Core
 
             var assert = actionConverter.GetAction(expression);
             return assert;
-        }
-    }
-
-    internal class InstanceOfExpression : ExpressionTypeToAction<TypeBinaryExpression>
-    {
-        protected override bool IsValidInternal(TypeBinaryExpression typedExpression)
-        {
-            return typedExpression.NodeType == ExpressionType.TypeIs;
-        }
-
-        protected override Expression<Action> GetActionInternal(TypeBinaryExpression typedExpression)
-        {
-            return AssertBuilder.GetIsInstanceOf(typedExpression.TypeOperand, typedExpression.Expression);
-        }
-    }
-
-    internal class NotInstanceOfExpression : ExpressionTypeToAction<TypeBinaryExpression>
-    {
-        protected override Expression<Action> GetActionInternal(TypeBinaryExpression typedExpression)
-        {
-            return AssertBuilder.GetIsInstanceOf(typedExpression.TypeOperand, typedExpression.Expression);
         }
     }
 }
