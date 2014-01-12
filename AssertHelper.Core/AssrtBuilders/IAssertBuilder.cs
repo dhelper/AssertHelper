@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace AssertHelper.Core.AssrtBuilders
+namespace AssertHelper.Core.AssertBuilders
 {
     internal static class AssertBuilderFaxctory
     {
@@ -28,5 +28,6 @@ namespace AssertHelper.Core.AssrtBuilders
         Expression<Action> GetIsFalseAction(Expression expression);
         Expression<Action> GetIsInstanceOf(Type typeOperand, Expression expression);
         Expression<Action> GetFail(string message);
+        Expression<Action> GetStringContains(Expression expected, Expression actual);
     }
 }

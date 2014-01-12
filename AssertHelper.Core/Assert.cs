@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Linq;
 using System.Text;
-using AssertHelper.Core.AssrtBuilders;
+using AssertHelper.Core.AssertBuilders;
 using AssertHelper.Core.ExpressionConverters;
 
 namespace AssertHelper.Core
@@ -21,7 +21,8 @@ namespace AssertHelper.Core
                 new BinaryExpressionWithConstantLeftAction(),
                 new BinaryExpressionEquals(),
                 new BinaryExpressionNotEquals(),
-                new InstanceOfExpression()
+                new InstanceOfExpression(),
+                new StringContainsExpression()
             };
         }
 
@@ -105,27 +106,6 @@ namespace AssertHelper.Core
 
             var assert = actionConverter.GetAction(expression);
             return assert;
-        }
-    }
-
-    internal class InstanceOfExpression : ExpressionTypeToAction<TypeBinaryExpression>
-    {
-        protected override bool IsValidInternal(TypeBinaryExpression typedExpression)
-        {
-            return typedExpression.NodeType == ExpressionType.TypeIs;
-        }
-
-        protected override Expression<Action> GetActionInternal(TypeBinaryExpression typedExpression)
-        {
-            return AssertBuilder.GetIsInstanceOf(typedExpression.TypeOperand, typedExpression.Expression);
-        }
-    }
-
-    internal class NotInstanceOfExpression : ExpressionTypeToAction<TypeBinaryExpression>
-    {
-        protected override Expression<Action> GetActionInternal(TypeBinaryExpression typedExpression)
-        {
-            return AssertBuilder.GetIsInstanceOf(typedExpression.TypeOperand, typedExpression.Expression);
         }
     }
 }

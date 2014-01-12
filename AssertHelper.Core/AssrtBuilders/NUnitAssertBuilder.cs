@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Linq;
 
-namespace AssertHelper.Core.AssrtBuilders
+namespace AssertHelper.Core.AssertBuilders
 {
     internal class NUnitAssertBuilder : IAssertBuilder
     {
@@ -14,13 +14,15 @@ namespace AssertHelper.Core.AssrtBuilders
         private static readonly MethodInfo IsInstanceOfType;
         private static readonly MethodInfo IsNotInstanceOfType;
         private static readonly MethodInfo Fail;
+        private static readonly MethodInfo StringContains;
 
         static NUnitAssertBuilder()
         {
-            var assertType = AppDomain.CurrentDomain.GetAssemblies()
-                                      .Where(a => a.GetName().Name == "nunit.framework")
-                                      .SelectMany(a => a.GetTypes())
-                                      .Single(t => t.Name == "Assert");
+            var nunitTypes = AppDomain.CurrentDomain.GetAssemblies()
+                .Where(a => a.GetName().Name == "nunit.framework")
+                .SelectMany(a => a.GetTypes());
+
+            var assertType = nunitTypes.Single(t => t.Name == "Assert");
 
             IsFalse = assertType.GetMethod("IsFalse", new[] { typeof(bool) });
             IsTrue = assertType.GetMethod("IsTrue", new[] { typeof(bool) });
@@ -29,6 +31,9 @@ namespace AssertHelper.Core.AssrtBuilders
             IsInstanceOfType = assertType.GetMethod("IsInstanceOf", new[] { typeof(Type), typeof(object) });
             IsNotInstanceOfType = assertType.GetMethod("IsNotInstanceOf", new[] { typeof(Type), typeof(object) });
             Fail = assertType.GetMethod("Fail", new[] { typeof(string) });
+
+            var stringAssertType = nunitTypes.Single(type => type.Name == "StringAssert");
+            StringContains = stringAssertType.GetMethod("Contains", new[] {typeof (string), typeof (string)});
         }
 
         public Expression<Action> GetAreEqualAction(Expression left, Expression right)
@@ -59,6 +64,11 @@ namespace AssertHelper.Core.AssrtBuilders
         public Expression<Action> GetFail(string message)
         {
             return Expression.Lambda<Action>(Expression.Call(Fail, Expression.Constant(message)));
+        }
+
+        public Expression<Action> GetStringContains(Expression expected, Expression actual)
+        {
+            return Expression.Lambda<Action>(Expression.Call(StringContains, expected, actual));
         }
     }
 }

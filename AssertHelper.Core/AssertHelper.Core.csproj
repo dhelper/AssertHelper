@@ -53,6 +53,9 @@
     <Compile Include="ExpressionConverters\ExpressionTypeToAction.cs" />
     <Compile Include="ExpressionConverters\ExpressionTypeToActionBase.cs" />
     <Compile Include="ExpressionConverters\IExpressionTypeToAction.cs" />
+    <Compile Include="ExpressionConverters\StringContainsExpression.cs" />
+    <Compile Include="ExpressionConverters\InstanceOfExpression.cs" />
+    <Compile Include="ExpressionConverters\NotInstanceOfExpression.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnaryNotExpressionToAction.cs" />
   </ItemGroup>
