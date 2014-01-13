@@ -30,5 +30,7 @@ namespace AssertHelper.Core.AssertBuilders
         Expression<Action> GetFail(string message);
         Expression<Action> GetCollectionContains(Expression collection, Expression value);
         Expression<Action> GetStringContains(Expression expected, Expression actual);
+        Expression<Action> GetStringStartsWith(Expression expected, Expression actual);
+        Expression<Action> GetStringEndsWith(Expression expected, Expression actual);
     }
 }

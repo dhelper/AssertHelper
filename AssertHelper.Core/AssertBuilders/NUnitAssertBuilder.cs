@@ -16,7 +16,9 @@ namespace AssertHelper.Core.AssertBuilders
         private static readonly MethodInfo IsNotInstanceOfType;
         private static readonly MethodInfo Fail;
         private static readonly MethodInfo CollectionContains;
-        private static readonly MethodInfo StringContains;         
+        private static readonly MethodInfo StringContains;
+        private static readonly MethodInfo StringStartsWith;
+        private static readonly MethodInfo StringEndsWith;         
 
         static NUnitAssertBuilder()
         {
@@ -39,7 +41,8 @@ namespace AssertHelper.Core.AssertBuilders
 
             var stringAssertType = nunitTypes.Single(type => type.Name == "StringAssert");
             StringContains = stringAssertType.GetMethod("Contains", new[] {typeof (string), typeof (string)});
-
+            StringStartsWith = stringAssertType.GetMethod("StartsWith", new[] { typeof(string), typeof(string) });
+            StringEndsWith = stringAssertType.GetMethod("EndsWith", new[] { typeof(string), typeof(string) });
         }
 
         public Expression<Action> GetAreEqualAction(Expression left, Expression right)
@@ -79,6 +82,16 @@ namespace AssertHelper.Core.AssertBuilders
         public Expression<Action> GetStringContains(Expression expected, Expression actual)
         {
             return Expression.Lambda<Action>(Expression.Call(StringContains, expected, actual));
+        }
+
+        public Expression<Action> GetStringStartsWith(Expression expected, Expression actual)
+        {
+            return Expression.Lambda<Action>(Expression.Call(StringStartsWith, expected, actual));
+        }
+
+        public Expression<Action> GetStringEndsWith(Expression expected, Expression actual)
+        {
+            return Expression.Lambda<Action>(Expression.Call(StringEndsWith, expected, actual));
         }
     }
 }

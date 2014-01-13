@@ -24,7 +24,9 @@ namespace AssertHelper.Core
                 new InstanceOfExpression(),
                 new EnumerableContains(),
                 new CollectionContains(),
-                new StringContainsExpression()
+                new StringContainsExpression(),
+                new StringStartsWithExpression(),
+                new StringEndsWithExpression()
             };
         }
 

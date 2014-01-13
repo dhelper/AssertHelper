@@ -42,8 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assert.cs" />
-    <Compile Include="AssrtBuilders\IAssertBuilder.cs" />
-    <Compile Include="AssrtBuilders\NUnitAssertBuilder.cs" />
+    <Compile Include="AssertBuilders\IAssertBuilder.cs" />
+    <Compile Include="AssertBuilders\NUnitAssertBuilder.cs" />
     <Compile Include="ExpressionConverters\AssertTrueAction.cs" />
     <Compile Include="ExpressionConverters\BinaryExpressionEquals.cs" />
     <Compile Include="ExpressionConverters\BinaryExpressionNotEquals.cs" />
@@ -57,7 +57,9 @@
     <Compile Include="ExpressionConverters\StringContainsExpression.cs" />
     <Compile Include="ExpressionConverters\InstanceOfExpression.cs" />
     <Compile Include="ExpressionConverters\NotInstanceOfExpression.cs" />
+    <Compile Include="ExpressionConverters\StringEndsWithExpression.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ExpressionConverters\StringStartsWithExpression.cs" />
     <Compile Include="UnaryNotExpressionToAction.cs" />
   </ItemGroup>
   <ItemGroup>

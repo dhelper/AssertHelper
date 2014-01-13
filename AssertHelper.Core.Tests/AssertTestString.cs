@@ -16,5 +16,25 @@ namespace AssertHelper.Core.Tests
 
             Isolate.Verify.WasCalledWithExactArguments(() => StringAssert.Contains("1234", "2"));
         }
+
+        [Test]
+        public void this_StringStartsWithCalled_StringAssertStartsWithUsed()
+        {
+            Isolate.Fake.StaticMethods(typeof(StringAssert));
+
+            Assert.This(() => "1234".StartsWith("2"));
+
+            Isolate.Verify.WasCalledWithExactArguments(() => StringAssert.StartsWith("1234", "2"));
+        }
+
+        [Test]
+        public void this_StringEndssWithCalled_StringAssertStartsWithUsed()
+        {
+            Isolate.Fake.StaticMethods(typeof(StringAssert));
+
+            Assert.This(() => "1234".EndsWith("2"));
+
+            Isolate.Verify.WasCalledWithExactArguments(() => StringAssert.EndsWith("1234", "2"));
+        }
     }
 }
