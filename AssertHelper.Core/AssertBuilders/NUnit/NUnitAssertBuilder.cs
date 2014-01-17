@@ -27,62 +27,62 @@ namespace AssertHelper.Core.AssertBuilders.NUnit
 
         public Expression<Action> GetAreEqualAction(Expression left, Expression right)
         {
-            return Expression.Lambda<Action>(Expression.Call(_assert.AreEqual, Expression.Convert(left, typeof(object)), Expression.Convert(right, typeof(object))));
+            return _assert.AreEqual.ToExpression(Expression.Convert(left, typeof(object)), Expression.Convert(right, typeof(object)));
         }
 
         public Expression<Action> GetAreNotEqualAction(Expression left, Expression right)
         {
-            return Expression.Lambda<Action>(Expression.Call(_assert.AreNotEqual, Expression.Convert(left, typeof(object)), Expression.Convert(right, typeof(object))));
+            return _assert.AreNotEqual.ToExpression(Expression.Convert(left, typeof(object)), Expression.Convert(right, typeof(object)));
         }
 
         public Expression<Action> GetIsTrueAction(Expression expression)
         {
-            return _assert.IsTrue.CreateExpression(expression);
+            return _assert.IsTrue.ToExpression(expression);
         }
 
         public Expression<Action> GetIsFalseAction(Expression expression)
         {
-            return Expression.Lambda<Action>(Expression.Call(_assert.IsFalse, expression));
+            return _assert.IsFalse.ToExpression(expression);
         }
 
         public Expression<Action> GetIsInstanceOf(Type typeOperand, Expression expression)
         {
-            return Expression.Lambda<Action>(Expression.Call(_assert.IsInstanceOfType, Expression.Constant(typeOperand), expression));
+            return _assert.IsInstanceOfType.ToExpression(Expression.Constant(typeOperand), expression);
         }
 
         public Expression<Action> GetFail(string message)
         {
-            return Expression.Lambda<Action>(Expression.Call(_assert.Fail, Expression.Constant(message)));
+            return _assert.Fail.ToExpression(Expression.Constant(message));
         }
 
         public Expression<Action> GetCollectionContains(Expression collection, Expression value)
         {
-            return Expression.Lambda<Action>(Expression.Call(_collectionAssert.Contains, Expression.Convert(collection, typeof(IEnumerable)), Expression.Convert(value, typeof(object))));
+            return _collectionAssert.Contains.ToExpression(Expression.Convert(collection, typeof(IEnumerable)), Expression.Convert(value, typeof(object)));
         }
 
         public Expression<Action> GetCollectionEquals(Expression expected, Expression actual)
         {
-            return Expression.Lambda<Action>(Expression.Call(_collectionAssert.AreEqual, Expression.Convert(expected, typeof(IEnumerable)), Expression.Convert(actual, typeof(IEnumerable))));
+            return _collectionAssert.AreEqual.ToExpression(Expression.Convert(expected, typeof(IEnumerable)), Expression.Convert(actual, typeof(IEnumerable)));
         }
 
         public Expression<Action> GetCollectionNotEquals(Expression expected, Expression actual)
         {
-            return Expression.Lambda<Action>(Expression.Call(_collectionAssert.AreNotEqual, Expression.Convert(expected, typeof(IEnumerable)), Expression.Convert(actual, typeof(IEnumerable))));
+            return _collectionAssert.AreNotEqual.ToExpression(Expression.Convert(expected, typeof(IEnumerable)), Expression.Convert(actual, typeof(IEnumerable)));
         }
 
         public Expression<Action> GetStringContains(Expression expected, Expression actual)
         {
-            return Expression.Lambda<Action>(Expression.Call(_stringAssert.Contains, expected, actual));
+            return _stringAssert.Contains.ToExpression(expected, actual);
         }
 
         public Expression<Action> GetStringStartsWith(Expression expected, Expression actual)
         {
-            return Expression.Lambda<Action>(Expression.Call(_stringAssert.StartsWith, expected, actual));
+            return _stringAssert.StartsWith.ToExpression(expected, actual);
         }
 
         public Expression<Action> GetStringEndsWith(Expression expected, Expression actual)
         {
-            return Expression.Lambda<Action>(Expression.Call(_stringAssert.EndsWith, expected, actual));
+            return _stringAssert.EndsWith.ToExpression(expected, actual);
         }
     }
 }
