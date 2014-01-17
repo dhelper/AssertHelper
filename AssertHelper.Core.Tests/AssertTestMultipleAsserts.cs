@@ -18,7 +18,7 @@ namespace AssertHelper.Core.Tests
             Assert.This(() => obj1 == obj2 && b1);
 
             Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsTrue(b1));
-            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.AreEqual(obj1, obj2));
+            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.AreEqual(obj2, obj1));
         }
 
         [Test]

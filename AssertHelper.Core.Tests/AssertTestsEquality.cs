@@ -16,7 +16,7 @@ namespace AssertHelper.Core.Tests
 
             Assert.This(() => value1 == value2);
 
-            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.AreEqual(value1, value2));
+            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.AreEqual(value2, value1));
         }
 
         [Test]
@@ -29,7 +29,7 @@ namespace AssertHelper.Core.Tests
 
             Assert.This(() => value1 != value2);
 
-            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.AreNotEqual(value1, value2));
+            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.AreNotEqual(value2, value1));
         }
         
         [Test]
@@ -42,7 +42,7 @@ namespace AssertHelper.Core.Tests
 
             Assert.This(() => value1 == value2);
 
-            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.AreEqual(value1, value2));
+            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.AreEqual(value2, value1));
         }
 
         [Test]
@@ -55,7 +55,7 @@ namespace AssertHelper.Core.Tests
 
             Assert.This(() => value1 != value2);
 
-            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.AreNotEqual((object)value1, (object)value2));
+            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.AreNotEqual((object)value2, (object)value1));
         }
         
         [Test]
@@ -68,7 +68,7 @@ namespace AssertHelper.Core.Tests
 
             Assert.This(() => value1 == value2);
 
-            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.AreEqual((object)value1, (object)value2));
+            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.AreEqual((object)value2, (object)value1));
         }
 
         [Test]
@@ -81,7 +81,7 @@ namespace AssertHelper.Core.Tests
 
             Assert.This(() => value1 != value2);
 
-            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.AreNotEqual((object)value1, (object)value2));
+            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.AreNotEqual((object)value2, (object)value1));
         }
         
         [Test]
@@ -94,7 +94,7 @@ namespace AssertHelper.Core.Tests
 
             Assert.This(() => value1 == value2);
 
-            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.AreEqual(value1, value2));
+            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.AreEqual(value2, value1));
         }
 
         [Test]
@@ -107,7 +107,7 @@ namespace AssertHelper.Core.Tests
 
             Assert.This(() => value1 != value2);
 
-            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.AreNotEqual((object)value1, (object)value2));
+            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.AreNotEqual((object)value2, (object)value1));
         }
     }
 }

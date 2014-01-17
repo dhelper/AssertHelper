@@ -1,3 +1,4 @@
+using AssertHelper.Core.AssertBuilders.NUnit;
 using System;
 using System.Linq.Expressions;
 
@@ -29,8 +30,14 @@ namespace AssertHelper.Core.AssertBuilders
         Expression<Action> GetIsInstanceOf(Type typeOperand, Expression expression);
         Expression<Action> GetFail(string message);
         Expression<Action> GetCollectionContains(Expression collection, Expression value);
+        Expression<Action> GetCollectionEquals(Expression expected, Expression actual);
+        Expression<Action> GetCollectionNotEquals(Expression expected, Expression actual);
         Expression<Action> GetStringContains(Expression expected, Expression actual);
         Expression<Action> GetStringStartsWith(Expression expected, Expression actual);
         Expression<Action> GetStringEndsWith(Expression expected, Expression actual);
+
+
+
+        
     }
 }

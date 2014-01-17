@@ -16,17 +16,18 @@ namespace AssertHelper.Core
         {
             _actionConverters = new List<IExpressionTypeToAction>
             {
+                new StringContainsExpression(),
+                new StringStartsWithExpression(),
+                new StringEndsWithExpression(),
                 new UnaryNotExpressionToAction(),
                 new BinaryExpressionWithConstantRightAction(),
                 new BinaryExpressionWithConstantLeftAction(),
+                new EnumerableEquals(),
                 new BinaryExpressionEquals(),
                 new BinaryExpressionNotEquals(),
                 new InstanceOfExpression(),
                 new EnumerableContains(),
-                new CollectionContains(),
-                new StringContainsExpression(),
-                new StringStartsWithExpression(),
-                new StringEndsWithExpression()
+                new CollectionContains()                
             };
         }
 

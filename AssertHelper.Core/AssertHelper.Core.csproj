@@ -43,7 +43,10 @@
   <ItemGroup>
     <Compile Include="Assert.cs" />
     <Compile Include="AssertBuilders\IAssertBuilder.cs" />
-    <Compile Include="AssertBuilders\NUnitAssertBuilder.cs" />
+    <Compile Include="AssertBuilders\NUnit\AssertMethods.cs" />
+    <Compile Include="AssertBuilders\NUnit\CollectionAssertMethods.cs" />
+    <Compile Include="AssertBuilders\NUnit\NUnitAssertBuilder.cs" />
+    <Compile Include="AssertBuilders\NUnit\StringAssertMethods.cs" />
     <Compile Include="ExpressionConverters\AssertTrueAction.cs" />
     <Compile Include="ExpressionConverters\BinaryExpressionEquals.cs" />
     <Compile Include="ExpressionConverters\BinaryExpressionNotEquals.cs" />
@@ -51,6 +54,7 @@
     <Compile Include="ExpressionConverters\BinaryExpressionWithConstantLeftAction.cs" />
     <Compile Include="ExpressionConverters\BinaryExpressionWithConstantRightAction.cs" />
     <Compile Include="ExpressionConverters\EnumerableContains.cs" />
+    <Compile Include="ExpressionConverters\EnumerableEquals.cs" />
     <Compile Include="ExpressionConverters\ExpressionTypeToAction.cs" />
     <Compile Include="ExpressionConverters\ExpressionTypeToActionBase.cs" />
     <Compile Include="ExpressionConverters\IExpressionTypeToAction.cs" />
@@ -58,6 +62,8 @@
     <Compile Include="ExpressionConverters\InstanceOfExpression.cs" />
     <Compile Include="ExpressionConverters\NotInstanceOfExpression.cs" />
     <Compile Include="ExpressionConverters\StringEndsWithExpression.cs" />
+    <Compile Include="Extensions\MethodInfoExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ExpressionConverters\StringStartsWithExpression.cs" />
     <Compile Include="UnaryNotExpressionToAction.cs" />
