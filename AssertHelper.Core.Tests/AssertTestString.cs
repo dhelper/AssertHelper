@@ -14,7 +14,7 @@ namespace AssertHelper.Core.Tests
 
             Assert.This(() => "1234".Contains("2"));
 
-            Isolate.Verify.WasCalledWithExactArguments(() => StringAssert.Contains("1234", "2"));
+            Isolate.Verify.WasCalledWithExactArguments(() => StringAssert.Contains("2", "1234"));
         }
 
         [Test]
@@ -24,7 +24,7 @@ namespace AssertHelper.Core.Tests
 
             Assert.This(() => "1234".StartsWith("2"));
 
-            Isolate.Verify.WasCalledWithExactArguments(() => StringAssert.StartsWith("1234", "2"));
+            Isolate.Verify.WasCalledWithExactArguments(() => StringAssert.StartsWith("2", "1234"));
         }
 
         [Test]
@@ -34,7 +34,7 @@ namespace AssertHelper.Core.Tests
 
             Assert.This(() => "1234".EndsWith("2"));
 
-            Isolate.Verify.WasCalledWithExactArguments(() => StringAssert.EndsWith("1234", "2"));
+            Isolate.Verify.WasCalledWithExactArguments(() => StringAssert.EndsWith("2", "1234"));
         }
     }
 }

@@ -29,7 +29,7 @@ namespace AssertHelper.Core.AssertBuilders
         Expression<Action> GetIsFalseAction(Expression expression);
         Expression<Action> GetIsInstanceOf(Type typeOperand, Expression expression);
         Expression<Action> GetFail(string message);
-        Expression<Action> GetCollectionContains(Expression collection, Expression value);
+        Expression<Action> GetCollectionContains(Expression expected, Expression actual);
         Expression<Action> GetCollectionEquals(Expression expected, Expression actual);
         Expression<Action> GetCollectionNotEquals(Expression expected, Expression actual);
         Expression<Action> GetStringContains(Expression expected, Expression actual);

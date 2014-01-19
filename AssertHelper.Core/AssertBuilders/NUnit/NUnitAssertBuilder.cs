@@ -55,9 +55,9 @@ namespace AssertHelper.Core.AssertBuilders.NUnit
             return _assert.Fail.ToExpression(Expression.Constant(message));
         }
 
-        public Expression<Action> GetCollectionContains(Expression collection, Expression value)
+        public Expression<Action> GetCollectionContains(Expression expected, Expression actual)
         {
-            return _collectionAssert.Contains.ToExpression(Expression.Convert(collection, typeof(IEnumerable)), Expression.Convert(value, typeof(object)));
+            return _collectionAssert.Contains.ToExpression(Expression.Convert(expected, typeof(IEnumerable)), Expression.Convert(actual, typeof(object)));
         }
 
         public Expression<Action> GetCollectionEquals(Expression expected, Expression actual)

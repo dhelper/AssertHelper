@@ -18,7 +18,7 @@ namespace AssertHelper.Core.ExpressionConverters
 
         protected override Expression<Action> GetActionInternal(MethodCallExpression typedExpression)
         {
-            return AssertBuilder.GetStringEndsWith(typedExpression.Object, typedExpression.Arguments[0]);
+            return AssertBuilder.GetStringEndsWith(typedExpression.Arguments[0], typedExpression.Object);
         }
     }
 }

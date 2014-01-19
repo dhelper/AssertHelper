@@ -14,7 +14,7 @@ namespace AssertHelper.Core.ExpressionConverters
 
         protected override Expression<Action> GetActionInternal(MethodCallExpression typedExpression)
         {
-            return AssertBuilder.GetStringContains(typedExpression.Object, typedExpression.Arguments[0]);
+            return AssertBuilder.GetStringContains(typedExpression.Arguments[0], typedExpression.Object);
         }
     }
 }

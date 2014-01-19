@@ -18,7 +18,7 @@ namespace AssertHelper.Core
 
         protected override Expression<Action> GetActionInternal(MethodCallExpression typedExpression)
         {
-            return AssertBuilder.GetStringStartsWith(typedExpression.Object, typedExpression.Arguments[0]);
+            return AssertBuilder.GetStringStartsWith(typedExpression.Arguments[0], typedExpression.Object);
         }
     }
 }
