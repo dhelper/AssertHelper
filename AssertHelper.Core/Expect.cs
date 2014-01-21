@@ -8,30 +8,30 @@ using AssertHelper.Core.ExpressionConverters;
 
 namespace AssertHelper.Core
 {
-    public static class Assert
+    public static class Expect
     {
         private static readonly List<IExpressionTypeToAction> _actionConverters;
         private static readonly IExpressionTypeToAction _defaultActionConverter = new AssertTrueAction();
-        static Assert()
+        static Expect()
         {
             _actionConverters = new List<IExpressionTypeToAction>
             {
-                new StringContainsExpression(),
-                new StringStartsWithExpression(),
-                new StringEndsWithExpression(),
+                new StringContains(),
+                new StringStartsWith(),
+                new StringEndsWith(),
                 new UnaryNotExpressionToAction(),
                 new BinaryExpressionWithConstantRightAction(),
                 new BinaryExpressionWithConstantLeftAction(),
                 new EnumerableEquals(),
                 new BinaryExpressionEquals(),
                 new BinaryExpressionNotEquals(),
-                new InstanceOfExpression(),
+                new IsInstanceOf(),
                 new EnumerableContains(),
                 new CollectionContains()                
             };
         }
 
-        public static void This(Expression<Func<bool>> predicate)
+        public static void That(Expression<Func<bool>> predicate)
         {
             var expression = predicate.Body;
 
@@ -66,16 +66,19 @@ namespace AssertHelper.Core
                 return;
 
             var errorText = new StringBuilder();
-            foreach (Exception e in errorMessages)
+            foreach (var e in errorMessages)
             {
                 if (errorText.Length > 0)
+                {
                     errorText.Append(Environment.NewLine);
+                }
+
                 errorText.Append(digestStackTrace(e));
             }
 
-            IAssertBuilder assertBuilder = AssertBuilderFactory.GetAssertBuilder();
+            var assertBuilder = AssertBuilderFactory.GetAssertBuilder();
 
-            string errorMessage = string.Format("{0}/{1} conditions failed:{2}{2}{3}", errorMessages.Count, assertionsToRun.Length, Environment.NewLine, errorText);
+            var errorMessage = string.Format("{0}/{1} conditions failed:{2}{2}{3}", errorMessages.Count, assertionsToRun.Length, Environment.NewLine, errorText);
 
             assertBuilder.GetFail(errorMessage).Compile().Invoke();
         }
@@ -103,14 +106,10 @@ namespace AssertHelper.Core
 
         private static Expression<Action> GetAssertExpression(Expression expression)
         {
-            var actionConverter = _actionConverters.FirstOrDefault(action => action.IsValid(expression));
-            if (actionConverter == null)
-            {
-                actionConverter = _defaultActionConverter;
-            }
+            var converter = _actionConverters.FirstOrDefault(action => action.IsValid(expression));
+            var actionConverter = converter ?? _defaultActionConverter;
 
-            var assert = actionConverter.GetAction(expression);
-            return assert;
+            return actionConverter.GetAction(expression);
         }
     }
 }

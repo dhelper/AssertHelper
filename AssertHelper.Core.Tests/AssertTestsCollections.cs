@@ -1,9 +1,6 @@
 ﻿using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TypeMock.ArrangeActAssert;
 
 namespace AssertHelper.Core.Tests
@@ -18,7 +15,7 @@ namespace AssertHelper.Core.Tests
 
             var collection = new[] { 1, 2, 3, 4, 5 };
 
-            Assert.This(() => collection.Contains(3));
+            Expect.That(() => collection.Contains(3));
 
             Isolate.Verify.WasCalledWithExactArguments(() => CollectionAssert.Contains(collection, 3));
         }
@@ -30,7 +27,7 @@ namespace AssertHelper.Core.Tests
 
             var collection = new[] { 1, 2, 3, 4, 5 };
             var val = 3;
-            Assert.This(() => collection.Contains(val));
+            Expect.That(() => collection.Contains(val));
 
             Isolate.Verify.WasCalledWithExactArguments(() => CollectionAssert.Contains(collection, 3));
         }
@@ -42,7 +39,7 @@ namespace AssertHelper.Core.Tests
 
             var collection = new List<int> { 1, 2, 3, 4, 5 };
 
-            Assert.This(() => collection.Contains(3));
+            Expect.That(() => collection.Contains(3));
 
             Isolate.Verify.WasCalledWithExactArguments(() => CollectionAssert.Contains(collection, 3));
         }
@@ -54,7 +51,7 @@ namespace AssertHelper.Core.Tests
 
             var collection = new HashSet<int> { 1, 2, 3, 4, 5 };
 
-            Assert.This(() => collection.Contains(3));
+            Expect.That(() => collection.Contains(3));
 
             Isolate.Verify.WasCalledWithExactArguments(() => CollectionAssert.Contains(collection, 3));
         }
@@ -67,7 +64,7 @@ namespace AssertHelper.Core.Tests
             var collection1 = new [] { 1, 2, 3, 4, 5 };
             var collection2 = new[] { 1, 2, 3, 4, 5 };
             
-            Assert.This(() => collection1 == collection2);
+            Expect.That(() => collection1 == collection2);
 
             Isolate.Verify.WasCalledWithExactArguments(() => CollectionAssert.AreEqual(collection2, collection1));
         }
@@ -75,12 +72,12 @@ namespace AssertHelper.Core.Tests
         [Test]
         public void This_CheckIfListEqualsToList_CollectionEqualsCalled()
         {
-            Isolate.Fake.StaticMethods(typeof(NUnit.Framework.CollectionAssert));
+            Isolate.Fake.StaticMethods(typeof(CollectionAssert));
 
-            var collection1 = new List<int>() { 1, 2, 3, 4, 5 };
-            var collection2 = new List<int>() { 1, 2, 3, 4, 5 };
+            var collection1 = new List<int> { 1, 2, 3, 4, 5 };
+            var collection2 = new List<int> { 1, 2, 3, 4, 5 };
 
-            Assert.This(() => collection1 == collection2);
+            Expect.That(() => collection1 == collection2);
 
             Isolate.Verify.WasCalledWithExactArguments(() => CollectionAssert.AreEqual(collection2, collection1));
         }
@@ -88,12 +85,12 @@ namespace AssertHelper.Core.Tests
         [Test]
         public void This_CheckIfArrayNotEqualsToArray_CollectionNotEqualsCalled()
         {
-            Isolate.Fake.StaticMethods(typeof(NUnit.Framework.CollectionAssert));
+            Isolate.Fake.StaticMethods(typeof(CollectionAssert));
 
             var collection1 = new[] { 1, 2, 3, 4, 5 };
             var collection2 = new[] { 1, 2, 3, 4, 5 };
 
-            Assert.This(() => collection1 != collection2);
+            Expect.That(() => collection1 != collection2);
 
             Isolate.Verify.WasCalledWithExactArguments(() => CollectionAssert.AreNotEqual(collection2, collection1));
         }
@@ -103,10 +100,10 @@ namespace AssertHelper.Core.Tests
         {
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.CollectionAssert));
 
-            var collection1 = new List<int>() { 1, 2, 3, 4, 5 };
-            var collection2 = new List<int>() { 1, 2, 3, 4, 5 };
+            var collection1 = new List<int> { 1, 2, 3, 4, 5 };
+            var collection2 = new List<int> { 1, 2, 3, 4, 5 };
 
-            Assert.This(() => collection1 != collection2);
+            Expect.That(() => collection1 != collection2);
 
             Isolate.Verify.WasCalledWithExactArguments(() => CollectionAssert.AreNotEqual(collection2, collection1));
         }

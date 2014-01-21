@@ -15,7 +15,7 @@ namespace AssertHelper.Core.Tests
             var obj2 = DummyCreator.GetReferenceObject();
             var b1 = DummyCreator.GetBooleanValue();
 
-            Assert.This(() => obj1 == obj2 && b1);
+            Expect.That(() => obj1 == obj2 && b1);
 
             Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsTrue(b1));
             Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.AreEqual(obj2, obj1));
@@ -29,7 +29,7 @@ namespace AssertHelper.Core.Tests
             var b1 = DummyCreator.GetBooleanValue();
             var b2 = DummyCreator.GetBooleanValue();
 
-            Assert.This(() => b1 && b2);
+            Expect.That(() => b1 && b2);
 
             Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsTrue(b1));
             Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsTrue(b2));
@@ -38,12 +38,12 @@ namespace AssertHelper.Core.Tests
         [Test]
         public void Assert_HaveTwoBooleanInsideAssertBlockOneFail_BothConditionsAreTested()
         {
-            Isolate.WhenCalled(() => NUnit.Framework.Assert.IsTrue(false)).WillThrow(new NUnit.Framework.AssertionException("This is a test"));
+            Isolate.WhenCalled(() => NUnit.Framework.Assert.IsTrue(false)).WillThrow(new AssertionException("This is a test"));
 
             var b1 = DummyCreator.GetTrueValue();
             var b2 = DummyCreator.GetFalseValue();
 
-            NUnit.Framework.Assert.Throws<AssertionException>(() => Assert.This(() => b1 && b2));
+            NUnit.Framework.Assert.Throws<AssertionException>(() => Expect.That(() => b1 && b2));
 
             Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsTrue(b1));
             Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsTrue(b2));
@@ -58,7 +58,7 @@ namespace AssertHelper.Core.Tests
             var b2 = DummyCreator.GetBooleanValue();
             var b3 = DummyCreator.GetBooleanValue();
 
-            Assert.This(() => b1 && b2 && b3);
+            Expect.That(() => b1 && b2 && b3);
 
             int timesCalled = Isolate.Verify.GetTimesCalled(() => NUnit.Framework.Assert.IsTrue(false));
 

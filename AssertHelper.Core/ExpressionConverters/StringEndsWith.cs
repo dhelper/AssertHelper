@@ -3,18 +3,18 @@ using System.Linq.Expressions;
 
 namespace AssertHelper.Core.ExpressionConverters
 {
-    class StringContainsExpression : ExpressionTypeToAction<MethodCallExpression>
+    class StringEndsWith : ExpressionTypeToAction<MethodCallExpression>
     {
         protected override bool IsValidInternal(MethodCallExpression typedExpression)
         {
             var method = typedExpression.Method;
 
-            return method.DeclaringType == typeof (string) && method.Name == "Contains";
+            return method.DeclaringType == typeof(string) && method.Name == "EndsWith";
         }
 
         protected override Expression<Action> GetActionInternal(MethodCallExpression typedExpression)
         {
-            return AssertBuilder.GetStringContains(typedExpression.Arguments[0], typedExpression.Object);
+            return AssertBuilder.GetStringEndsWith(typedExpression.Arguments[0], typedExpression.Object);
         }
     }
 }

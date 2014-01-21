@@ -1,26 +1,8 @@
-using AssertHelper.Core.AssertBuilders.NUnit;
 using System;
 using System.Linq.Expressions;
 
 namespace AssertHelper.Core.AssertBuilders
 {
-    internal static class AssertBuilderFactory
-    {
-        private static readonly NUnitAssertBuilder _assertBuilder;
-
-        static AssertBuilderFactory()
-        {
-            _assertBuilder = new NUnitAssertBuilder();
-        }
-
-        public static IAssertBuilder GetAssertBuilder()
-        {
-            return _assertBuilder;
-        }
-
-    }
-
-
     public interface IAssertBuilder
     {
         Expression<Action> GetAreEqualAction(Expression left, Expression right);

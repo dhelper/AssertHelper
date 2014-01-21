@@ -1,5 +1,4 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using TypeMock.ArrangeActAssert;
 
 namespace AssertHelper.Core.Tests
@@ -12,7 +11,7 @@ namespace AssertHelper.Core.Tests
         {
             Isolate.Fake.StaticMethods(typeof(StringAssert));
 
-            Assert.This(() => "1234".Contains("2"));
+            Expect.That(() => "1234".Contains("2"));
 
             Isolate.Verify.WasCalledWithExactArguments(() => StringAssert.Contains("2", "1234"));
         }
@@ -22,7 +21,7 @@ namespace AssertHelper.Core.Tests
         {
             Isolate.Fake.StaticMethods(typeof(StringAssert));
 
-            Assert.This(() => "1234".StartsWith("2"));
+            Expect.That(() => "1234".StartsWith("2"));
 
             Isolate.Verify.WasCalledWithExactArguments(() => StringAssert.StartsWith("2", "1234"));
         }
@@ -32,7 +31,7 @@ namespace AssertHelper.Core.Tests
         {
             Isolate.Fake.StaticMethods(typeof(StringAssert));
 
-            Assert.This(() => "1234".EndsWith("2"));
+            Expect.That(() => "1234".EndsWith("2"));
 
             Isolate.Verify.WasCalledWithExactArguments(() => StringAssert.EndsWith("2", "1234"));
         }

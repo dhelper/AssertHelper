@@ -9,29 +9,29 @@ namespace AssertHelper.Core.Tests
         [Test]
         public void This_UseIsToCheckType_AssertIsInstaceOfCalled()
         {
-            Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
+            Isolate.Fake.StaticMethods(typeof(Assert));
 
             var val = DummyCreator.GetDummy();
 
-            Assert.This(() => val is DummyClass);
+            Expect.That(() => val is DummyClass);
 
             var type = typeof (DummyClass);
 
-            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsInstanceOf(type, val));
+            Isolate.Verify.WasCalledWithExactArguments(() => Assert.IsInstanceOf(type, val));
         } 
         
         [Test, Ignore("TODO")]
         public void This_UseIsNotToCheckType_AssertIsInstaceOfCalled()
         {
-            Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
+            Isolate.Fake.StaticMethods(typeof(Assert));
 
             var val = DummyCreator.GetDummy();
 
-            Assert.This(() => !(val is DummyClass));
+            Expect.That(() => !(val is DummyClass));
 
             var type = typeof (DummyClass);
 
-            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsNotInstanceOf(type, val));
+            Isolate.Verify.WasCalledWithExactArguments(() => Assert.IsNotInstanceOf(type, val));
         }
     }
 }

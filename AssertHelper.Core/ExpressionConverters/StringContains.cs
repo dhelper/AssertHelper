@@ -1,24 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AssertHelper.Core.ExpressionConverters
 {
-    class StringEndsWithExpression : ExpressionTypeToAction<MethodCallExpression>
+    class StringContains : ExpressionTypeToAction<MethodCallExpression>
     {
         protected override bool IsValidInternal(MethodCallExpression typedExpression)
         {
             var method = typedExpression.Method;
 
-            return method.DeclaringType == typeof(string) && method.Name == "EndsWith";
+            return method.DeclaringType == typeof (string) && method.Name == "Contains";
         }
 
         protected override Expression<Action> GetActionInternal(MethodCallExpression typedExpression)
         {
-            return AssertBuilder.GetStringEndsWith(typedExpression.Arguments[0], typedExpression.Object);
+            return AssertBuilder.GetStringContains(typedExpression.Arguments[0], typedExpression.Object);
         }
     }
 }

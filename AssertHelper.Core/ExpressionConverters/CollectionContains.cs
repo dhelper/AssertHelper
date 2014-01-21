@@ -1,11 +1,12 @@
-﻿using AssertHelper.Core.AssertBuilders;
-using System;
+﻿using System;
 using System.Linq.Expressions;
+using AssertHelper.Core.AssertBuilders;
 
 namespace AssertHelper.Core.ExpressionConverters
 {
-    public class EnumerableContains : IExpressionTypeToAction
+    public class CollectionContains : IExpressionTypeToAction
     {
+
         public bool IsValid(Expression expr)
         {
             if (expr.NodeType != ExpressionType.Call)
@@ -21,7 +22,7 @@ namespace AssertHelper.Core.ExpressionConverters
                 return false;
             }
 
-            if (declaringType.Name == "Enumerable" && methodCallExpr.Method.Name == "Contains")
+            if (declaringType.FullName.StartsWith("System.Collections.Generic") && methodCallExpr.Method.Name == "Contains")
             {
                 return true;
             }
@@ -33,7 +34,7 @@ namespace AssertHelper.Core.ExpressionConverters
         {
             var methodCallExpr = (MethodCallExpression)expression;
 
-            return AssertBuilderFactory.GetAssertBuilder().GetCollectionContains(methodCallExpr.Arguments[0], methodCallExpr.Arguments[1]);
+            return AssertBuilderFactory.GetAssertBuilder().GetCollectionContains(methodCallExpr.Object, methodCallExpr.Arguments[0]);
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace AssertHelper.Core.ExpressionConverters
 {
-    internal class InstanceOfExpression : ExpressionTypeToAction<TypeBinaryExpression>
+    internal class IsInstanceOf : ExpressionTypeToAction<TypeBinaryExpression>
     {
         protected override bool IsValidInternal(TypeBinaryExpression typedExpression)
         {

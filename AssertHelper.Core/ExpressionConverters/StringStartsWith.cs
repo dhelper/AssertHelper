@@ -1,13 +1,9 @@
-﻿using AssertHelper.Core.ExpressionConverters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Linq.Expressions;
-using System.Text;
 
-namespace AssertHelper.Core
+namespace AssertHelper.Core.ExpressionConverters
 {
-    class StringStartsWithExpression : ExpressionTypeToAction<MethodCallExpression>
+    class StringStartsWith : ExpressionTypeToAction<MethodCallExpression>
     {
         protected override bool IsValidInternal(MethodCallExpression typedExpression)
         {

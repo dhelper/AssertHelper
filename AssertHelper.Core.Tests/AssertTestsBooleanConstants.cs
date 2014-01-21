@@ -13,7 +13,7 @@ namespace AssertHelper.Core.Tests
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
-            Assert.This(() => value);
+            Expect.That(() => value);
 
             Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsTrue(value));
         }
@@ -25,7 +25,7 @@ namespace AssertHelper.Core.Tests
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
-            Assert.This(() => !value);
+            Expect.That(() => !value);
 
             Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsFalse(value));
         }
@@ -37,7 +37,7 @@ namespace AssertHelper.Core.Tests
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
-            Assert.This(() => value == true);
+            Expect.That(() => value == true);
 
             Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsTrue(value));
         }
@@ -49,7 +49,7 @@ namespace AssertHelper.Core.Tests
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
-            Assert.This(() => value == false);
+            Expect.That(() => value == false);
 
             Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsFalse(value));
         }
@@ -61,7 +61,7 @@ namespace AssertHelper.Core.Tests
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
-            Assert.This(() => true == value);
+            Expect.That(() => true == value);
 
             Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsTrue(value));
         }
@@ -73,7 +73,7 @@ namespace AssertHelper.Core.Tests
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
-            Assert.This(() => false == value);
+            Expect.That(() => false == value);
 
             Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsFalse(value));
         }
@@ -85,7 +85,7 @@ namespace AssertHelper.Core.Tests
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
-            Assert.This(() => value != true);
+            Expect.That(() => value != true);
 
             Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsFalse(value));
         }
@@ -97,7 +97,7 @@ namespace AssertHelper.Core.Tests
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
-            Assert.This(() => value != false);
+            Expect.That(() => value != false);
 
             Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsTrue(value));
         }
@@ -109,7 +109,7 @@ namespace AssertHelper.Core.Tests
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
-            Assert.This(() => true != value);
+            Expect.That(() => true != value);
 
             Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsFalse(value));
         }
@@ -121,7 +121,7 @@ namespace AssertHelper.Core.Tests
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
-            Assert.This(() => false != value);
+            Expect.That(() => false != value);
 
             Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsTrue(value));
         }
@@ -133,7 +133,7 @@ namespace AssertHelper.Core.Tests
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
-            Assert.This(() => value || false);
+            Expect.That(() => value || false);
 
             Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsTrue(false || value));
         }
@@ -145,7 +145,7 @@ namespace AssertHelper.Core.Tests
 
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
-            Assert.This(() => false || value);
+            Expect.That(() => false || value);
 
             Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsTrue(false || value));
         }
