@@ -45,6 +45,16 @@ namespace AssertHelper.Core.AssertBuilders.NUnit
             return _assert.IsFalse.ToExpression(expression);
         }
 
+        public Expression<Action> GetIsNullAction(Expression expression)
+        {
+            return _assert.IsNull.ToExpression(expression);
+        }
+
+        public Expression<Action> GetIsNotNullAction(Expression expression)
+        {
+            return _assert.IsNotNull.ToExpression(expression);
+        }
+
         public Expression<Action> GetIsInstanceOf(Type typeOperand, Expression expression)
         {
             return _assert.IsInstanceOfType.ToExpression(Expression.Constant(typeOperand), expression);

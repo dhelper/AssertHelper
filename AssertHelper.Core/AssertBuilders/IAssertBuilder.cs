@@ -17,9 +17,7 @@ namespace AssertHelper.Core.AssertBuilders
         Expression<Action> GetStringContains(Expression expected, Expression actual);
         Expression<Action> GetStringStartsWith(Expression expected, Expression actual);
         Expression<Action> GetStringEndsWith(Expression expected, Expression actual);
-
-
-
-        
+        Expression<Action> GetIsNullAction(Expression expression);
+        Expression<Action> GetIsNotNullAction(Expression expression);
     }
 }

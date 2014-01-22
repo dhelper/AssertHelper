@@ -7,7 +7,7 @@ namespace AssertHelper.Core.Tests
     public class AssertTestsEquality
     {
         [Test]
-        public void This_PassTwoValuesWithEqualSign_TransformToAssertEqual()
+        public void That_PassTwoValuesWithEqualSign_TransformToAssertEqual()
         {
             Isolate.Fake.StaticMethods(typeof(Assert));
 
@@ -20,7 +20,7 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
-        public void This_PassTwoValuesWithNotEqualSign_TransformToAssertNotEqual()
+        public void That_PassTwoValuesWithNotEqualSign_TransformToAssertNotEqual()
         {
             Isolate.Fake.StaticMethods(typeof(Assert));
 
@@ -33,7 +33,7 @@ namespace AssertHelper.Core.Tests
         }
         
         [Test]
-        public void This_PassTwoStringValuesWithEqualSign_TransformToAssertEqual()
+        public void That_PassTwoStringValuesWithEqualSign_TransformToAssertEqual()
         {
             Isolate.Fake.StaticMethods(typeof(Assert));
 
@@ -46,7 +46,7 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
-        public void This_PassTwoStringValuesWithNotEqualSign_TransformToAssertNotEqual()
+        public void That_PassTwoStringValuesWithNotEqualSign_TransformToAssertNotEqual()
         {
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
@@ -59,7 +59,7 @@ namespace AssertHelper.Core.Tests
         }
         
         [Test]
-        public void This_PassTwoIntValuesWithEqualSign_TransformToAssertEqual()
+        public void That_PassTwoIntValuesWithEqualSign_TransformToAssertEqual()
         {
             Isolate.Fake.StaticMethods(typeof(Assert));
 
@@ -72,7 +72,7 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
-        public void This_PassTwoIntValuesWithNotEqualSign_TransformToAssertNotEqual()
+        public void That_PassTwoIntValuesWithNotEqualSign_TransformToAssertNotEqual()
         {
             Isolate.Fake.StaticMethods(typeof(Assert));
 
@@ -85,7 +85,7 @@ namespace AssertHelper.Core.Tests
         }
         
         [Test]
-        public void This_PassTwoDoubleValuesWithEqualSign_TransformToAssertEqual()
+        public void That_PassTwoDoubleValuesWithEqualSign_TransformToAssertEqual()
         {
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
@@ -98,7 +98,7 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
-        public void This_PassTwoDoubleValuesWithNotEqualSign_TransformToAssertNotEqual()
+        public void That_PassTwoDoubleValuesWithNotEqualSign_TransformToAssertNotEqual()
         {
             Isolate.Fake.StaticMethods(typeof(Assert));
 

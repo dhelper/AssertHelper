@@ -7,7 +7,7 @@ namespace AssertHelper.Core.Tests
     public class AssertTestMultipleAsserts
     {
         [Test]
-        public void Assert_HaveOneEqualityAndOneBooleanInsideAssertBlock_BothConditionsAreTested()
+        public void That_HaveOneEqualityAndOneBooleanInsideAssertBlock_BothConditionsAreTested()
         {
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
@@ -22,7 +22,7 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
-        public void Assert_HaveTwoBooleanInsideAssertBlock_BothConditionsAreTested()
+        public void That_HaveTwoBooleanInsideAssertBlock_BothConditionsAreTested()
         {
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
@@ -36,7 +36,7 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
-        public void Assert_HaveTwoBooleanInsideAssertBlockOneFail_BothConditionsAreTested()
+        public void That_HaveTwoBooleanInsideAssertBlockOneFail_BothConditionsAreTested()
         {
             Isolate.WhenCalled(() => NUnit.Framework.Assert.IsTrue(false)).WillThrow(new AssertionException("This is a test"));
 
@@ -50,7 +50,7 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
-        public void Assert_HaveThreeBooleanInsideAssertBlock_BothConditionsAreTested()
+        public void That_HaveThreeBooleanInsideAssertBlock_BothConditionsAreTested()
         {
             Isolate.WhenCalled(() => NUnit.Framework.Assert.IsTrue(false)).IgnoreCall();
 

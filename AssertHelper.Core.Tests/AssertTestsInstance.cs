@@ -7,7 +7,7 @@ namespace AssertHelper.Core.Tests
     public class AssertTestsInstance
     {
         [Test]
-        public void This_UseIsToCheckType_AssertIsInstaceOfCalled()
+        public void That_UseIsToCheckType_AssertIsInstaceOfCalled()
         {
             Isolate.Fake.StaticMethods(typeof(Assert));
 
@@ -21,7 +21,7 @@ namespace AssertHelper.Core.Tests
         } 
         
         [Test, Ignore("TODO")]
-        public void This_UseIsNotToCheckType_AssertIsInstaceOfCalled()
+        public void That_UseIsNotToCheckType_AssertIsInstaceOfCalled()
         {
             Isolate.Fake.StaticMethods(typeof(Assert));
 

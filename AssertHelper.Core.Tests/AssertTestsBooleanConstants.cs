@@ -7,7 +7,7 @@ namespace AssertHelper.Core.Tests
     public class AssertTestsBooleanConstants
     {
         [Test]
-        public void This_PassSingleValue_AssertTrueIsCalled()
+        public void That_PassSingleValue_AssertTrueIsCalled()
         {
             var value = DummyCreator.GetBooleanValue();
 
@@ -19,7 +19,7 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
-        public void This_PassNot_AssertFalseIsCalled()
+        public void That_PassNot_AssertFalseIsCalled()
         {
             var value = DummyCreator.GetBooleanValue();
 
@@ -31,7 +31,7 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
-        public void This_PassLeftValueEqualToTrue_AssertTrueIsCalled()
+        public void That_PassLeftValueEqualToTrue_AssertTrueIsCalled()
         {
             bool value = DummyCreator.GetBooleanValue();
 
@@ -43,7 +43,7 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
-        public void This_PassLeftValueEqualToFalse_AssertFalseIsCalled()
+        public void That_PassLeftValueEqualToFalse_AssertFalseIsCalled()
         {
             var value = DummyCreator.GetBooleanValue();
 
@@ -55,7 +55,7 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
-        public void This_PassRightValueEqualToTrue_AssertTrueIsCalled()
+        public void That_PassRightValueEqualToTrue_AssertTrueIsCalled()
         {
             bool value = DummyCreator.GetBooleanValue();
 
@@ -67,7 +67,7 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
-        public void This_PassRightValueEqualToFalse_AssertFalseIsCalled()
+        public void That_PassRightValueEqualToFalse_AssertFalseIsCalled()
         {
             var value = DummyCreator.GetBooleanValue();
 
@@ -79,7 +79,7 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
-        public void This_PassLeftValueNotEqualToTrue_AssertFalseIsCalled()
+        public void That_PassLeftValueNotEqualToTrue_AssertFalseIsCalled()
         {
             bool value = DummyCreator.GetBooleanValue();
 
@@ -91,7 +91,7 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
-        public void This_PassLeftValueNotEqualToFalse_AssertTrueIsCalled()
+        public void That_PassLeftValueNotEqualToFalse_AssertTrueIsCalled()
         {
             var value = DummyCreator.GetBooleanValue();
 
@@ -103,7 +103,7 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
-        public void This_PassRightValueNotEqualToTrue_AssertFalseIsCalled()
+        public void That_PassRightValueNotEqualToTrue_AssertFalseIsCalled()
         {
             bool value = DummyCreator.GetBooleanValue();
 
@@ -115,7 +115,7 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
-        public void This_PassRightValueNotEqualToFalse_AssertTrueIsCalled()
+        public void That_PassRightValueNotEqualToFalse_AssertTrueIsCalled()
         {
             var value = DummyCreator.GetBooleanValue();
 
@@ -127,7 +127,7 @@ namespace AssertHelper.Core.Tests
         }
         
         [Test]
-        public void This_PassRightFalseOrValue_AssertTrueIsCalled()
+        public void That_PassRightFalseOrValue_AssertTrueIsCalled()
         {
             var value = DummyCreator.GetBooleanValue();
 
@@ -139,7 +139,7 @@ namespace AssertHelper.Core.Tests
         }
         
         [Test]
-        public void This_PassRightValueOrFalse_AssertTrueIsCalled()
+        public void That_PassRightValueOrFalse_AssertTrueIsCalled()
         {
             var value = DummyCreator.GetBooleanValue();
 

@@ -5,14 +5,14 @@ namespace AssertHelper.Core.ExpressionConverters
 {
     internal class BinaryExpressionWithConstantLeftAction : BinaryExpressionWithConstantBase
     {
-        protected override bool IsValidInternal(BinaryExpression typedExpression)
+        protected override Func<BinaryExpression, Expression> GetConstantExpression
         {
-            return base.IsValidInternal(typedExpression) && typedExpression.Left is ConstantExpression;
+            get { return expr => expr.Left; }
         }
 
-        protected override Expression<Action> GetActionInternal(BinaryExpression typedExpression)
+        protected override Func<BinaryExpression, Expression> GetValueExpression
         {
-            return GetActionForConstant((ConstantExpression)typedExpression.Left, typedExpression.Right, typedExpression.NodeType);
+            get { return expr => expr.Right; }
         }
     }
 }

@@ -58,6 +58,7 @@
     <Compile Include="AssertTestsCollections.cs" />
     <Compile Include="AssertTestsEquality.cs" />
     <Compile Include="AssertTestsInstance.cs" />
+    <Compile Include="AssertTestsNull.cs" />
     <Compile Include="AssertTestString.cs" />
     <Compile Include="DummyCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

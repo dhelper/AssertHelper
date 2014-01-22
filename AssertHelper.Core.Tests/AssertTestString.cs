@@ -7,7 +7,7 @@ namespace AssertHelper.Core.Tests
     public class AssertTestString
     {
         [Test]
-        public void this_StringContainsCalled_StringAssertContainedUsed()
+        public void That_StringContainsCalled_StringAssertContainedUsed()
         {
             Isolate.Fake.StaticMethods(typeof(StringAssert));
 
@@ -17,7 +17,7 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
-        public void this_StringStartsWithCalled_StringAssertStartsWithUsed()
+        public void That_StringStartsWithCalled_StringAssertStartsWithUsed()
         {
             Isolate.Fake.StaticMethods(typeof(StringAssert));
 
@@ -27,7 +27,7 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
-        public void this_StringEndssWithCalled_StringAssertStartsWithUsed()
+        public void That_StringEndssWithCalled_StringAssertStartsWithUsed()
         {
             Isolate.Fake.StaticMethods(typeof(StringAssert));
 
