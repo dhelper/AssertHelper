@@ -1,53 +1,42 @@
-﻿using NUnit.Framework;
-using TypeMock.ArrangeActAssert;
+﻿using System;
+using NUnit.Framework;
 
 namespace AssertHelper.Core.Tests
 {
-    [TestFixture, Isolated]
-    public class AssertTestsNull
+    [TestFixture]
+    public class AssertTestsNull : AssertTestBase
     {
+        protected override Action FailedAssertionAction
+        {
+            get { return () => Assert.IsNull(new object()); }
+        }
+
+        [Test]
+        public void That_CompareValueEqualToNullANdValudIsNull_FinishNormally()
+        {
+           object val = null;
+
+            Expect.That(() => val == null);
+        }
+        
         [Test]
         public void That_CompareValueEqualToNull_AssertIsNullCalled()
         {
-            Isolate.Fake.StaticMethods<Assert>();
+           var val = new object();
 
-            var val = new object();
-            Expect.That(() => val == null);
+            var result = Assert.Throws<AssertionException>(() => Expect.That(() => val == null));
 
-            Isolate.Verify.WasCalledWithExactArguments(() => Assert.IsNull(val));
+            Assert.That(result.Message, Is.EqualTo(AssertMessage));
         }
-
+        
         [Test]
         public void That_CompareValueEqualToNullReversed_AssertIsNullCalled()
         {
-            Isolate.Fake.StaticMethods<Assert>();
-
             var val = new object();
-            Expect.That(() => null == val);
 
-            Isolate.Verify.WasCalledWithExactArguments(() => Assert.IsNull(val));
-        }
+            var result = Assert.Throws<AssertionException>(() => Expect.That(() => null == val));
 
-        [Test]
-        public void That_CompareValueNotEqualToNull_AssertIsNullCalled()
-        {
-            Isolate.Fake.StaticMethods<Assert>();
-
-            var val = new object();
-            Expect.That(() => val != null);
-
-            Isolate.Verify.WasCalledWithExactArguments(() => Assert.IsNotNull(val));
-        }
-
-        [Test]
-        public void That_CompareValueNotEqualToNullReversed_AssertIsNullCalled()
-        {
-            Isolate.Fake.StaticMethods<Assert>();
-
-            var val = new object();
-            Expect.That(() => null != val);
-
-            Isolate.Verify.WasCalledWithExactArguments(() => Assert.IsNotNull(val));
+            Assert.That(result.Message, Is.EqualTo(AssertMessage));
         }
     }
 }

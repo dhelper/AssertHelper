@@ -4,7 +4,10 @@ namespace AssertHelper.Core.Tests
 {
     public static class DummyCreator
     {
-        public static bool GetBooleanValue()
+        private static readonly object _referenceObject1 = new object();
+        private static readonly object _referenceObject2 = new object();
+
+        public static bool GetTrueBooleanValue()
         {
             return true;
         }
@@ -19,9 +22,14 @@ namespace AssertHelper.Core.Tests
             return false;
         }
 
-        public static object GetReferenceObject()
+        public static object GetReferenceObject1()
         {
-            return new object();
+            return _referenceObject1;
+        }
+
+        public static object GetReferenceObject2()
+        {
+            return _referenceObject2;
         }
 
         public static object GetDummy()

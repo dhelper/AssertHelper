@@ -53,11 +53,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssertTestBase.cs" />
     <Compile Include="AssertTestMultipleAsserts.cs" />
-    <Compile Include="AssertTestsBooleanConstants.cs" />
+    <Compile Include="AssertTestsAreNotEqual.cs" />
+    <Compile Include="AssertTestsIsFalse.cs" />
+    <Compile Include="AssertTestsIsTrue.cs" />
     <Compile Include="AssertTestsCollections.cs" />
-    <Compile Include="AssertTestsEquality.cs" />
+    <Compile Include="AssertTestsAreEqual.cs" />
     <Compile Include="AssertTestsInstance.cs" />
+    <Compile Include="AssertTestsNotNull.cs" />
     <Compile Include="AssertTestsNull.cs" />
     <Compile Include="AssertTestString.cs" />
     <Compile Include="DummyCreator.cs" />

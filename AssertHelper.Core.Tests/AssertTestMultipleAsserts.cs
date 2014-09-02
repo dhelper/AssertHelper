@@ -11,9 +11,9 @@ namespace AssertHelper.Core.Tests
         {
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
-            var obj1 = DummyCreator.GetReferenceObject();
-            var obj2 = DummyCreator.GetReferenceObject();
-            var b1 = DummyCreator.GetBooleanValue();
+            var obj1 = DummyCreator.GetReferenceObject1();
+            var obj2 = DummyCreator.GetReferenceObject1();
+            var b1 = DummyCreator.GetTrueBooleanValue();
 
             Expect.That(() => obj1 == obj2 && b1);
 
@@ -26,8 +26,8 @@ namespace AssertHelper.Core.Tests
         {
             Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
 
-            var b1 = DummyCreator.GetBooleanValue();
-            var b2 = DummyCreator.GetBooleanValue();
+            var b1 = DummyCreator.GetTrueBooleanValue();
+            var b2 = DummyCreator.GetTrueBooleanValue();
 
             Expect.That(() => b1 && b2);
 
@@ -54,9 +54,9 @@ namespace AssertHelper.Core.Tests
         {
             Isolate.WhenCalled(() => NUnit.Framework.Assert.IsTrue(false)).IgnoreCall();
 
-            var b1 = DummyCreator.GetBooleanValue();
-            var b2 = DummyCreator.GetBooleanValue();
-            var b3 = DummyCreator.GetBooleanValue();
+            var b1 = DummyCreator.GetTrueBooleanValue();
+            var b2 = DummyCreator.GetTrueBooleanValue();
+            var b3 = DummyCreator.GetTrueBooleanValue();
 
             Expect.That(() => b1 && b2 && b3);
 
