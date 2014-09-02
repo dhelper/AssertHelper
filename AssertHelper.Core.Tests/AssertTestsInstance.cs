@@ -1,37 +1,20 @@
 ﻿using NUnit.Framework;
-using TypeMock.ArrangeActAssert;
 
 namespace AssertHelper.Core.Tests
 {
-    [TestFixture, Isolated]
+    [TestFixture]
     public class AssertTestsInstance
     {
         [Test]
         public void That_UseIsToCheckType_AssertIsInstaceOfCalled()
         {
-            Isolate.Fake.StaticMethods(typeof(Assert));
-
             var val = DummyCreator.GetDummy();
 
-            Expect.That(() => val is DummyClass);
+            var result = Assert.Throws<AssertionException>(() => Expect.That(() => val is string));
 
-            var type = typeof (DummyClass);
+            var expected = AssertTestBase.GetAssertionMessage(() => Assert.IsInstanceOf(typeof(string), val));
 
-            Isolate.Verify.WasCalledWithExactArguments(() => Assert.IsInstanceOf(type, val));
+            Assert.That(result.Message, Is.EqualTo(expected));
         } 
-        
-        [Test, Ignore("TODO")]
-        public void That_UseIsNotToCheckType_AssertIsInstaceOfCalled()
-        {
-            Isolate.Fake.StaticMethods(typeof(Assert));
-
-            var val = DummyCreator.GetDummy();
-
-            Expect.That(() => !(val is DummyClass));
-
-            var type = typeof (DummyClass);
-
-            Isolate.Verify.WasCalledWithExactArguments(() => Assert.IsNotInstanceOf(type, val));
-        }
     }
 }

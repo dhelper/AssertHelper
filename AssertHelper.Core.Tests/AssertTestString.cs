@@ -1,39 +1,36 @@
 ﻿using NUnit.Framework;
-using TypeMock.ArrangeActAssert;
 
 namespace AssertHelper.Core.Tests
 {
-    [TestFixture, Isolated]
+    [TestFixture]
     public class AssertTestString
     {
         [Test]
         public void That_StringContainsCalled_StringAssertContainedUsed()
         {
-            Isolate.Fake.StaticMethods(typeof(StringAssert));
+            var result = Assert.Throws<AssertionException>(() => Expect.That(() => "1234".Contains("5")));
+            var expected = AssertTestBase.GetAssertionMessage(() => StringAssert.Contains("5", "1234"));
 
-            Expect.That(() => "1234".Contains("2"));
-
-            Isolate.Verify.WasCalledWithExactArguments(() => StringAssert.Contains("2", "1234"));
+            Assert.That(result.Message, Is.EqualTo(expected));
         }
 
         [Test]
         public void That_StringStartsWithCalled_StringAssertStartsWithUsed()
         {
-            Isolate.Fake.StaticMethods(typeof(StringAssert));
+            var result = Assert.Throws<AssertionException>(() => Expect.That(() => "1234".StartsWith("2")));
+            var expected = AssertTestBase.GetAssertionMessage(() => StringAssert.StartsWith("2", "1234"));
 
-            Expect.That(() => "1234".StartsWith("2"));
-
-            Isolate.Verify.WasCalledWithExactArguments(() => StringAssert.StartsWith("2", "1234"));
+            Assert.That(result.Message, Is.EqualTo(expected));
         }
 
         [Test]
         public void That_StringEndssWithCalled_StringAssertStartsWithUsed()
         {
-            Isolate.Fake.StaticMethods(typeof(StringAssert));
 
-            Expect.That(() => "1234".EndsWith("2"));
+            var result = Assert.Throws<AssertionException>(() => Expect.That(() => "1234".EndsWith("2")));
+            var expected = AssertTestBase.GetAssertionMessage(() => StringAssert.EndsWith("2", "1234"));
 
-            Isolate.Verify.WasCalledWithExactArguments(() => StringAssert.EndsWith("2", "1234"));
+            Assert.That(result.Message, Is.EqualTo(expected));
         }
     }
 }

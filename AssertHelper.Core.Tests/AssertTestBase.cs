@@ -13,7 +13,7 @@ namespace AssertHelper.Core.Tests
             AssertMessage = GetAssertionMessage(FailedAssertionAction);
         }
 
-        protected string GetAssertionMessage(Action failedAssertionAction)
+        public static string GetAssertionMessage(Action failedAssertionAction)
         {
             try
             {
