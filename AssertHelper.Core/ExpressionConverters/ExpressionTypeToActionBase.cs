@@ -6,11 +6,9 @@ namespace AssertHelper.Core.ExpressionConverters
 {
     internal abstract class ExpressionTypeToActionBase : IExpressionTypeToAction
     {
-        private readonly IAssertBuilder _assertBuilder = AssertBuilderFactory.GetAssertBuilder();
-
         protected IAssertBuilder AssertBuilder
         {
-            get { return _assertBuilder; }
+            get { return AssertBuilderFactory.GetAssertBuilder(); }
         }
 
         public abstract bool IsValid(Expression expr);

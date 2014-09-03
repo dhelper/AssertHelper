@@ -2,9 +2,9 @@ using AssertHelper.Core.AssertBuilders.NUnit;
 
 namespace AssertHelper.Core.AssertBuilders
 {
-    internal static class AssertBuilderFactory
+    internal class AssertBuilderFactory
     {
-        private static readonly NUnitAssertBuilder _assertBuilder;
+        protected static IAssertBuilder _assertBuilder;
 
         static AssertBuilderFactory()
         {
@@ -16,5 +16,9 @@ namespace AssertHelper.Core.AssertBuilders
             return _assertBuilder;
         }
 
+        protected static void Reset()
+        {
+            _assertBuilder = new NUnitAssertBuilder();
+        }
     }
 }

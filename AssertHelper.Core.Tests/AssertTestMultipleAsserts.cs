@@ -1,58 +1,55 @@
-﻿using NUnit.Framework;
-using TypeMock.ArrangeActAssert;
+﻿using System.Linq.Expressions;
+using System.Resources;
+using FakeItEasy;
+using NUnit.Framework;
+using AssertHelper.Core.AssertBuilders;
 
 namespace AssertHelper.Core.Tests
 {
-    [TestFixture, Isolated]
+    [TestFixture]
     public class AssertTestMultipleAsserts
     {
+        [TearDown]
+        public void RestoreAssertBuilder()
+        {
+            AssertBuilderFactoryForTests.Restore();
+        }
+
         [Test]
         public void That_HaveOneEqualityAndOneBooleanInsideAssertBlock_BothConditionsAreTested()
         {
-            Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
+            AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var obj1 = DummyCreator.GetReferenceObject1();
-            var obj2 = DummyCreator.GetReferenceObject1();
+            var obj2 = DummyCreator.GetReferenceObject2();
             var b1 = DummyCreator.GetTrueBooleanValue();
 
             Expect.That(() => obj1 == obj2 && b1);
 
-            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsTrue(b1));
-            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.AreEqual(obj2, obj1));
+            var fakeBuilder = AssertBuilderFactory.GetAssertBuilder();
+            A.CallTo(() => fakeBuilder.GetIsTrueAction(A<Expression>._)).MustHaveHappened();
+            A.CallTo(() => fakeBuilder.GetAreEqualAction(A<Expression>._, A<Expression>._)).MustHaveHappened();
         }
 
         [Test]
         public void That_HaveTwoBooleanInsideAssertBlock_BothConditionsAreTested()
         {
-            Isolate.Fake.StaticMethods(typeof(NUnit.Framework.Assert));
-
-            var b1 = DummyCreator.GetTrueBooleanValue();
-            var b2 = DummyCreator.GetTrueBooleanValue();
-
-            Expect.That(() => b1 && b2);
-
-            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsTrue(b1));
-            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsTrue(b2));
-        }
-
-        [Test]
-        public void That_HaveTwoBooleanInsideAssertBlockOneFail_BothConditionsAreTested()
-        {
-            Isolate.WhenCalled(() => NUnit.Framework.Assert.IsTrue(false)).WillThrow(new AssertionException("This is a test"));
+            AssertBuilderFactoryForTests.FakeAssertBuilder();            
 
             var b1 = DummyCreator.GetTrueValue();
             var b2 = DummyCreator.GetFalseValue();
 
-            NUnit.Framework.Assert.Throws<AssertionException>(() => Expect.That(() => b1 && b2));
+            Expect.That(() => b1 && b2);
 
-            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsTrue(b1));
-            Isolate.Verify.WasCalledWithExactArguments(() => NUnit.Framework.Assert.IsTrue(b2));
+            var assertBuilder = AssertBuilderFactory.GetAssertBuilder();
+            A.CallTo(() => assertBuilder.GetIsTrueAction(A<Expression>._)).MustHaveHappened(Repeated.Exactly.Twice);
         }
 
         [Test]
         public void That_HaveThreeBooleanInsideAssertBlock_BothConditionsAreTested()
         {
-            Isolate.WhenCalled(() => NUnit.Framework.Assert.IsTrue(false)).IgnoreCall();
+            AssertBuilderFactoryForTests.FakeAssertBuilder();            
+
 
             var b1 = DummyCreator.GetTrueBooleanValue();
             var b2 = DummyCreator.GetTrueBooleanValue();
@@ -60,9 +57,8 @@ namespace AssertHelper.Core.Tests
 
             Expect.That(() => b1 && b2 && b3);
 
-            int timesCalled = Isolate.Verify.GetTimesCalled(() => NUnit.Framework.Assert.IsTrue(false));
-
-            NUnit.Framework.Assert.AreEqual(3, timesCalled);
+            var assertBuilder = AssertBuilderFactory.GetAssertBuilder();
+            A.CallTo(() => assertBuilder.GetIsTrueAction(A<Expression>._)).MustHaveHappened(Repeated.Exactly.Times(3));
         }
     }
 }
