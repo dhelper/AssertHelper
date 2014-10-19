@@ -60,6 +60,7 @@
     <Compile Include="AssertTestsNotNull.cs" />
     <Compile Include="AssertTestsNull.cs" />
     <Compile Include="AssertTestString.cs" />
+    <Compile Include="CallValidator.cs" />
     <Compile Include="DummyCreator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

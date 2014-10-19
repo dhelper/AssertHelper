@@ -1,28 +1,27 @@
 ﻿using System;
+using System.Linq.Expressions;
+using FakeItEasy;
 using NUnit.Framework;
 
 namespace AssertHelper.Core.Tests
 {
     [TestFixture]
-    public class AssertTestsAreNotEqual : AssertTestBase
+    public class AssertTestsAreNotEqual : FakeAssertBuilderTests
     {
-        protected override Action FailedAssertionAction
-        {
-            get
-            {
-                return () => Assert.AreNotEqual(DummyCreator.GetReferenceObject1(), DummyCreator.GetReferenceObject1());
-            }
-        }
-
         [Test]
         public void That_PassTwoValuesWithNotEqualSign_TransformToAssertNotEqual()
         {
             var value = DummyCreator.GetReferenceObject1();
             var expected = DummyCreator.GetReferenceObject1();
 
-            var result = Assert.Throws<AssertionException>(() => Expect.That(() => value != expected));
+            var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
-            Assert.That(result.Message, Is.EqualTo(AssertMessage));
+            var assertAreEqualValidator = new CallValidator();
+            A.CallTo(() => fakeBuilder.GetAreNotEqualAction(A<Expression>._, A<Expression>._)).AddAssertValidation(assertAreEqualValidator);
+
+            Expect.That(() => value != expected);
+
+            assertAreEqualValidator.WasAssertCalledWithArguments(expected, value);
         }
 
         [Test]
@@ -31,11 +30,14 @@ namespace AssertHelper.Core.Tests
             var value = DummyCreator.GetString();
             var expected = value;
 
-            var result = Assert.Throws<AssertionException>(() => Expect.That(() => value != expected));
+            var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
-            var expectedMessage = GetAssertionMessage(() => Assert.AreNotEqual(expected, value));
+            var assertAreEqualValidator = new CallValidator();
+            A.CallTo(() => fakeBuilder.GetAreNotEqualAction(A<Expression>._, A<Expression>._)).AddAssertValidation(assertAreEqualValidator);
 
-            Assert.That(result.Message, Is.EqualTo(expectedMessage));
+            Expect.That(() => value != expected);
+
+            assertAreEqualValidator.WasAssertCalledWithArguments(expected, value);
         }
 
         [Test]
@@ -44,11 +46,14 @@ namespace AssertHelper.Core.Tests
             var value = DummyCreator.GetInt();
             var expected = DummyCreator.GetInt();
 
-            var result = Assert.Throws<AssertionException>(() => Expect.That(() => value != expected));
+            var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
-            var expectedMessage = GetAssertionMessage(() => Assert.AreNotEqual(expected, value));
+            var assertAreEqualValidator = new CallValidator();
+            A.CallTo(() => fakeBuilder.GetAreNotEqualAction(A<Expression>._, A<Expression>._)).AddAssertValidation(assertAreEqualValidator);
 
-            Assert.That(result.Message, Is.EqualTo(expectedMessage));
+            Expect.That(() => value != expected);
+
+            assertAreEqualValidator.WasAssertCalledWithArguments(expected, value);
         }
 
         [Test]
@@ -57,11 +62,14 @@ namespace AssertHelper.Core.Tests
             var value = DummyCreator.GetDouble();
             var expected = value;
 
-            var result = Assert.Throws<AssertionException>(() => Expect.That(() => value != expected));
+            var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
-            var expectedMessage = GetAssertionMessage(() => Assert.AreNotEqual(expected, value));
+            var assertAreEqualValidator = new CallValidator();
+            A.CallTo(() => fakeBuilder.GetAreNotEqualAction(A<Expression>._, A<Expression>._)).AddAssertValidation(assertAreEqualValidator);
 
-            Assert.That(result.Message, Is.EqualTo(expectedMessage));
+            Expect.That(() => value != expected);
+
+            assertAreEqualValidator.WasAssertCalledWithArguments(expected, value);
         }
     }
 }

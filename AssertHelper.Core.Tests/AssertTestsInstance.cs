@@ -1,20 +1,26 @@
-﻿using NUnit.Framework;
+﻿using System;
+using System.Linq.Expressions;
+using FakeItEasy;
+using NUnit.Framework;
 
 namespace AssertHelper.Core.Tests
 {
     [TestFixture]
-    public class AssertTestsInstance
+    public class AssertTestsInstance : FakeAssertBuilderTests
     {
         [Test]
         public void That_UseIsToCheckType_AssertIsInstaceOfCalled()
         {
             var val = DummyCreator.GetDummy();
 
-            var result = Assert.Throws<AssertionException>(() => Expect.That(() => val is string));
+            var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
-            var expected = AssertTestBase.GetAssertionMessage(() => Assert.IsInstanceOf(typeof(string), val));
+            var validator = new CallValidator();
+            A.CallTo(() => fakeBuilder.GetIsInstanceOf(A<Type>._, A<Expression>._)).AddAssertValidation(validator);
 
-            Assert.That(result.Message, Is.EqualTo(expected));
+            Expect.That(() => val is string);
+
+            validator.WasAssertCalledWithArguments(typeof(string), val);
         } 
     }
 }

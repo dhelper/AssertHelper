@@ -1,36 +1,49 @@
-﻿using NUnit.Framework;
+﻿using System.Linq.Expressions;
+using FakeItEasy;
+using NUnit.Framework;
 
 namespace AssertHelper.Core.Tests
 {
     [TestFixture]
-    public class AssertTestString
+    public class AssertTestString : FakeAssertBuilderTests
     {
         [Test]
         public void That_StringContainsCalled_StringAssertContainedUsed()
         {
-            var result = Assert.Throws<AssertionException>(() => Expect.That(() => "1234".Contains("5")));
-            var expected = AssertTestBase.GetAssertionMessage(() => StringAssert.Contains("5", "1234"));
+            var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
-            Assert.That(result.Message, Is.EqualTo(expected));
+            var validator = new CallValidator();
+            A.CallTo(() => fakeBuilder.GetStringContains(A<Expression>._, A<Expression>._)).AddAssertValidation(validator);
+
+            Expect.That(() => "1234".Contains("5"));
+
+            validator.WasAssertCalledWithArguments("5", "1234");
         }
 
         [Test]
         public void That_StringStartsWithCalled_StringAssertStartsWithUsed()
         {
-            var result = Assert.Throws<AssertionException>(() => Expect.That(() => "1234".StartsWith("2")));
-            var expected = AssertTestBase.GetAssertionMessage(() => StringAssert.StartsWith("2", "1234"));
+            var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
-            Assert.That(result.Message, Is.EqualTo(expected));
+            var validator = new CallValidator();
+            A.CallTo(() => fakeBuilder.GetStringStartsWith(A<Expression>._, A<Expression>._)).AddAssertValidation(validator);
+
+            Expect.That(() => "1234".StartsWith("2"));
+
+            validator.WasAssertCalledWithArguments("2", "1234");
         }
 
         [Test]
         public void That_StringEndssWithCalled_StringAssertStartsWithUsed()
         {
+            var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
-            var result = Assert.Throws<AssertionException>(() => Expect.That(() => "1234".EndsWith("2")));
-            var expected = AssertTestBase.GetAssertionMessage(() => StringAssert.EndsWith("2", "1234"));
+            var validator = new CallValidator();
+            A.CallTo(() => fakeBuilder.GetStringEndsWith(A<Expression>._, A<Expression>._)).AddAssertValidation(validator);
 
-            Assert.That(result.Message, Is.EqualTo(expected));
+            Expect.That(() => "1234".EndsWith("2"));
+
+            validator.WasAssertCalledWithArguments("2", "1234");
         }
     }
 }
