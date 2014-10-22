@@ -1,11 +1,16 @@
-﻿using AssertHelper.Core;
+﻿using System;
+using AssertHelper.Core;
 using NUnit.Framework;
 
 namespace AssertHelper.NUnit.Tests
 {
-    [TestFixture]
-    public class NUnitTests
+    public abstract class SpecificAssertTestsBase
     {
+        protected abstract Action<int, int> AssertEqualAction { get; }
+        protected abstract Action<int, int> AssertNotEqualAction { get; }
+        protected abstract Action<bool> AssertIsTrueAction { get; }
+        protected abstract Action<bool> AssertIsFalseAction { get; }
+
         [Test]
         public void That_CompareTwoNumbers_ReturnSameErrorMessageAsAreEqual()
         {
@@ -14,7 +19,7 @@ namespace AssertHelper.NUnit.Tests
 
             var result = Assert.Throws<AssertionException>(() => Expect.That(() => actual == expected));
 
-            var expectedMessage = Assert.Throws<AssertionException>(() => Assert.AreEqual(expected, actual)).Message;
+            var expectedMessage = Assert.Throws<AssertionException>(() => AssertEqualAction(expected, actual)).Message;
 
             Assert.That(result.Message, Is.EqualTo(expectedMessage));
         }
@@ -27,7 +32,7 @@ namespace AssertHelper.NUnit.Tests
 
             var result = Assert.Throws<AssertionException>(() => Expect.That(() => actual != expected));
 
-            var expectedMessage = Assert.Throws<AssertionException>(() => Assert.AreNotEqual(expected, actual)).Message;
+            var expectedMessage = Assert.Throws<AssertionException>(() => AssertNotEqualAction(expected, actual)).Message;
 
             Assert.That(result.Message, Is.EqualTo(expectedMessage));
         }
@@ -39,7 +44,7 @@ namespace AssertHelper.NUnit.Tests
 
             var result = Assert.Throws<AssertionException>(() => Expect.That(() => actual == true));
 
-            var expectedMessage = Assert.Throws<AssertionException>(() => Assert.IsTrue(actual)).Message;
+            var expectedMessage = Assert.Throws<AssertionException>(() => AssertIsTrueAction(actual)).Message;
 
             Assert.That(result.Message, Is.EqualTo(expectedMessage));
         }
@@ -51,9 +56,37 @@ namespace AssertHelper.NUnit.Tests
 
             var result = Assert.Throws<AssertionException>(() => Expect.That(() => actual == false));
 
-            var expectedMessage = Assert.Throws<AssertionException>(() => Assert.IsFalse(actual)).Message;
+            var expectedMessage = Assert.Throws<AssertionException>(() => AssertIsFalseAction(actual)).Message;
 
             Assert.That(result.Message, Is.EqualTo(expectedMessage));
+        }
+    }
+
+
+    [TestFixture]
+    public class NUnitTests : SpecificAssertTestsBase
+    {
+
+       
+
+        protected override Action<int, int> AssertEqualAction
+        {
+            get { return Assert.AreEqual; }
+        }
+
+        protected override Action<int, int> AssertNotEqualAction
+        {
+            get { return Assert.AreNotEqual; }
+        }
+
+        protected override Action<bool> AssertIsTrueAction
+        {
+            get { return Assert.IsTrue; }
+        }
+
+        protected override Action<bool> AssertIsFalseAction
+        {
+            get { return Assert.IsFalse; }
         }
     }
 }
