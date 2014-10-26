@@ -46,6 +46,11 @@ namespace AssertHelper.Core.Tests
 
     internal class FakeAssertBuilder : IAssertBuilder
     {
+        public bool IsValid()
+        {
+            return true;
+        }
+
         public Expression<Action> GetAreEqualAction(Expression left, Expression right)
         {
             throw new NotImplementedException();

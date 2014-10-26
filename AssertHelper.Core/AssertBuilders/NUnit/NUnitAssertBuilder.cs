@@ -9,11 +9,11 @@ namespace AssertHelper.Core.AssertBuilders.NUnit
 {
     internal class NUnitAssertBuilder : IAssertBuilder
     {    
-        private static AssertMethods _assert;
-        private static StringAssertMethods _stringAssert;
-        private static CollectionAssertMethods _collectionAssert;
+        private readonly AssertMethods _assert;
+        private readonly StringAssertMethods _stringAssert;
+        private readonly CollectionAssertMethods _collectionAssert;
 
-        static NUnitAssertBuilder()
+        public NUnitAssertBuilder()
         {
             var nunitTypes = AppDomain.CurrentDomain.GetAssemblies()
                 .Where(a => a.GetName().Name == "nunit.framework")

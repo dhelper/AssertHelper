@@ -1,3 +1,6 @@
+using System;
+using System.Linq;
+using AssertHelper.Core.AssertBuilders.MSTest;
 using AssertHelper.Core.AssertBuilders.NUnit;
 
 namespace AssertHelper.Core.AssertBuilders
@@ -6,13 +9,23 @@ namespace AssertHelper.Core.AssertBuilders
     {
         protected static IAssertBuilder _assertBuilder;
 
-        static AssertBuilderFactory()
-        {
-            _assertBuilder = new NUnitAssertBuilder();
-        }
 
         public static IAssertBuilder GetAssertBuilder()
         {
+            if (_assertBuilder == null)
+            {
+                var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+                if (assemblies.Any(a => a.GetName().Name == "nunit.framework"))
+                {
+                    _assertBuilder = new NUnitAssertBuilder();
+                }
+                else if (assemblies.Any(a => a.GetName().Name == "Microsoft.VisualStudio.QualityTools.UnitTestFramework"))
+                {
+                    _assertBuilder = new MSTestAssertBuilder();
+                }
+            }
+
             return _assertBuilder;
         }
 

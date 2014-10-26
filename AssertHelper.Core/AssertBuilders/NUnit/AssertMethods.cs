@@ -16,7 +16,6 @@ namespace AssertHelper.Core.AssertBuilders.NUnit
         private readonly MethodInfo _areEqual;
         private readonly MethodInfo _areNotEqual;
         private readonly MethodInfo _isInstanceOfType;
-        private readonly MethodInfo _isNotInstanceOfType;
         private readonly MethodInfo _fail;
 
         public AssertMethods(IEnumerable<Type> nunitTypes)
@@ -30,7 +29,6 @@ namespace AssertHelper.Core.AssertBuilders.NUnit
             _areEqual = assertType.GetMethod("AreEqual", new[] { typeof(object), typeof(object) });
             _areNotEqual = assertType.GetMethod("AreNotEqual", new[] { typeof(object), typeof(object) });
             _isInstanceOfType = assertType.GetMethod("IsInstanceOf", new[] { typeof(Type), typeof(object) });
-            _isNotInstanceOfType = assertType.GetMethod("IsNotInstanceOf", new[] { typeof(Type), typeof(object) });
             _fail = assertType.GetMethod("Fail", new[] { typeof(string) });
         }
 
@@ -41,7 +39,6 @@ namespace AssertHelper.Core.AssertBuilders.NUnit
         public MethodInfo AreEqual { get { return _areEqual; } }
         public MethodInfo AreNotEqual { get { return _areNotEqual; } }
         public MethodInfo IsInstanceOfType { get { return _isInstanceOfType; } }
-        public MethodInfo IsNotInstanceOfType { get { return _isNotInstanceOfType; } }
         public MethodInfo Fail { get { return _fail; } }
     }
 }

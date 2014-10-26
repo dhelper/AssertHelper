@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssertBuilders\MSTest\MSTestAssertBuilder.cs" />
     <Compile Include="Expect.cs" />
     <Compile Include="AssertBuilders\AssertBuilderFactory.cs" />
     <Compile Include="AssertBuilders\IAssertBuilder.cs" />
