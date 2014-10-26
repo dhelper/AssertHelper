@@ -1,4 +1,3 @@
-using System;
 using System.Linq.Expressions;
 using FakeItEasy;
 using NUnit.Framework;
@@ -9,7 +8,7 @@ namespace AssertHelper.Core.Tests
     public class AssertTestsNotNull : FakeAssertBuilderTests
     {
        [Test]
-        public void That_CompareValueNotEqualToNull_FinishNormally()
+        public void That_CompareValueNotEqualToNull_AssertNotNullCalled()
         {
             var val = new object();
 
