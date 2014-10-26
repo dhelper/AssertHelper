@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections;
-using NUnit.Framework;
 using System.Collections.Generic;
 using AssertHelper.TestBase;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace AssertHelper.NUnit.Tests
+namespace AssertHelper.MSTest.Tests
 {
-    [TestFixture]
-    public class NUnitTests : FrameworkSpecificAssertTestsBase
+    [TestClass]
+    public class MSTestTests : FrameworkSpecificAssertTestsBase
     {
         protected override Action<int, int> AssertEqualAction
         {
@@ -46,16 +46,17 @@ namespace AssertHelper.NUnit.Tests
 
         protected override Action<ICollection, ICollection> AssertCollectionEqualsAction
         {
-            get { return CollectionAssert.AreEqual; }
+            get{return CollectionAssert.AreEqual;}
         }
+
         protected override Action<ICollection, ICollection> AssertCollectionNotEqualsAction
         {
-            get { return CollectionAssert.AreNotEqual; }
+            get{return CollectionAssert.AreNotEqual;}
         }
 
         protected override Action<Type, object> AssertInstanceOfTypeAction
         {
-            get { return Assert.IsInstanceOf; }
+            get { return (type, obj) => Assert.IsInstanceOfType(obj, type); }
         }
 
         protected override Action<string, string> AssertStringContainsAction
