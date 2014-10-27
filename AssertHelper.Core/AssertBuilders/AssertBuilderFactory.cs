@@ -18,11 +18,11 @@ namespace AssertHelper.Core.AssertBuilders
 
                 if (assemblies.Any(a => a.GetName().Name == "nunit.framework"))
                 {
-                    _assertBuilder = new NUnitAssertBuilder();
+                    _assertBuilder = new AssertBuilder(new NUnitAssertBuilderFactory());
                 }
                 else if (assemblies.Any(a => a.GetName().Name == "Microsoft.VisualStudio.QualityTools.UnitTestFramework"))
                 {
-                    _assertBuilder = new MSTestAssertBuilder();
+                    _assertBuilder = new AssertBuilder(new MsTestAssertBuilderFactory());
                 }
             }
 
@@ -31,7 +31,7 @@ namespace AssertHelper.Core.AssertBuilders
 
         protected static void Reset()
         {
-            _assertBuilder = new NUnitAssertBuilder();
+            _assertBuilder = null;
         }
     }
 }
