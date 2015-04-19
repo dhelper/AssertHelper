@@ -167,3 +167,7 @@ pip-log.txt
 
 # Mac crap
 .DS_Store
+AssertHelper.MSTest.Tests/AssertHelper.MSTest.Tests.v2.ncrunchproject
+*.ncrunchproject
+_NCrunch_AssertHelper/AssertHelper.crunchsolution.cache
+*.cache
