@@ -54,14 +54,14 @@ namespace AssertHelper.Core.AssertBuilders
             return _areNotEqual.Assert(left, right);
         }
 
-        public Expression<Action> GetIsTrueAction(Expression expression)
+        public Expression<Action> GetIsTrueAction(Expression expression, string lambda)
         {
-            return _isTrue.Assert(expression);
+            return _isTrue.Assert(expression, lambda);
         }
 
-        public Expression<Action> GetIsFalseAction(Expression expression)
+        public Expression<Action> GetIsFalseAction(Expression expression, string lambda)
         {
-            return _isFalse.Assert(expression);
+            return _isFalse.Assert(expression, lambda);
         }
 
         public Expression<Action> GetIsInstanceOf(Type typeOperand, Expression expression)
@@ -71,7 +71,7 @@ namespace AssertHelper.Core.AssertBuilders
 
         public Expression<Action> GetFail(string message)
         {
-            return _fail.Assert(message);
+            return _fail.Assert(message, string.Empty);
         }
 
         public Expression<Action> GetCollectionContains(Expression expected, Expression actual)
@@ -104,14 +104,14 @@ namespace AssertHelper.Core.AssertBuilders
             return _stringEndsWith.Assert(expected, actual);
         }
 
-        public Expression<Action> GetIsNullAction(Expression expression)
+        public Expression<Action> GetIsNullAction(Expression expression, string lambda)
         {
-            return _isNull.Assert(expression);
+            return _isNull.Assert(expression, lambda);
         }
 
-        public Expression<Action> GetIsNotNullAction(Expression expression)
+        public Expression<Action> GetIsNotNullAction(Expression expression, string lambda)
         {
-            return _isNotNull.Assert(expression);
+            return _isNotNull.Assert(expression, lambda);
         }
     }
 }

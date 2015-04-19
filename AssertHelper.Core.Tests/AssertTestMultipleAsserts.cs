@@ -16,7 +16,7 @@ namespace AssertHelper.Core.Tests
             var assertIsTrueValidor = new CallValidator();
             var assertAreEqualValidator = new CallValidator();
 
-            A.CallTo(() => fakeBuilder.GetIsTrueAction(A<Expression>._)).AddAssertValidation(assertIsTrueValidor);
+            A.CallTo(() => fakeBuilder.GetIsTrueAction(A<Expression>._, A<string>._)).AddAssertValidation(assertIsTrueValidor);
             A.CallTo(() => fakeBuilder.GetAreEqualAction(A<Expression>._, A<Expression>._)).AddAssertValidation(assertAreEqualValidator);
 
             var obj1 = DummyCreator.GetReferenceObject1();
@@ -39,7 +39,7 @@ namespace AssertHelper.Core.Tests
 
             Expect.That(() => b1 && b2);
 
-            A.CallTo(() => fakeBuilder.GetIsTrueAction(A<Expression>._)).MustHaveHappened(Repeated.Exactly.Twice);
+            A.CallTo(() => fakeBuilder.GetIsTrueAction(A<Expression>._, A<string>._)).MustHaveHappened(Repeated.Exactly.Twice);
         }
 
         [Test]
@@ -55,7 +55,7 @@ namespace AssertHelper.Core.Tests
             Expect.That(() => b1 && b2 && b3);
 
             var assertBuilder = AssertBuilderFactory.GetAssertBuilder();
-            A.CallTo(() => assertBuilder.GetIsTrueAction(A<Expression>._)).MustHaveHappened(Repeated.Exactly.Times(3));
+            A.CallTo(() => assertBuilder.GetIsTrueAction(A<Expression>._, A<string>._)).MustHaveHappened(Repeated.Exactly.Times(3));
         }
     }
 }

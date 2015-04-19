@@ -15,7 +15,7 @@ namespace AssertHelper.Core
         {
             var operand = typedExpression.Operand;
 
-            return AssertBuilder.GetIsFalseAction(operand);
+            return AssertBuilder.GetIsFalseAction(operand, string.Empty);
         }
     }
 }

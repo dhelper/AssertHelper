@@ -19,9 +19,19 @@ namespace AssertHelper.Core.ExpressionConverters
         {
             var typedExpression = (T) expression;
 
-            return GetActionInternal(typedExpression);
+            return GetActionInternal(typedExpression, GetLembda(typedExpression));
         }
 
         protected abstract Expression<Action> GetActionInternal(T typedExpression);
+
+        protected virtual Expression<Action> GetActionInternal(T typedExpression, string lambdaString)
+        {
+            return GetActionInternal(typedExpression);
+        }
+
+        public virtual string GetLembda(T typedExpression)
+        {
+            return typedExpression.ToString();
+        }
     }
 }

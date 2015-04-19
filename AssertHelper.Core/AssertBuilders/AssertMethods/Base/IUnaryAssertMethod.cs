@@ -5,7 +5,7 @@ namespace AssertHelper.Core.AssertBuilders.AssertMethods.Base
 {
     interface IUnaryAssertMethod<in T>
     {
-        Expression<Action> Assert(T expression);
+        Expression<Action> Assert(T expression, string lambda);
     }
 
     interface IUnaryAssertMethod : IUnaryAssertMethod<Expression>

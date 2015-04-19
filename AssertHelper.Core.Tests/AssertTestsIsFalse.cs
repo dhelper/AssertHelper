@@ -16,13 +16,13 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var validator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetIsFalseAction(A<Expression>._)).AddAssertValidation(validator);
+            A.CallTo(() => fakeBuilder.GetIsFalseAction(A<Expression>._, A<string>._)).AddAssertValidation(validator);
 
             Expect.That(() => !value);
 
             validator.WasAssertCalledWithArguments(value);
         }
-        
+
         [Test]
         public void That_PassNot_AssertFalseIsCalled()
         {
@@ -31,7 +31,7 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var validator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetIsFalseAction(A<Expression>._)).AddAssertValidation(validator);
+            A.CallTo(() => fakeBuilder.GetIsFalseAction(A<Expression>._, A<string>._)).AddAssertValidation(validator);
 
             Expect.That(() => !value);
 
@@ -46,14 +46,14 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var validator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetIsFalseAction(A<Expression>._)).AddAssertValidation(validator);
+            A.CallTo(() => fakeBuilder.GetIsFalseAction(A<Expression>._, A<string>._)).AddAssertValidation(validator);
 
             Expect.That(() => value == false);
 
             validator.WasAssertCalledWithArguments(value);
 
-        } 
-        
+        }
+
         [Test]
         public void That_PassRightValueEqualToFalse_AssertFalseIsCalled()
         {
@@ -62,7 +62,7 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var validator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetIsFalseAction(A<Expression>._)).AddAssertValidation(validator);
+            A.CallTo(() => fakeBuilder.GetIsFalseAction(A<Expression>._, A<string>._)).AddAssertValidation(validator);
 
             Expect.That(() => false == value);
 
@@ -77,7 +77,7 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var validator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetIsFalseAction(A<Expression>._)).AddAssertValidation(validator);
+            A.CallTo(() => fakeBuilder.GetIsFalseAction(A<Expression>._, A<string>._)).AddAssertValidation(validator);
 
             Expect.That(() => value != true);
 
@@ -92,7 +92,7 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var validator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetIsFalseAction(A<Expression>._)).AddAssertValidation(validator);
+            A.CallTo(() => fakeBuilder.GetIsFalseAction(A<Expression>._, A<string>._)).AddAssertValidation(validator);
 
             Expect.That(() => true != value);
 

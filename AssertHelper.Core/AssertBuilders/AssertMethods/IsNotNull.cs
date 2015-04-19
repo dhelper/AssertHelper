@@ -6,7 +6,7 @@ namespace AssertHelper.Core.AssertBuilders.AssertMethods
     internal class IsNotNull : UnaryAssertMethodBase
     {
         public IsNotNull(Type assertType)
-            : base(assertType, "IsNotNull", new[] { typeof(object) })
+            : base(assertType, "IsNotNull", new[] { typeof(object), typeof(string) })
         { }
     }
 }

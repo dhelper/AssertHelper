@@ -7,8 +7,8 @@ namespace AssertHelper.Core.AssertBuilders
     {
         Expression<Action> GetAreEqualAction(Expression left, Expression right);
         Expression<Action> GetAreNotEqualAction(Expression left, Expression right);
-        Expression<Action> GetIsTrueAction(Expression expression);
-        Expression<Action> GetIsFalseAction(Expression expression);
+        Expression<Action> GetIsTrueAction(Expression expression, string lambda);
+        Expression<Action> GetIsFalseAction(Expression expression, string lambda);
         Expression<Action> GetIsInstanceOf(Type typeOperand, Expression expression);
         Expression<Action> GetFail(string message);
         Expression<Action> GetCollectionContains(Expression expected, Expression actual);
@@ -17,7 +17,7 @@ namespace AssertHelper.Core.AssertBuilders
         Expression<Action> GetStringContains(Expression expected, Expression actual);
         Expression<Action> GetStringStartsWith(Expression expected, Expression actual);
         Expression<Action> GetStringEndsWith(Expression expected, Expression actual);
-        Expression<Action> GetIsNullAction(Expression expression);
-        Expression<Action> GetIsNotNullAction(Expression expression);
+        Expression<Action> GetIsNullAction(Expression expression, string lambda);
+        Expression<Action> GetIsNotNullAction(Expression expression, string lambda);
     }
 }

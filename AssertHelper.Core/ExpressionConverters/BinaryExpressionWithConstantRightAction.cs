@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace AssertHelper.Core.ExpressionConverters
@@ -14,5 +15,14 @@ namespace AssertHelper.Core.ExpressionConverters
         {
             get { return expr => expr.Left; }
         }        
+
+        public override string GetLembda(BinaryExpression binaryExpression)
+        {
+            var left = binaryExpression.Left.ToString();
+
+            var shortLeft = left.Split('.').Last();
+
+            return binaryExpression.ToString().Replace(left, shortLeft);
+        }
     }
 }

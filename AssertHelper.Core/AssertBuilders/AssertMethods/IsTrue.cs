@@ -6,7 +6,7 @@ namespace AssertHelper.Core.AssertBuilders.AssertMethods
     internal class IsTrue : UnaryAssertMethodBase
     {
         public IsTrue(Type assertType)
-            : base(assertType, "IsTrue", new[] { typeof(bool) })
+            : base(assertType, "IsTrue", new[] { typeof(bool), typeof(string) })
         { }
     }
 }

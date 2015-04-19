@@ -15,7 +15,7 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var validator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetIsNotNullAction(A<Expression>._)).AddAssertValidation(validator);
+            A.CallTo(() => fakeBuilder.GetIsNotNullAction(A<Expression>._, A<string>._)).AddAssertValidation(validator);
 
             Expect.That(() => val != null);
 
@@ -30,7 +30,7 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var validator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetIsNotNullAction(A<Expression>._)).AddAssertValidation(validator);
+            A.CallTo(() => fakeBuilder.GetIsNotNullAction(A<Expression>._, A<string>._)).AddAssertValidation(validator);
 
             Expect.That(() => val != null);
 
@@ -45,7 +45,7 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var validator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetIsNotNullAction(A<Expression>._)).AddAssertValidation(validator);
+            A.CallTo(() => fakeBuilder.GetIsNotNullAction(A<Expression>._, A<string>._)).AddAssertValidation(validator);
 
             Expect.That(() => null != val);
 

@@ -10,9 +10,9 @@ namespace AssertHelper.Core.AssertBuilders.AssertMethods.Base
         {
         }
 
-        public Expression<Action> Assert(Expression expression)
+        public Expression<Action> Assert(Expression expression, string lambda)
         {
-            return GetExpression(expression);
+            return GetExpression(expression, Expression.Constant(lambda, typeof(string)));
         }
     }
 }

@@ -30,23 +30,28 @@ namespace AssertHelper.Core.ExpressionConverters
 
         protected override Expression<Action> GetActionInternal(BinaryExpression typedExpression)
         {
+            throw new NotImplementedException();
+        }
+
+        protected override Expression<Action> GetActionInternal(BinaryExpression typedExpression, string lambdaString)
+        {
             var constantExpression = (ConstantExpression)GetConstantExpression(typedExpression);
             var valueExpression = GetValueExpression(typedExpression);
 
-            return GetActionForConstant(constantExpression, valueExpression, typedExpression.NodeType);
+            return GetActionForConstant(constantExpression, valueExpression, typedExpression.NodeType, lambdaString);
         }
 
-        private Expression<Action> GetActionForConstant(ConstantExpression constantExpression, Expression resultExpression, ExpressionType expressionType)
+        private Expression<Action> GetActionForConstant(ConstantExpression constantExpression, Expression resultExpression, ExpressionType expressionType, string lambdaString)
         {
             if (constantExpression.Value == null)
             {
                 if (expressionType == ExpressionType.Equal)
                 {
-                    return AssertBuilder.GetIsNullAction(resultExpression);
+                    return AssertBuilder.GetIsNullAction(resultExpression, lambdaString);
                 }
                 else
                 {
-                    return AssertBuilder.GetIsNotNullAction(resultExpression);
+                    return AssertBuilder.GetIsNotNullAction(resultExpression, lambdaString);
                 }
             }
 
@@ -57,8 +62,8 @@ namespace AssertHelper.Core.ExpressionConverters
             }
 
             return value
-                       ? AssertBuilder.GetIsTrueAction(resultExpression)
-                       : AssertBuilder.GetIsFalseAction(resultExpression);
+                       ? AssertBuilder.GetIsTrueAction(resultExpression, lambdaString)
+                       : AssertBuilder.GetIsFalseAction(resultExpression, lambdaString);
         }
     }
 }

@@ -3,9 +3,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AssertHelper.MSTest.Tests
 {
+    public delegate void TestDelegate();
+
     public static class AssertEx
     {
-        public static T Throws<T>(Action action) where T : Exception
+        public static T Throws<T>(TestDelegate action) where T : Exception
         {
             try
             {

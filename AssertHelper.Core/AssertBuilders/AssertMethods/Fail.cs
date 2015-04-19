@@ -11,7 +11,7 @@ namespace AssertHelper.Core.AssertBuilders.AssertMethods
         {
         }
 
-        public Expression<Action> Assert(string message)
+        public Expression<Action> Assert(string message, string lambda)
         {
             return GetExpression(Expression.Constant(message));
         }

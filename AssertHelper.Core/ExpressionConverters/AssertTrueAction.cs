@@ -12,7 +12,7 @@ namespace AssertHelper.Core.ExpressionConverters
 
         public override Expression<Action> GetAction(Expression expression)
         {
-            return AssertBuilder.GetIsTrueAction(expression);
+            return AssertBuilder.GetIsTrueAction(expression, "Boom!");
         }
     }
 }
