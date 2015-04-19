@@ -1,21 +1,10 @@
-﻿using System.Linq;
-using System.Linq.Expressions;
-using System.Resources;
+﻿using System.Linq.Expressions;
 using FakeItEasy;
 using NUnit.Framework;
 using AssertHelper.Core.AssertBuilders;
 
 namespace AssertHelper.Core.Tests
 {
-    public class FakeAssertBuilderTests
-    {
-        [TearDown]
-        public void RestoreAssertBuilder()
-        {
-            AssertBuilderFactoryForTests.Restore();
-        }
-    }
-
     [TestFixture]
     public class AssertTestMultipleAsserts : FakeAssertBuilderTests
     {

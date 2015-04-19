@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 using FakeItEasy;
 using NUnit.Framework;
@@ -8,7 +7,6 @@ namespace AssertHelper.Core.Tests
 {
     public class CallValidator
     {
-//        private readonly List<Expression> _arguments = new List<Expression>();
         private ArgumentCollection _arguments;
         public bool WasCalled { get; set; }
 

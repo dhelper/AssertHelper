@@ -49,7 +49,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssertBuilderFactoryForTests.cs" />
-    <Compile Include="AssertTestBase.cs" />
     <Compile Include="AssertTestMultipleAsserts.cs" />
     <Compile Include="AssertTestsAreNotEqual.cs" />
     <Compile Include="AssertTestsIsFalse.cs" />
@@ -60,8 +59,9 @@
     <Compile Include="AssertTestsNotNull.cs" />
     <Compile Include="AssertTestsNull.cs" />
     <Compile Include="AssertTestString.cs" />
-    <Compile Include="CallValidator.cs" />
-    <Compile Include="DummyCreator.cs" />
+    <Compile Include="TestHelpers\CallValidator.cs" />
+    <Compile Include="TestHelpers\DummyCreator.cs" />
+    <Compile Include="TestHelpers\FakeAssertBuilderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
