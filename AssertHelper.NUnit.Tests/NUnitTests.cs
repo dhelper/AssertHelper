@@ -9,6 +9,11 @@ namespace AssertHelper.NUnit.Tests
     [TestFixture]
     public class NUnitTests : FrameworkSpecificAssertTestsBase
     {
+        protected override string CreateExpectedMessage(string expectedLambda, AssertionException expectedException)
+        {
+            return "(" + expectedLambda + ")" + expectedException.Message;
+        }
+
         protected override Action<int, int> AssertEqualAction
         {
             get { return Assert.AreEqual; }

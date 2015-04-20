@@ -22,13 +22,14 @@ namespace AssertHelper.TestBase
         {
             Assert.AreEqual(Regex.Replace(expected, @"\s+", String.Empty), Regex.Replace(actual, @"\s+", String.Empty));
         }
-
-        private static string GetExpectedMessage(TestDelegate action, string expectedLambda)
+        
+        private string GetExpectedMessage(TestDelegate action, string expectedLambda)
         {
             var expectedException = AssertEx.Throws<AssertionException>(action);
-            var expectedMessage = "(" + expectedLambda + ")" + expectedException.Message;
-            return expectedMessage;
+            return CreateExpectedMessage(expectedLambda, expectedException);
         }
+
+        protected abstract string CreateExpectedMessage(string expectedLambda, AssertionException expectedException);
 
         protected abstract Action<int, int> AssertEqualAction { get; }
         protected abstract Action<int, int> AssertNotEqualAction { get; }

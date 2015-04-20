@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using AssertHelper.TestBase;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using AssertionException = Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException;
 
 namespace AssertHelper.MSTest.Tests
 {
     [TestClass]
     public class MSTestTests : FrameworkSpecificAssertTestsBase
     {
+        protected override string CreateExpectedMessage(string expectedLambda, AssertionException expectedException)
+        {
+            return expectedException.Message + "(" + expectedLambda + ")";
+        }
+
         protected override Action<int, int> AssertEqualAction
         {
             get { return Assert.AreEqual; }
