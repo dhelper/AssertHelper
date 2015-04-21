@@ -17,7 +17,7 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var validator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetCollectionContains(A<Expression>._, A<Expression>._)).AddAssertValidation(validator);
+            A.CallTo(() => fakeBuilder.GetCollectionContains(A<Expression>._, A<Expression>._, A<string>._)).AddAssertValidation(validator);
 
             Expect.That(() => collection.Contains(7));
 
@@ -33,7 +33,7 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var validator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetCollectionContains(A<Expression>._, A<Expression>._)).AddAssertValidation(validator);
+            A.CallTo(() => fakeBuilder.GetCollectionContains(A<Expression>._, A<Expression>._, A<string>._)).AddAssertValidation(validator);
 
             Expect.That(() => collection.Contains(val));
 
@@ -48,7 +48,7 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var validator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetCollectionContains(A<Expression>._, A<Expression>._)).AddAssertValidation(validator);
+            A.CallTo(() => fakeBuilder.GetCollectionContains(A<Expression>._, A<Expression>._, A<string>._)).AddAssertValidation(validator);
 
             Expect.That(() => collection.Contains(7));
 
@@ -63,7 +63,7 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var validator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetCollectionContains(A<Expression>._, A<Expression>._)).AddAssertValidation(validator);
+            A.CallTo(() => fakeBuilder.GetCollectionContains(A<Expression>._, A<Expression>._, A<string>._)).AddAssertValidation(validator);
 
             Expect.That(() => collection.Contains(7));
 
@@ -79,7 +79,7 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var validator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetCollectionEquals(A<Expression>._, A<Expression>._)).AddAssertValidation(validator);
+            A.CallTo(() => fakeBuilder.GetCollectionEquals(A<Expression>._, A<Expression>._, A<string>._)).AddAssertValidation(validator);
 
             Expect.That(() => collection1 == collection2);
 
@@ -95,7 +95,7 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var validator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetCollectionEquals(A<Expression>._, A<Expression>._)).AddAssertValidation(validator);
+            A.CallTo(() => fakeBuilder.GetCollectionEquals(A<Expression>._, A<Expression>._, A<string>._)).AddAssertValidation(validator);
 
             Expect.That(() => collection1 == collection2);
 
@@ -111,7 +111,7 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var validator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetCollectionNotEquals(A<Expression>._, A<Expression>._)).AddAssertValidation(validator);
+            A.CallTo(() => fakeBuilder.GetCollectionNotEquals(A<Expression>._, A<Expression>._, A<string>._)).AddAssertValidation(validator);
 
             Expect.That(() => collection1 != collection2);
 
@@ -127,7 +127,7 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var validator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetCollectionNotEquals(A<Expression>._, A<Expression>._)).AddAssertValidation(validator);
+            A.CallTo(() => fakeBuilder.GetCollectionNotEquals(A<Expression>._, A<Expression>._, A<string>._)).AddAssertValidation(validator);
 
             Expect.That(() => collection1 != collection2);
 

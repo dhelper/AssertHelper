@@ -33,7 +33,7 @@ namespace AssertHelper.Core.ExpressionConverters
         {
             var methodCallExpr = (MethodCallExpression)expression;
 
-            return AssertBuilderFactory.GetAssertBuilder().GetCollectionContains(methodCallExpr.Arguments[0], methodCallExpr.Arguments[1]);
+            return AssertBuilderFactory.GetAssertBuilder().GetCollectionContains(methodCallExpr.Arguments[0], methodCallExpr.Arguments[1], string.Empty);
         }
     }
 }

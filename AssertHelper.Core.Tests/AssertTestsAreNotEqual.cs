@@ -17,7 +17,7 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var assertAreEqualValidator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetAreNotEqualAction(A<Expression>._, A<Expression>._)).AddAssertValidation(assertAreEqualValidator);
+            A.CallTo(() => fakeBuilder.GetAreNotEqualAction(A<Expression>._, A<Expression>._, A<string>._)).AddAssertValidation(assertAreEqualValidator);
 
             Expect.That(() => value != expected);
 
@@ -33,7 +33,7 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var assertAreEqualValidator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetAreNotEqualAction(A<Expression>._, A<Expression>._)).AddAssertValidation(assertAreEqualValidator);
+            A.CallTo(() => fakeBuilder.GetAreNotEqualAction(A<Expression>._, A<Expression>._, A<string>._)).AddAssertValidation(assertAreEqualValidator);
 
             Expect.That(() => value != expected);
 
@@ -49,7 +49,7 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var assertAreEqualValidator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetAreNotEqualAction(A<Expression>._, A<Expression>._)).AddAssertValidation(assertAreEqualValidator);
+            A.CallTo(() => fakeBuilder.GetAreNotEqualAction(A<Expression>._, A<Expression>._, A<string>._)).AddAssertValidation(assertAreEqualValidator);
 
             Expect.That(() => value != expected);
 
@@ -65,7 +65,7 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var assertAreEqualValidator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetAreNotEqualAction(A<Expression>._, A<Expression>._)).AddAssertValidation(assertAreEqualValidator);
+            A.CallTo(() => fakeBuilder.GetAreNotEqualAction(A<Expression>._, A<Expression>._, A<string>._)).AddAssertValidation(assertAreEqualValidator);
 
             Expect.That(() => value != expected);
 

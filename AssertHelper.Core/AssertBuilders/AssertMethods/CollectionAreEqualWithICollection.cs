@@ -12,8 +12,9 @@ namespace AssertHelper.Core.AssertBuilders.AssertMethods
         {
         }
 
-        public Expression<Action> Assert(Expression left, Expression right)
+        public Expression<Action> Assert(Expression left, Expression right, string lambda)
         {
+            // TODO: fixme!
             return GetExpression(Expression.Convert(left, typeof(ICollection)), Expression.Convert(right, typeof(ICollection)));
         }
     }

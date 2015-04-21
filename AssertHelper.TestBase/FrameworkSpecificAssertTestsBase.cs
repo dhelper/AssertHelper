@@ -190,7 +190,7 @@ namespace AssertHelper.TestBase
         }
 
         [Test]
-        public void That_StringEndssWithCalled_StringAssertStartsWithUsed()
+        public void That_StringEndsWithCalled_StringAssertStartsWithUsed()
         {
             var result = AssertEx.Throws<AssertionException>(() => Expect.That(() => "1234".EndsWith("2")));
 

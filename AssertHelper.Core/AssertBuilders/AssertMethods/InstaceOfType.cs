@@ -10,8 +10,9 @@ namespace AssertHelper.Core.AssertBuilders.AssertMethods
             : base(assertType, "IsInstanceOf", new[] { typeof(Type), typeof(object) })
         { }
 
-        public Expression<Action> Assert(Type type, Expression expression)
+        public Expression<Action> Assert(Type type, Expression expression, string lambda)
         {
+            // TODO: fixme!
             return GetExpression(Expression.Constant(type), expression);
         }
     }

@@ -10,6 +10,6 @@ namespace AssertHelper.Core.AssertBuilders.AssertMethods.Base
 
     interface IBinaryAssertMethod<in T1, in T2>
     {
-        Expression<Action> Assert(T1 left, T2 right);
+        Expression<Action> Assert(T1 left, T2 right, string lambda);
     }
 }

@@ -7,7 +7,7 @@ namespace AssertHelper.Core.ExpressionConverters
     {
         protected override Expression<Action> GetActionInternal(TypeBinaryExpression typedExpression)
         {
-            return AssertBuilder.GetIsInstanceOf(typedExpression.TypeOperand, typedExpression.Expression);
+            return AssertBuilder.GetIsInstanceOf(typedExpression.TypeOperand, typedExpression.Expression, string.Empty);
         }
     }
 }

@@ -34,7 +34,7 @@ namespace AssertHelper.Core.ExpressionConverters
         {
             var methodCallExpr = (MethodCallExpression)expression;
 
-            return AssertBuilderFactory.GetAssertBuilder().GetCollectionContains(methodCallExpr.Object, methodCallExpr.Arguments[0]);
+            return AssertBuilderFactory.GetAssertBuilder().GetCollectionContains(methodCallExpr.Object, methodCallExpr.Arguments[0], string.Empty);
         }
     }
 }

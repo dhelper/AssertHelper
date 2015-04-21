@@ -88,6 +88,7 @@
     <Compile Include="ExpressionConverters\IsInstanceOf.cs" />
     <Compile Include="ExpressionConverters\NotInstanceOf.cs" />
     <Compile Include="ExpressionConverters\StringEndsWith.cs" />
+    <Compile Include="Extensions\ExpressionExtensions.cs" />
     <Compile Include="Extensions\MethodInfoExtensions.cs" />
     <Compile Include="Extensions\TypeExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

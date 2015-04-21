@@ -15,10 +15,10 @@ namespace AssertHelper.Core.ExpressionConverters
         {
             if (binaryExpression.Left.Type.IsNot<string>() && binaryExpression.Left.Type.IsEnumerableType())
             {
-                return AssertBuilder.GetCollectionNotEquals(binaryExpression.Right, binaryExpression.Left);
+                return AssertBuilder.GetCollectionNotEquals(binaryExpression.Right, binaryExpression.Left, string.Empty);
             }
 
-            return AssertBuilder.GetAreNotEqualAction(binaryExpression.Right, binaryExpression.Left);
+            return AssertBuilder.GetAreNotEqualAction(binaryExpression.Right, binaryExpression.Left, string.Empty);
         }
     }
 }

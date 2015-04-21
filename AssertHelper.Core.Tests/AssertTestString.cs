@@ -13,7 +13,7 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var validator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetStringContains(A<Expression>._, A<Expression>._)).AddAssertValidation(validator);
+            A.CallTo(() => fakeBuilder.GetStringContains(A<Expression>._, A<Expression>._, A<string>._)).AddAssertValidation(validator);
 
             Expect.That(() => "1234".Contains("5"));
 
@@ -26,7 +26,7 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var validator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetStringStartsWith(A<Expression>._, A<Expression>._)).AddAssertValidation(validator);
+            A.CallTo(() => fakeBuilder.GetStringStartsWith(A<Expression>._, A<Expression>._, A<string>._)).AddAssertValidation(validator);
 
             Expect.That(() => "1234".StartsWith("2"));
 
@@ -39,7 +39,7 @@ namespace AssertHelper.Core.Tests
             var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
 
             var validator = new CallValidator();
-            A.CallTo(() => fakeBuilder.GetStringEndsWith(A<Expression>._, A<Expression>._)).AddAssertValidation(validator);
+            A.CallTo(() => fakeBuilder.GetStringEndsWith(A<Expression>._, A<Expression>._, A<string>._)).AddAssertValidation(validator);
 
             Expect.That(() => "1234".EndsWith("2"));
 

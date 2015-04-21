@@ -17,14 +17,14 @@ namespace AssertHelper.Core.ExpressionConverters
             throw new NotImplementedException();
         }
 
-        protected override Expression<Action> GetActionInternal(BinaryExpression binaryExpression, string lambdaString)
+        protected override Expression<Action> GetActionInternal(BinaryExpression binaryExpression, string lambda)
         {
             if (binaryExpression.Left.Type.IsNot<string>() && binaryExpression.Left.Type.IsEnumerableType())
             {
-                return AssertBuilder.GetCollectionEquals(binaryExpression.Right, binaryExpression.Left);
+                return AssertBuilder.GetCollectionEquals(binaryExpression.Right, binaryExpression.Left, lambda);
             }
 
-            return AssertBuilder.GetAreEqualAction(binaryExpression.Right, binaryExpression.Left);
+            return AssertBuilder.GetAreEqualAction(binaryExpression.Right, binaryExpression.Left, lambda);
         }
 
         public override string GetLembda(BinaryExpression binaryExpression)

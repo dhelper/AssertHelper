@@ -17,7 +17,7 @@ namespace AssertHelper.Core.Tests
             var assertAreEqualValidator = new CallValidator();
 
             A.CallTo(() => fakeBuilder.GetIsTrueAction(A<Expression>._, A<string>._)).AddAssertValidation(assertIsTrueValidor);
-            A.CallTo(() => fakeBuilder.GetAreEqualAction(A<Expression>._, A<Expression>._)).AddAssertValidation(assertAreEqualValidator);
+            A.CallTo(() => fakeBuilder.GetAreEqualAction(A<Expression>._, A<Expression>._, A<string>._)).AddAssertValidation(assertAreEqualValidator);
 
             var obj1 = DummyCreator.GetReferenceObject1();
             var obj2 = DummyCreator.GetReferenceObject2();
