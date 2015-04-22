@@ -1,6 +1,7 @@
 ﻿using AssertHelper.Core.AssertBuilders;
 using System;
 using System.Linq.Expressions;
+using AssertHelper.Core.Extensions;
 
 namespace AssertHelper.Core.ExpressionConverters
 {
@@ -33,7 +34,7 @@ namespace AssertHelper.Core.ExpressionConverters
         {
             var methodCallExpr = (MethodCallExpression)expression;
 
-            return AssertBuilderFactory.GetAssertBuilder().GetCollectionContains(methodCallExpr.Arguments[0], methodCallExpr.Arguments[1], string.Empty);
+            return AssertBuilderFactory.GetAssertBuilder().GetCollectionContains(methodCallExpr.Arguments[0], methodCallExpr.Arguments[1], methodCallExpr.PrettyPrint());
         }
     }
 }

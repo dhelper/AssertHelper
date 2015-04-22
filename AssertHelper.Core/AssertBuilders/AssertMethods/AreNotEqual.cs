@@ -8,7 +8,7 @@ namespace AssertHelper.Core.AssertBuilders.AssertMethods
     internal class AreNotEqual : AssertMethodBase, IBinaryAssertMethod
     {
         public AreNotEqual(Type assertType)
-            : base(assertType, "AreNotEqual", new[] { typeof(object), typeof(object) })
+            : base(assertType, "AreNotEqual", new[] { typeof(object), typeof(object), typeof(string) })
         { }
 
         public Expression<Action> Assert(Expression left, Expression right, string lambda)

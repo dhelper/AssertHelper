@@ -23,4 +23,12 @@ namespace AssertHelper.MSTest.Tests
             return null;
         }
     }
+
+    public static class StringAssertEx
+    {
+        public static void Contains(string expected, string actual)
+        {
+            StringAssert.Contains(actual, expected);
+        }
+    }
 }

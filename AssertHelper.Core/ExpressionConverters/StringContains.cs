@@ -12,9 +12,9 @@ namespace AssertHelper.Core.ExpressionConverters
             return method.DeclaringType == typeof (string) && method.Name == "Contains";
         }
 
-        protected override Expression<Action> GetActionInternal(MethodCallExpression typedExpression)
+        protected override Expression<Action> GetActionInternal(MethodCallExpression typedExpression, string lambda)
         {
-            return AssertBuilder.GetStringContains(typedExpression.Arguments[0], typedExpression.Object, string.Empty);
+            return AssertBuilder.GetStringContains(typedExpression.Arguments[0], typedExpression.Object, lambda);
         }
     }
 }

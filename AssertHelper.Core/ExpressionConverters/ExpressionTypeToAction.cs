@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using AssertHelper.Core.Extensions;
 
 namespace AssertHelper.Core.ExpressionConverters
 {
@@ -19,19 +20,9 @@ namespace AssertHelper.Core.ExpressionConverters
         {
             var typedExpression = (T) expression;
 
-            return GetActionInternal(typedExpression, GetLembda(typedExpression));
+            return GetActionInternal(typedExpression, typedExpression.PrettyPrint());
         }
 
-        protected abstract Expression<Action> GetActionInternal(T typedExpression);
-
-        protected virtual Expression<Action> GetActionInternal(T typedExpression, string lambdaString)
-        {
-            return GetActionInternal(typedExpression);
-        }
-
-        public virtual string GetLembda(T typedExpression)
-        {
-            return typedExpression.ToString();
-        }
+        protected abstract Expression<Action> GetActionInternal(T typedExpression, string lambdaString);
     }
 }

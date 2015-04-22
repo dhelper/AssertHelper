@@ -11,14 +11,14 @@ namespace AssertHelper.Core.ExpressionConverters
             return binaryExpression.NodeType == ExpressionType.NotEqual;
         }
 
-        protected override Expression<Action> GetActionInternal(BinaryExpression binaryExpression)
+        protected override Expression<Action> GetActionInternal(BinaryExpression binaryExpression, string lambda)
         {
             if (binaryExpression.Left.Type.IsNot<string>() && binaryExpression.Left.Type.IsEnumerableType())
             {
-                return AssertBuilder.GetCollectionNotEquals(binaryExpression.Right, binaryExpression.Left, string.Empty);
+                return AssertBuilder.GetCollectionNotEquals(binaryExpression.Right, binaryExpression.Left, lambda);
             }
 
-            return AssertBuilder.GetAreNotEqualAction(binaryExpression.Right, binaryExpression.Left, string.Empty);
+            return AssertBuilder.GetAreNotEqualAction(binaryExpression.Right, binaryExpression.Left, lambda);
         }
     }
 }

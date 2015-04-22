@@ -1,5 +1,6 @@
 using System;
 using System.Linq.Expressions;
+using AssertHelper.Core.Extensions;
 
 namespace AssertHelper.Core.AssertBuilders.AssertMethods.Base
 {
@@ -12,8 +13,7 @@ namespace AssertHelper.Core.AssertBuilders.AssertMethods.Base
 
         public Expression<Action> Assert(Expression left, Expression right, string lambda)
         {
-            // TODO: need to output lamda string
-            return GetExpression(left, right);
+            return GetExpression(left, right, lambda.ToConstantExpression());
         }
     }
 }

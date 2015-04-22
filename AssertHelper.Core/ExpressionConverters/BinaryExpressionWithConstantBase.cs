@@ -28,11 +28,6 @@ namespace AssertHelper.Core.ExpressionConverters
             return constantExpression.Value == null || constantExpression.Value is bool;
         }
 
-        protected override Expression<Action> GetActionInternal(BinaryExpression typedExpression)
-        {
-            throw new NotImplementedException();
-        }
-
         protected override Expression<Action> GetActionInternal(BinaryExpression typedExpression, string lambdaString)
         {
             var constantExpression = (ConstantExpression)GetConstantExpression(typedExpression);

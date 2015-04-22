@@ -1,12 +1,12 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using AssertHelper.Core;
 #if NUNIT
 using NUnit.Framework;
 using AssertEx = NUnit.Framework.Assert;
+using StringAssertEx = NUnit.Framework.StringAssert;
 #else
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestAttribute = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
@@ -27,6 +27,13 @@ namespace AssertHelper.TestBase
         {
             var expectedException = AssertEx.Throws<AssertionException>(action);
             return CreateExpectedMessage(expectedLambda, expectedException);
+        }
+
+        private static void AssertStringContains(AssertionException result, string expectedMessage, string lambdaDescription)
+        {
+            StringAssertEx.Contains(lambdaDescription, result.Message);
+            var replace = result.Message.Replace(lambdaDescription, "");
+            StringAssertEx.Contains(expectedMessage, replace);
         }
 
         protected abstract string CreateExpectedMessage(string expectedLambda, AssertionException expectedException);
@@ -115,9 +122,9 @@ namespace AssertHelper.TestBase
 
             var result = AssertEx.Throws<AssertionException>(() => Expect.That(() => collection1 == collection2));
 
-            var expectedMessage = GetExpectedMessage(() => AssertCollectionEqualsAction(collection2, collection1), "collection1 == collection2");
+            var expectedMessage = AssertEx.Throws<AssertionException>(() => AssertCollectionEqualsAction(collection2, collection1)).Message;
 
-            AssertIgnoreWhitespace(expectedMessage, result.Message);
+            AssertStringContains(result, expectedMessage, "collection1 == collection2");
         }
 
         [Test]
@@ -128,9 +135,9 @@ namespace AssertHelper.TestBase
 
             var result = AssertEx.Throws<AssertionException>(() => Expect.That(() => collection1 != collection2));
 
-            var expectedMessage = GetExpectedMessage(() => AssertCollectionNotEqualsAction(collection2, collection1), "collection1 != collection2");
+            var expectedMessage = AssertEx.Throws<AssertionException>(() => AssertCollectionNotEqualsAction(collection2, collection1)).Message;
 
-            AssertIgnoreWhitespace(expectedMessage, result.Message);
+            AssertStringContains(result, expectedMessage, "collection1 != collection2");
         }
 
         [Test]
@@ -140,10 +147,11 @@ namespace AssertHelper.TestBase
 
             var result = AssertEx.Throws<AssertionException>(() => Expect.That(() => val is string));
 
-            var expectedMessage = GetExpectedMessage(() => AssertInstanceOfTypeAction(typeof(string), val), "val is string");
+            var expectedMessage = AssertEx.Throws<AssertionException>( () => AssertInstanceOfTypeAction(typeof(string), val)).Message;
 
-            AssertIgnoreWhitespace(expectedMessage, result.Message);
+            AssertStringContains(result, expectedMessage, "val Is String");
         }
+
 
         [Test]
         public void That_CompareValueToNull_AssertIsNullCalled()
@@ -174,9 +182,9 @@ namespace AssertHelper.TestBase
         {
             var result = AssertEx.Throws<AssertionException>(() => Expect.That(() => "1234".Contains("5")));
 
-            var expectedMessage = GetExpectedMessage(() => AssertStringContainsAction("5", "1234"), "\"1234\".Contains(\"5\")");
+            var expectedMessage = AssertEx.Throws<AssertionException>(() => AssertStringContainsAction("5", "1234")).Message;
 
-            AssertIgnoreWhitespace(expectedMessage, result.Message);
+            AssertStringContains(result, expectedMessage, "\"1234\".Contains(\"5\")");
         }
 
         [Test]
@@ -184,9 +192,9 @@ namespace AssertHelper.TestBase
         {
             var result = AssertEx.Throws<AssertionException>(() => Expect.That(() => "1234".StartsWith("2")));
 
-            var expectedMessage = GetExpectedMessage(() => AssertStringStartsWithAction("2", "1234"), "\"1234\".StartsWith(\"2\")");
+            var expectedMessage = AssertEx.Throws<AssertionException>(() => AssertStringStartsWithAction("2", "1234")).Message;
 
-            AssertIgnoreWhitespace(expectedMessage, result.Message);
+            AssertStringContains(result, expectedMessage, "\"1234\".StartsWith(\"2\")");
         }
 
         [Test]
@@ -194,9 +202,9 @@ namespace AssertHelper.TestBase
         {
             var result = AssertEx.Throws<AssertionException>(() => Expect.That(() => "1234".EndsWith("2")));
 
-            var expectedMessage = GetExpectedMessage(() => AssertStringEndsWithAction("2", "1234"), "\"1234\".EndsWith(\"2\")");
+            var expectedMessage = AssertEx.Throws<AssertionException>(() => AssertStringEndsWithAction("2", "1234")).Message;
 
-            AssertIgnoreWhitespace(expectedMessage, result.Message);
+            AssertStringContains(result, expectedMessage, "\"1234\".EndsWith(\"2\")");
         }
     }
 }

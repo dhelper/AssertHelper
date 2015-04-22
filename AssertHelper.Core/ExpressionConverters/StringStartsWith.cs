@@ -12,9 +12,9 @@ namespace AssertHelper.Core.ExpressionConverters
             return method.DeclaringType == typeof(string) && method.Name == "StartsWith";
         }
 
-        protected override Expression<Action> GetActionInternal(MethodCallExpression typedExpression)
+        protected override Expression<Action> GetActionInternal(MethodCallExpression typedExpression, string lambda)
         {
-            return AssertBuilder.GetStringStartsWith(typedExpression.Arguments[0], typedExpression.Object, string.Empty);
+            return AssertBuilder.GetStringStartsWith(typedExpression.Arguments[0], typedExpression.Object, lambda);
         }
     }
 }

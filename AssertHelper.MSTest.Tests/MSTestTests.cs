@@ -11,7 +11,7 @@ namespace AssertHelper.MSTest.Tests
     {
         protected override string CreateExpectedMessage(string expectedLambda, AssertionException expectedException)
         {
-            return expectedException.Message + "(" + expectedLambda + ")";
+            return expectedException.Message + expectedLambda;
         }
 
         protected override Action<int, int> AssertEqualAction
@@ -51,12 +51,12 @@ namespace AssertHelper.MSTest.Tests
 
         protected override Action<ICollection, ICollection> AssertCollectionEqualsAction
         {
-            get{return CollectionAssert.AreEqual;}
+            get { return CollectionAssert.AreEqual; }
         }
 
         protected override Action<ICollection, ICollection> AssertCollectionNotEqualsAction
         {
-            get{return CollectionAssert.AreNotEqual;}
+            get { return CollectionAssert.AreNotEqual; }
         }
 
         protected override Action<Type, object> AssertInstanceOfTypeAction

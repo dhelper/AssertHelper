@@ -11,11 +11,11 @@ namespace AssertHelper.Core
             return unaryExpression.NodeType == ExpressionType.Not;
         }
 
-        protected override Expression<Action> GetActionInternal(UnaryExpression typedExpression)
+        protected override Expression<Action> GetActionInternal(UnaryExpression typedExpression, string lambda)
         {
             var operand = typedExpression.Operand;
 
-            return AssertBuilder.GetIsFalseAction(operand, string.Empty);
+            return AssertBuilder.GetIsFalseAction(operand, lambda);
         }
     }
 }

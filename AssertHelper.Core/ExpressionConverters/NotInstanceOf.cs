@@ -5,9 +5,9 @@ namespace AssertHelper.Core.ExpressionConverters
 {
     internal class NotInstanceOf : ExpressionTypeToAction<TypeBinaryExpression>
     {
-        protected override Expression<Action> GetActionInternal(TypeBinaryExpression typedExpression)
+        protected override Expression<Action> GetActionInternal(TypeBinaryExpression typedExpression, string lambda)
         {
-            return AssertBuilder.GetIsInstanceOf(typedExpression.TypeOperand, typedExpression.Expression, string.Empty);
+            return AssertBuilder.GetIsInstanceOf(typedExpression.TypeOperand, typedExpression.Expression, lambda);
         }
     }
 }
