@@ -5,7 +5,7 @@ namespace AssertHelper.Core.Extensions
 {
     internal static class ExpressionExtensions
     {
-        public static Regex FindOuterBracketsRegex = new Regex("^\\(*|\\)*$",RegexOptions.CultureInvariant| RegexOptions.Compiled);
+        public static Regex FindOuterBracketsRegex = new Regex("^\\(|\\)*$",RegexOptions.CultureInvariant| RegexOptions.Compiled);
 
         public static ConstantExpression ToConstantExpression(this string str)
         {

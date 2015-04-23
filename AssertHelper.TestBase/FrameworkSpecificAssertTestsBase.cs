@@ -90,6 +90,29 @@ namespace AssertHelper.TestBase
             AssertIgnoreWhitespace(expectedMessage, result.Message);
         }
 
+        [Test, Ignore]
+        public void That_CompareTwoPlusTwoToFive_ReturnSameErrorMessageAsEqual()
+        {
+            var result = AssertEx.Throws<AssertionException>(() => Expect.That(() => 2 + 2 == 5));
+
+            var expectedMessage = GetExpectedMessage(() => AssertEqualAction(5, 2 + 2), "2 + 2 == 5");
+
+            AssertIgnoreWhitespace(expectedMessage, result.Message);
+        }
+
+        [Test] // This is good enough for now (using true instead of equal)
+        public void That_CompareTwoPlusThreeToFour_ReturnSameErrorMessageAsEqual()
+        {
+            var a = 2;
+            var b = 3;
+
+            var result = AssertEx.Throws<AssertionException>(() => Expect.That(() => a + b == 4));
+
+            var expectedMessage = GetExpectedMessage(() => AssertEqualAction(4, a + b), "(a + b) == 4");
+
+            AssertIgnoreWhitespace(expectedMessage, result.Message);
+        }
+
         [Test]
         public void That_CompareValueToFalse_ReturnSameErrorMessageAsIsFalse()
         {
