@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("AssertHelper.Core")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -15,6 +15,6 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("1086e2eb-f764-4711-81e8-372535b9daed")]
 
-[assembly: AssemblyVersion("0.1.1.0")]
+[assembly: AssemblyVersion("1.0.0.0")]
 
 [assembly: InternalsVisibleTo("AssertHelper.Core.Tests")]

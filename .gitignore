@@ -172,3 +172,4 @@ AssertHelper.MSTest.Tests/AssertHelper.MSTest.Tests.v2.ncrunchproject
 _NCrunch_AssertHelper/AssertHelper.crunchsolution.cache
 *.cache
 AssertHelper.jmconfig
+*.cache
