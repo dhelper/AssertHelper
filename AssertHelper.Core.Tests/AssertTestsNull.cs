@@ -8,7 +8,7 @@ namespace AssertHelper.Core.Tests
     public class AssertTestsNull : FakeAssertBuilderTests
     {
         [Test]
-        public void That_CompareValueEqualToNullANdValudIsNull_FinishNormally()
+        public void That_CompareValueEqualToNullAndValueIsNull_FinishNormally()
         {
             object val = null;
 
