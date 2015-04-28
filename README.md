@@ -4,7 +4,7 @@ One assert to rule them all!
 
 Supports NUnit & MSTest
 
-#### Use Expect.That and use expressions to tell your unit testing what you want to do.
+#### Use Expect.That and use expressions to tell your unit testing what you want:
 * Expect.That(() => value == true) → Assert.IsTrue
 * Expect.That(() => value == false) → Assert.IsFalse
 * Expect.That(() => value == null) → Assert.IsNull
@@ -19,5 +19,5 @@ Supports NUnit & MSTest
 * Expect.That(() => aCollection != expected) → CollectionAssert.AreNotEqual
 * Expect.That(() => aCollection.Contains(value)) → CollectionAssert.Contains
 
-#### Run several assert using one call - and see them run independently
+#### Run several assert using one call - and see them run independently:
 Expect.That(a == 100 && b != null) → Assert.AreEqual(100, a) | Assert.IsNotNull(b)
