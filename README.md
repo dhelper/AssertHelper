@@ -2,7 +2,9 @@ AssertHelper
 ============
 One assert to rule them all!
 
-Use Expect.That and use expressions to tell your unit testing what you want to do.
+Supports NUnit & MSTest
+
+### Use Expect.That and use expressions to tell your unit testing what you want to do.
 
 Examples:
 -------------------------------------------------
@@ -20,4 +22,5 @@ Examples:
 * Expect.That(() => aCollection != expected) → CollectionAssert.AreNotEqual
 * Expect.That(() => aCollection.Contains(value)) → CollectionAssert.Contains
 
-Currently supports NUnit & MSTest
+### Run several assert using one call - and see them run independently
+Expect.That(a == 100 && b != null) → Assert.AreEqual(100, a) | Assert.IsNotNull(b)
