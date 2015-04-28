@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
-        <id>AssertHelper.Core.dll</id>
-        <version>1.0.1</version>
+        <id>AssertHelper</id>
+        <version>1.0.2</version>
         <authors>Dror Helper</authors>
         <owners>Dror Helper</owners>
         <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
         <projectUrl>https://github.com/dhelper/AssertHelper</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>One assert to rule them all</description>
-        <releaseNotes>First official release.
-		NUnit and MSTest supported
-		Print lambda expression on assertion failure
+        <releaseNotes>
+		Added Nullable support (Daniel Rose)
+		LambdaPrint improvements
 		</releaseNotes>
         <copyright>Copyright 2015</copyright>
         <tags>Unit-testing NUnit MSTest</tags>

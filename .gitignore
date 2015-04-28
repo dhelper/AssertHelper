@@ -173,3 +173,5 @@ _NCrunch_AssertHelper/AssertHelper.crunchsolution.cache
 *.cache
 AssertHelper.jmconfig
 *.cache
+AssertHelper.NuGet/AssertHelper.1.0.2.nupkg
+*.nupkg
