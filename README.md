@@ -5,9 +5,6 @@ One assert to rule them all!
 Supports NUnit & MSTest
 
 #### Use Expect.That and use expressions to tell your unit testing what you want to do.
-
-Examples:
--------------------------------------------------
 * Expect.That(() => value == true) → Assert.IsTrue
 * Expect.That(() => value == false) → Assert.IsFalse
 * Expect.That(() => value == null) → Assert.IsNull
