@@ -9,7 +9,7 @@ namespace AssertHelper.Core.Tests
     public class AssertTestsIsFalse : FakeAssertBuilderTests
     {
         [Test]
-        public void That_PassNotToFalseValue_FinishNormally()
+        public void That_PassNotToFalseValue_AssertFalseIsCalled()
         {
             var value = DummyCreator.GetFalseValue();
 
@@ -24,11 +24,18 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
-        public void That_NullableBoolAndPassEqualToFalseValue_FinishNormally()
+        public void That_NullableBoolAndPassEqualToFalseValue_AreEqualCalled()
         {
-            var value = (bool?)DummyCreator.GetFalseValue();
+            var value = (bool?)DummyCreator.GetTrueValue();
+
+            var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
+
+            var validator = new CallValidator();
+            A.CallTo(() => fakeBuilder.GetAreEqualAction(A<Expression>._,A<Expression>._, A<string>._)).AddAssertValidation(validator);
 
             Expect.That(() => value == false);
+
+            validator.WasAssertCalledWithArguments<bool?, bool?>(false, value);
         }
 
         [Test]

@@ -11,9 +11,16 @@ namespace AssertHelper.Core.Tests
         [TestCase(false, true)]
         [TestCase(false, null)]
         [TestCase(null, true)]
-        public void That_NullableBoolAndPassEqualToNullableBool_FinishNormally(bool? value, bool? expect)
+        public void That_NullableBoolAndPassEqualToNullableBool_TransformToAssertNotEqual(bool? value, bool? expected)
         {
-            Expect.That(() => value != expect);
+            var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
+
+            var assertAreEqualValidator = new CallValidator();
+            A.CallTo(() => fakeBuilder.GetAreNotEqualAction(A<Expression>._, A<Expression>._, A<string>._)).AddAssertValidation(assertAreEqualValidator);
+
+            Expect.That(() => value != expected);
+
+            assertAreEqualValidator.WasAssertCalledWithArguments(expected, value);
         }
 
         [Test]

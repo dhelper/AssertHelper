@@ -8,7 +8,7 @@ namespace AssertHelper.Core.Tests
     public class AssertTestsIsTrue : FakeAssertBuilderTests
     {
         [Test]
-        public void That_PassSingleTrueValue_FinishNormally()
+        public void That_PassSingleTrueValue_AssertTrueIsCalled()
         {
             var value = DummyCreator.GetTrueValue();
 
@@ -16,11 +16,18 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
-        public void That_NullableBoolAndPassEqualToTrue_FinishNormally()
+        public void That_NullableBoolAndPassEqualToTrue_AssertEqualCalled()
         {
-            var value = (bool?)DummyCreator.GetTrueValue();
+            var value = (bool?)DummyCreator.GetFalseValue();
+
+            var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
+
+            var validator = new CallValidator();
+            A.CallTo(() => fakeBuilder.GetAreEqualAction(A<Expression>._, A<Expression>._, A<string>._)).AddAssertValidation(validator);
 
             Expect.That(() => value == true);
+
+            validator.WasAssertCalledWithArguments<bool?, bool?>(true, value);
         }
 
         [Test]

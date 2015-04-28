@@ -23,11 +23,18 @@ namespace AssertHelper.Core.Tests
         }
 
        [Test]
-       public void That_NullableBoolAndPassNotEqualToNull_FinishNormally()
+       public void That_NullableBoolAndPassNotEqualToNull_AssertIsNullCalled()
        {
            var value = (bool?)DummyCreator.GetTrueValue();
 
+           var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
+
+           var validator = new CallValidator();
+           A.CallTo(() => fakeBuilder.GetIsNotNullAction(A<Expression>._, A<string>._)).AddAssertValidation(validator);
+
            Expect.That(() => value != null);
+
+           validator.WasAssertCalledWithArguments<bool?>(value);
        }
 
         [Test]

@@ -8,7 +8,7 @@ namespace AssertHelper.Core.Tests
     public class AssertTestsNull : FakeAssertBuilderTests
     {
         [Test]
-        public void That_CompareValueEqualToNullAndValueIsNull_FinishNormally()
+        public void That_CompareValueEqualToNullAndValueIsNull_AssertIsNullCalled()
         {
             object val = null;
 
@@ -23,11 +23,18 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
-        public void That_NullableBoolAndPassEqualToNull_FinishNormally()
+        public void That_NullableBoolAndPassEqualToNull_AssertIsNullCalled()
         {
             var value = (bool?)null;
 
+            var fakeBuilder = AssertBuilderFactoryForTests.FakeAssertBuilder();
+
+            var validator = new CallValidator();
+            A.CallTo(() => fakeBuilder.GetIsNullAction(A<Expression>._, A<string>._)).AddAssertValidation(validator);
+
             Expect.That(() => value == null);
+
+            validator.WasAssertCalledWithArguments(value);
         }
 
         [Test]
