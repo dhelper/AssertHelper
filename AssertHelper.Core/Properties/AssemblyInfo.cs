@@ -15,6 +15,6 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("1086e2eb-f764-4711-81e8-372535b9daed")]
 
-[assembly: AssemblyVersion("1.0.1.*")]
+[assembly: AssemblyVersion("1.0.2.*")]
 
 [assembly: InternalsVisibleTo("AssertHelper.Core.Tests")]

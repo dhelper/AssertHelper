@@ -39,6 +39,7 @@ namespace AssertHelper.TestBase
         protected abstract string CreateExpectedMessage(string expectedLambda, AssertionException expectedException);
 
         protected abstract Action<int, int> AssertEqualAction { get; }
+        protected abstract Action<bool, bool> AssertEqualBoolAction { get; }
         protected abstract Action<int, int> AssertNotEqualAction { get; }
         protected abstract Action<object> AssertIsNullAction { get; }
         protected abstract Action<object> AssertIsNotNullAction { get; }
@@ -90,7 +91,43 @@ namespace AssertHelper.TestBase
             AssertIgnoreWhitespace(expectedMessage, result.Message);
         }
 
-        [Test] // This is good enough for now (using true instead of equal)
+        [Test]
+        public void That_CompareNullableValueToTrue_ReturnSameErrorMessageAsEqual()
+        {
+            bool? actual = false;
+
+            var result = AssertEx.Throws<AssertionException>(() => Expect.That(() => actual == true));
+
+            var expectedMessage = GetExpectedMessage(() => AssertEqualBoolAction(true, actual.Value), "actual == True");
+
+            AssertIgnoreWhitespace(expectedMessage, result.Message);
+        }
+
+        [Test]
+        public void That_CompareNullableValueToNull_ReturnSameErrorMessageAsIsNull()
+        {
+            bool? actual = false;
+
+            var result = AssertEx.Throws<AssertionException>(() => Expect.That(() => actual == null));
+
+            var expectedMessage = GetExpectedMessage(() => AssertIsNullAction(actual), "actual == null");
+
+            AssertIgnoreWhitespace(expectedMessage, result.Message);
+        }
+
+        [Test]
+        public void That_NotCompareNullableValueToNull_ReturnSameErrorMessageAsNotNull()
+        {
+            bool? actual = null;
+
+            var result = AssertEx.Throws<AssertionException>(() => Expect.That(() => actual != null));
+
+            var expectedMessage = GetExpectedMessage(() => AssertIsNotNullAction(actual), "actual != null");
+
+            AssertIgnoreWhitespace(expectedMessage, result.Message);
+        }
+
+        [Test] 
         public void That_CompareTwoPlusThreeToFour_ReturnSameErrorMessageAsEqual()
         {
             var a = 2;

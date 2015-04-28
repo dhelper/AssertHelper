@@ -19,6 +19,11 @@ namespace AssertHelper.MSTest.Tests
             get { return Assert.AreEqual; }
         }
 
+        protected override Action<bool, bool> AssertEqualBoolAction
+        {
+            get { return Assert.AreEqual; }
+        }
+
         protected override Action<int, int> AssertNotEqualAction
         {
             get { return Assert.AreNotEqual; }

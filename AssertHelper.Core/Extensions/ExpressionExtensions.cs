@@ -15,7 +15,7 @@ namespace AssertHelper.Core.Extensions
         public static string PrettyPrint(this Expression expression)
         {
             var expressionString = expression.ToString();
-            var prettyPrint = Regex.Replace(expressionString, @"value\([^)]+\)\.", string.Empty);
+            var prettyPrint = Regex.Replace(expressionString, @"value\([^)]+\)\.|Convert\(", string.Empty);
 
             if (prettyPrint.StartsWith("("))
             {

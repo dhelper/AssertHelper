@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using NUnit.Framework;
-using System.Collections.Generic;
 using AssertHelper.TestBase;
 
 namespace AssertHelper.NUnit.Tests
@@ -17,6 +16,11 @@ namespace AssertHelper.NUnit.Tests
         protected override Action<int, int> AssertEqualAction
         {
             get { return Assert.AreEqual; }
+        }
+
+        protected override Action<bool, bool> AssertEqualBoolAction
+        {
+            get { return (b, b1) => Assert.AreEqual(b, b1); }
         }
 
         protected override Action<int, int> AssertNotEqualAction
