@@ -23,6 +23,14 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
+        public void That_NullableBoolAndPassEqualToNull_FinishNormally()
+        {
+            var value = (bool?)null;
+
+            Expect.That(() => value == null);
+        }
+
+        [Test]
         public void That_CompareValueEqualToNull_AssertIsNullCalled()
         {
             var val = new object();
