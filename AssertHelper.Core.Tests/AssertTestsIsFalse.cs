@@ -24,6 +24,14 @@ namespace AssertHelper.Core.Tests
         }
 
         [Test]
+        public void That_NullableBoolAndPassEqualToFalseValue_FinishNormally()
+        {
+            var value = (bool?)DummyCreator.GetFalseValue();
+
+            Expect.That(() => value == false);
+        }
+
+        [Test]
         public void That_PassNot_AssertFalseIsCalled()
         {
             var value = DummyCreator.GetTrueValue();

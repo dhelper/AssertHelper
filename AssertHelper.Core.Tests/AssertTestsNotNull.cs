@@ -22,6 +22,14 @@ namespace AssertHelper.Core.Tests
             validator.WasAssertCalledWithArguments(val);
         }
 
+       [Test]
+       public void That_NullableBoolAndPassNotEqualToNull_FinishNormally()
+       {
+           var value = (bool?)DummyCreator.GetTrueValue();
+
+           Expect.That(() => value != null);
+       }
+
         [Test]
         public void That_CompareValueNotEqualToNull_AssertIsNullCalled()
         {
