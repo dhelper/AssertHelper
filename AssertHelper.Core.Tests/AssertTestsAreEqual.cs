@@ -8,6 +8,16 @@ namespace AssertHelper.Core.Tests
     [TestFixture]
     public class AssertTestsAreEqual : FakeAssertBuilderTests
     {
+        [TestCase(true)]
+        [TestCase(false)]
+        [TestCase(null)]
+        public void That_NullableBoolAndPassEqualToNullableBool_FinishNormally(bool? expect)
+        {
+            var value = expect;
+
+            Expect.That(() => value == expect);
+        }
+
         [Test]
         public void That_PassTwoValuesWithEqualSign_TransformToAssertEqual()
         {
