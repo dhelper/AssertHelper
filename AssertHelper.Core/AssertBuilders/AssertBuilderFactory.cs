@@ -35,7 +35,11 @@ namespace AssertHelper.Core.AssertBuilders
                 }
                 else
                 {
-                    throw new InvalidOperationException("Unsupported unit testing framework. Currently supported: NUnit, MSTest");
+                    throw new InvalidOperationException(
+                        + string.Join(
+                            ", ",
+                            typeof(NUnitAssertBuilderFactory).Name,
+                            typeof(MsTestAssertBuilderFactory).Name));
                 }
             }
 
