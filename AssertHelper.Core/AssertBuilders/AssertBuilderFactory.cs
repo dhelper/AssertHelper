@@ -5,6 +5,8 @@ using AssertHelper.Core.AssertBuilders.NUnit;
 
 namespace AssertHelper.Core.AssertBuilders
 {
+    using System.Reflection;
+
     internal class AssertBuilderFactory
     {
         protected static IAssertBuilder _assertBuilder;
@@ -18,6 +20,13 @@ namespace AssertHelper.Core.AssertBuilders
 
                 if (assemblies.Any(a => a.GetName().Name == "nunit.framework"))
                 {
+                    _assertBuilder = new AssertBuilder(new NUnitAssertBuilderFactory());
+                }
+                else if (assemblies.Any(a => a.GetName().Name == "nunit.core"))
+                {
+                    // Using NUnit, but the nunit.framework assembly is not yet loaded.
+                    // Since the NUnit assert builder requires that assembly, load it explicitly.
+                    Assembly.Load(typeof(global::NUnit.Framework.Assert).Assembly.GetName());
                     _assertBuilder = new AssertBuilder(new NUnitAssertBuilderFactory());
                 }
                 else if (assemblies.Any(a => a.GetName().Name == "Microsoft.VisualStudio.QualityTools.UnitTestFramework"))
