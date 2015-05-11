@@ -61,12 +61,16 @@
     <Compile Include="AssertBuilders\AssertMethods\CollectionAreEqualWithIEnumerable.cs" />
     <Compile Include="AssertBuilders\AssertMethods\CollectionAreNotEqualWithIEnumerable.cs" />
     <Compile Include="AssertBuilders\AssertBuilder.cs" />
+    <Compile Include="AssertBuilders\NUnit\CreateNUnitCoreBuilderCommand.cs" />
+    <Compile Include="AssertBuilders\MSTest\CreateMsTestBuilderCommand.cs" />
+    <Compile Include="AssertBuilders\NUnit\CreateNUnitBuilderCommand.cs" />
     <Compile Include="AssertBuilders\IAssertBuilderFactory.cs" />
     <Compile Include="AssertBuilders\AssertBuilderFactoryBase.cs" />
     <Compile Include="AssertBuilders\AssertMethods\Base\UnaryAssertMethodBase.cs" />
     <Compile Include="AssertBuilders\AssertMethods\StringContains.cs" />
     <Compile Include="AssertBuilders\AssertMethods\StringStartsWith.cs" />
     <Compile Include="AssertBuilders\AssertMethods\StringEndsWith.cs" />
+    <Compile Include="AssertBuilders\ICreateBuilderCommand.cs" />
     <Compile Include="AssertBuilders\MSTest\MsTestAssertBuilderFactory.cs" />
     <Compile Include="AssertBuilders\NUnit\NUnitAssertBuilderFactory.cs" />
     <Compile Include="Expect.cs" />

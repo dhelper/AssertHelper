@@ -2,7 +2,6 @@
 using System.Linq.Expressions;
 using AssertHelper.Core.AssertBuilders.AssertMethods;
 using AssertHelper.Core.AssertBuilders.AssertMethods.Base;
-using AssertHelper.Core.AssertBuilders.MSTest;
 
 namespace AssertHelper.Core.AssertBuilders.NUnit
 {

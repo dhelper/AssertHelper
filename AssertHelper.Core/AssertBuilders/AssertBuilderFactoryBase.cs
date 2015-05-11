@@ -12,7 +12,6 @@ namespace AssertHelper.Core.AssertBuilders
         private readonly Type _stringAssertType;
         private readonly Type _collectionAssertType;
 
-
         protected Type AssertType { get { return _assertType; } }
         protected Type StringAssertType { get { return _stringAssertType; } }
         protected Type CollectionAssertType { get { return _collectionAssertType; } }
