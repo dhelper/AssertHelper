@@ -36,6 +36,7 @@ namespace AssertHelper.Core.AssertBuilders
                 else
                 {
                     throw new InvalidOperationException(
+                        "Unable to create an AssertBuilder. Currently supported: "
                         + string.Join(
                             ", ",
                             typeof(NUnitAssertBuilderFactory).Name,
