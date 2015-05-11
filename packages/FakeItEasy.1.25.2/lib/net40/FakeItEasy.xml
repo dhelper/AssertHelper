@@ -466,6 +466,60 @@
             <returns>An instance of the first non-default IBootstrapper implementation found,
             or a DefaultBootstrapper.</returns>
         </member>
+        <member name="T:FakeItEasy.Core.IFakeCallProcessor">
+            <summary>
+            Represents the target of intercepted calls of a fake proxy. An implementation of this interface receives calls, gets its arguments
+            and can provide return values.
+            </summary>
+        </member>
+        <member name="M:FakeItEasy.Core.IFakeCallProcessor.Process(FakeItEasy.Core.IWritableFakeObjectCall)">
+            <summary>
+            Processes an intercepted call of a fake proxy.
+            </summary>
+            <param name="fakeObjectCall">The call information (like which method has been called, its arguments, ...).</param>
+        </member>
+        <member name="T:FakeItEasy.Core.FakeManagerProvider">
+            <summary>
+            Implementation of <see cref="T:FakeItEasy.Core.IFakeCallProcessorProvider"/>, which returns a <see cref="T:FakeItEasy.Core.FakeManager"/> as "call processor" lazily (on
+            the first call of <see cref="M:FakeItEasy.Core.FakeManagerProvider.Fetch(System.Object)"/> or <see cref="M:FakeItEasy.Core.FakeManagerProvider.EnsureInitialized(System.Object)"/>).
+            </summary>
+            <remarks>
+            Note that we just need to serialize the <see cref="T:FakeItEasy.Core.FakeManager"/> + the lock (an "empty", *new* object will be deserialized)
+            because <see cref="T:FakeItEasy.Core.IFakeCallProcessorProvider"/> doesn't require serializability before the first call of <see cref="M:FakeItEasy.Core.FakeManagerProvider.Fetch(System.Object)"/> or
+            <see cref="M:FakeItEasy.Core.FakeManagerProvider.EnsureInitialized(System.Object)"/> (see remarks section of <see cref="T:FakeItEasy.Core.IFakeCallProcessorProvider"/>).
+            </remarks>
+        </member>
+        <member name="T:FakeItEasy.Core.IFakeCallProcessorProvider">
+            <summary>
+            The responsibility of this interface is to instantiate a new <see cref="T:FakeItEasy.Core.IFakeCallProcessor"/> and to fully initialize it (e.g. 
+            applying the initial configuration). This should happen one time on the first call of <see cref="M:FakeItEasy.Core.IFakeCallProcessorProvider.Fetch(System.Object)"/> or
+            <see cref="M:FakeItEasy.Core.IFakeCallProcessorProvider.EnsureInitialized(System.Object)"/>.
+            </summary>
+            <remarks>
+            <para>
+            Note that the implementation of this interface must be thread-safe and guarantee the one-time-initialization property when accessing 
+            the interface methods concurrently (could happen when using this provider in spawned threads in a proxy base constructor).
+            </para>
+            <para>
+            An implementation of this interface should also be serializable and the deserialized object should behave like the original one
+            *after* it has been initialized (i.e. after the first call of <see cref="M:FakeItEasy.Core.IFakeCallProcessorProvider.Fetch(System.Object)"/> or <see cref="M:FakeItEasy.Core.IFakeCallProcessorProvider.EnsureInitialized(System.Object)"/>) because 
+            we don't need to serialize a fake before it has been initialized (returned to the user).
+            </para>
+            </remarks>
+        </member>
+        <member name="M:FakeItEasy.Core.IFakeCallProcessorProvider.Fetch(System.Object)">
+            <summary>
+            Create and initialize a new <see cref="T:FakeItEasy.Core.IFakeCallProcessor"/> for <paramref name="proxy"/>.
+            </summary>
+            <param name="proxy">The corresponding proxy object of the new <see cref="T:FakeItEasy.Core.IFakeCallProcessor"/>.</param>
+            <returns>The created <see cref="T:FakeItEasy.Core.IFakeCallProcessor"/>.</returns>
+        </member>
+        <member name="M:FakeItEasy.Core.IFakeCallProcessorProvider.EnsureInitialized(System.Object)">
+            <summary>
+            Ensures that the <see cref="T:FakeItEasy.Core.IFakeCallProcessor"/> is initialized (and can be used via the proxy's tag later on).
+            </summary>
+            <param name="proxy">The corresponding proxy object of the new <see cref="T:FakeItEasy.Core.IFakeCallProcessor"/>.</param>
+        </member>
         <member name="T:FakeItEasy.DefaultBootstrapper">
             <summary>
             The default bootstrapper, used to initialize FakeItEasy unless another 
@@ -1217,6 +1271,11 @@
               Looks up a localized string similar to Unable to create fake object..
             </summary>
         </member>
+        <member name="P:FakeItEasy.ExceptionMessages.FakeManagerWasInitializedWithDifferentProxyMessage">
+            <summary>
+              Looks up a localized string similar to The fake manager was initialized for a different proxy..
+            </summary>
+        </member>
         <member name="P:FakeItEasy.ExceptionMessages.FakingNonAbstractClassWithArgumentsForConstructor">
             <summary>
               Looks up a localized string similar to Only abstract classes can be faked using the A.Fake-method that takes an enumerable of objects as arguments for constructor, use the overload that takes an expression instead..
@@ -1320,7 +1379,28 @@
             Gets the event arguments of the event.
             </summary>
         </member>
+        <member name="M:FakeItEasy.Raise`1.op_Implicit(FakeItEasy.Raise{`0})~System.EventHandler{`0}">
+            <summary>
+            Converts a raiser into an <see cref="T:System.EventHandler`1"/>
+            </summary>
+            <param name="raiser">The raiser to convert.</param>
+            <returns>The new event handler</returns>
+        </member>
+        <member name="M:FakeItEasy.Raise`1.op_Implicit(FakeItEasy.Raise{`0})~System.EventHandler">
+            <summary>
+            Converts a raiser into an <see cref="T:System.EventHandler"/>
+            </summary>
+            <param name="raiser">The raiser to convert.</param>
+            <returns>The new event handler</returns>
+        </member>
         <member name="M:FakeItEasy.Raise`1.Now(System.Object,`0)">
+            <summary>
+            Register this event handler to an event on a faked object in order to raise that event.
+            </summary>
+            <param name="sender">The sender of the event.</param>
+            <param name="e">Event args for the event.</param>
+        </member>
+        <member name="M:FakeItEasy.Raise`1.Now(System.Object,System.EventArgs)">
             <summary>
             Register this event handler to an event on a faked object in order to raise that event.
             </summary>
@@ -1698,23 +1778,6 @@
             and the type for which the formatted is registered.
             </summary>
         </member>
-        <member name="T:FakeItEasy.Core.CallInterceptedEventArgs">
-            <summary>
-            Represents an event that happens when a call has been intercepted by a proxy.
-            </summary>
-        </member>
-        <member name="M:FakeItEasy.Core.CallInterceptedEventArgs.#ctor(FakeItEasy.Core.IWritableFakeObjectCall)">
-            <summary>
-            Initializes a new instance of the <see cref="T:FakeItEasy.Core.CallInterceptedEventArgs"/> class.
-            </summary>
-            <param name="call">The call.</param>
-        </member>
-        <member name="P:FakeItEasy.Core.CallInterceptedEventArgs.Call">
-            <summary>
-            Gets the call that was intercepted.
-            </summary>
-            <value>The call.</value>
-        </member>
         <member name="T:FakeItEasy.Core.CallRuleMetadata">
             <summary>
             Keeps track of metadata for interceptions.
@@ -1766,15 +1829,6 @@
             calls can be configured.
             </summary>
         </member>
-        <member name="M:FakeItEasy.Core.IFakeManagerAccessor.AttachFakeManagerToProxy(System.Type,System.Object,FakeItEasy.Creation.ICallInterceptedEventRaiser)">
-            <summary>
-            Attaches a <see cref="T:FakeItEasy.Core.FakeManager"/> to the specified proxy, listening to
-            the event raiser.
-            </summary>
-            <param name="typeOfFake">The type of the fake object proxy.</param>
-            <param name="proxy">The proxy to attach to.</param>
-            <param name="eventRaiser">The event raiser to listen to.</param>
-        </member>
         <member name="M:FakeItEasy.Core.IFakeManagerAccessor.GetFakeManager(System.Object)">
             <summary>
             Gets the fake manager associated with the proxy.
@@ -1782,14 +1836,12 @@
             <param name="proxy">The proxy to get the manager from.</param>
             <returns>A fake manager.</returns>
         </member>
-        <member name="M:FakeItEasy.Core.DefaultFakeManagerAccessor.AttachFakeManagerToProxy(System.Type,System.Object,FakeItEasy.Creation.ICallInterceptedEventRaiser)">
+        <member name="M:FakeItEasy.Core.IFakeManagerAccessor.TagProxy(System.Object,FakeItEasy.Core.FakeManager)">
             <summary>
-            Attaches a <see cref="T:FakeItEasy.Core.FakeManager"/> to the specified proxy, listening to
-            the event raiser.
+            Tags a proxy object, so that it can accessed later by <see cref="M:FakeItEasy.Core.IFakeManagerAccessor.GetFakeManager(System.Object)"/>.
             </summary>
-            <param name="typeOfFake">The type of the fake object proxy.</param>
-            <param name="proxy">The proxy to attach to.</param>
-            <param name="eventRaiser">The event raiser to listen to.</param>
+            <param name="proxy">The proxy to tag.</param>
+            <param name="manager">The fake manager.</param>
         </member>
         <member name="M:FakeItEasy.Core.DefaultFakeManagerAccessor.GetFakeManager(System.Object)">
             <summary>
@@ -2000,10 +2052,12 @@
             <content>Property behavior rule.</content>
             <content>Property setter rule.</content>
         </member>
-        <member name="M:FakeItEasy.Core.FakeManager.#ctor">
+        <member name="M:FakeItEasy.Core.FakeManager.#ctor(System.Type,System.Object)">
             <summary>
             Initializes a new instance of the <see cref="T:FakeItEasy.Core.FakeManager"/> class.
             </summary>
+            <param name="fakeObjectType">The faked type.</param>
+            <param name="proxy">The faked proxy object.</param>
         </member>
         <member name="M:FakeItEasy.Core.FakeManager.AddRuleFirst(FakeItEasy.Core.IFakeObjectCallRule)">
             <summary>
@@ -2036,7 +2090,7 @@
         </member>
         <member name="P:FakeItEasy.Core.FakeManager.Object">
             <summary>
-            Gets the faked object.
+            Gets the faked proxy object.
             </summary>
         </member>
         <member name="P:FakeItEasy.Core.FakeManager.FakeObjectType">
@@ -2058,6 +2112,8 @@
             <summary>
             A delegate responsible for creating FakeObject instances.
             </summary>
+            <param name="fakeObjectType">The faked type.</param>
+            <param name="proxy">The faked proxy object.</param>
             <returns>An instance of <see cref="T:FakeItEasy.Core.FakeManager"/>.</returns>
         </member>
         <member name="T:FakeItEasy.Core.IInterceptedFakeObjectCall">
@@ -2206,7 +2262,7 @@
             An interface to be implemented by classes that can generate proxies for FakeItEasy.
             </summary>
         </member>
-        <member name="M:FakeItEasy.Creation.IProxyGenerator.GenerateProxy(System.Type,System.Collections.Generic.IEnumerable{System.Type},System.Collections.Generic.IEnumerable{System.Object},System.Collections.Generic.IEnumerable{System.Reflection.Emit.CustomAttributeBuilder})">
+        <member name="M:FakeItEasy.Creation.IProxyGenerator.GenerateProxy(System.Type,System.Collections.Generic.IEnumerable{System.Type},System.Collections.Generic.IEnumerable{System.Object},System.Collections.Generic.IEnumerable{System.Reflection.Emit.CustomAttributeBuilder},FakeItEasy.Core.IFakeCallProcessorProvider)">
             <summary>
             Generates a proxy of the specified type and returns a result object containing information
             about the success of the generation and the proxy if it was generated.
@@ -2215,9 +2271,10 @@
             <param name="additionalInterfacesToImplement">Interfaces to be implemented by the proxy.</param>
             <param name="argumentsForConstructor">Arguments to pass to the constructor of the type in <paramref name="typeOfProxy" />.</param>
             <param name="customAttributeBuilders">The custom attribute builders.</param>
+            <param name="fakeCallProcessorProvider">The call processor provider.</param>
             <returns>A result containing the generated proxy.</returns>
         </member>
-        <member name="M:FakeItEasy.Creation.IProxyGenerator.GenerateProxy(System.Type,System.Collections.Generic.IEnumerable{System.Type},System.Collections.Generic.IEnumerable{System.Object})">
+        <member name="M:FakeItEasy.Creation.IProxyGenerator.GenerateProxy(System.Type,System.Collections.Generic.IEnumerable{System.Type},System.Collections.Generic.IEnumerable{System.Object},FakeItEasy.Core.IFakeCallProcessorProvider)">
             <summary>
             Generates a proxy of the specified type and returns a result object containing information
             about the success of the generation and the proxy if it was generated.
@@ -2225,6 +2282,7 @@
             <param name="typeOfProxy">The type of proxy to generate.</param>
             <param name="additionalInterfacesToImplement">Interfaces to be implemented by the proxy.</param>
             <param name="argumentsForConstructor">Arguments to pass to the constructor of the type in <paramref name="typeOfProxy" />.</param>
+            <param name="fakeCallProcessorProvider">The call processor provider.</param>
             <returns>A result containing the generated proxy.</returns>
         </member>
         <member name="M:FakeItEasy.Creation.IProxyGenerator.MethodCanBeInterceptedOnInstance(System.Reflection.MethodInfo,System.Object,System.String@)">
@@ -2235,16 +2293,6 @@
             <param name="callTarget">The instance the method will be called on.</param>
             <param name="failReason">The reason the method can not be intercepted.</param>
             <returns>True if the member can be intercepted.</returns>
-        </member>
-        <member name="T:FakeItEasy.Creation.ICallInterceptedEventRaiser">
-            <summary>
-            An object that raises an event every time a call to a proxy has been intercepted.
-            </summary>
-        </member>
-        <member name="E:FakeItEasy.Creation.ICallInterceptedEventRaiser.CallWasIntercepted">
-            <summary>
-            Raised when a call is intercepted.
-            </summary>
         </member>
         <member name="T:FakeItEasy.Core.ICompletedFakeObjectCall">
             <summary>
@@ -2696,7 +2744,7 @@
             The exception thrown from the creation attempt.
             </param>
         </member>
-        <member name="M:FakeItEasy.Creation.ProxyGeneratorResult.#ctor(System.Object,FakeItEasy.Creation.ICallInterceptedEventRaiser)">
+        <member name="M:FakeItEasy.Creation.ProxyGeneratorResult.#ctor(System.Object)">
             <summary>
             Initializes a new instance of the <see cref="T:FakeItEasy.Creation.ProxyGeneratorResult"/> class. 
             Creates a new instance representing a successful proxy
@@ -2704,10 +2752,6 @@
             </summary>
             <param name="generatedProxy">
             The proxy that was generated.
-            </param>
-            <param name="callInterceptedEventRaiser">
-            An event raiser that raises
-            events when calls are intercepted to the proxy.
             </param>
         </member>
         <member name="P:FakeItEasy.Creation.ProxyGeneratorResult.ProxyWasSuccessfullyGenerated">
@@ -2718,12 +2762,6 @@
         <member name="P:FakeItEasy.Creation.ProxyGeneratorResult.GeneratedProxy">
             <summary>
             Gets the generated proxy when it was successfully created.
-            </summary>
-        </member>
-        <member name="P:FakeItEasy.Creation.ProxyGeneratorResult.CallInterceptedEventRaiser">
-            <summary>
-            Gets the event raiser that raises events when calls to the proxy are
-            intercepted.
             </summary>
         </member>
         <member name="P:FakeItEasy.Creation.ProxyGeneratorResult.ReasonForFailure">
