@@ -26,7 +26,7 @@ namespace AssertHelper.Core.AssertBuilders
                 {
                     // Using NUnit, but the nunit.framework assembly is not yet loaded.
                     // Since the NUnit assert builder requires that assembly, load it explicitly.
-                    Assembly.Load(typeof(global::NUnit.Framework.Assert).Assembly.GetName());
+                    Assembly.Load("nunit.framework");
                     _assertBuilder = new AssertBuilder(new NUnitAssertBuilderFactory());
                 }
                 else if (assemblies.Any(a => a.GetName().Name == "Microsoft.VisualStudio.QualityTools.UnitTestFramework"))
