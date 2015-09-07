@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/cnptestoiyihl5v8/branch/master?svg=true)](https://ci.appveyor.com/project/dhelper/asserthelper/branch/master)
+
 AssertHelper
 ============
 One assert to rule them all!
