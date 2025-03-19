@@ -11,7 +11,7 @@ using StringAssertEx = NUnit.Framework.StringAssert;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TestAttribute = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
 using AssertHelper.MSTest.Tests;
-using AssertionException = Microsoft.VisualStudio.TestTools.UnitTesting.UnitTestAssertException;
+using AssertionException = Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException;
 #endif
 
 namespace AssertHelper.TestBase
