@@ -1,14 +1,13 @@
 using System;
 using System.Linq.Expressions;
 using FakeItEasy;
-using FakeItEasy.Configuration;
 using NUnit.Framework;
 
 namespace AssertHelper.Core.Tests
 {
     public class CallValidator
     {
-        private IArgumentCollection _arguments;
+        private ArgumentCollection _arguments;
         public bool WasCalled { get; set; }
 
         public void WasAssertCalledWithArguments<T>(T argument)
@@ -37,7 +36,7 @@ namespace AssertHelper.Core.Tests
             return Expression.Lambda<Func<T>>(argumentExpression).Compile().Invoke();
         }
 
-        virtual internal void SetArguments(IArgumentCollection arguments)
+        virtual internal void SetArguments(ArgumentCollection arguments)
         {
             _arguments = arguments;
         }
