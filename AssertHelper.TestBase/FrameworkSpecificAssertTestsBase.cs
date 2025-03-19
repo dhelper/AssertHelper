@@ -3,8 +3,16 @@ using System.Collections;
 using System.Linq;
 using System.Text.RegularExpressions;
 using AssertHelper.Core;
+#if NUNIT
+using NUnit.Framework;
+using AssertEx = NUnit.Framework.Assert;
+using StringAssertEx = NUnit.Framework.StringAssert;
+#else
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestAttribute = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
 using AssertHelper.MSTest.Tests;
+using AssertionException = Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException;
+#endif
 
 namespace AssertHelper.TestBase
 {
@@ -45,7 +53,7 @@ namespace AssertHelper.TestBase
         protected abstract Action<string, string> AssertStringStartsWithAction { get; }
         protected abstract Action<string, string> AssertStringEndsWithAction { get; }
 
-        [TestMethod]
+        [Test]
         public void That_CompareTwoNumbers_ReturnSameErrorMessageAsAreEqual()
         {
             int actual = 1;
@@ -58,7 +66,7 @@ namespace AssertHelper.TestBase
             AssertIgnoreWhitespace(expectedMessage, result.Message);
         }
 
-        [TestMethod]
+        [Test]
         public void That_CheckIfTwoValuesAreDifferent_ReturnSameErrorMessageAsAreNotEqual()
         {
             int actual = 1;
@@ -71,7 +79,7 @@ namespace AssertHelper.TestBase
             AssertIgnoreWhitespace(expectedMessage, result.Message);
         }
 
-        [TestMethod]
+        [Test]
         public void That_CompareValueToTrue_ReturnSameErrorMessageAsIsTrue()
         {
             bool actual = false;
@@ -83,7 +91,7 @@ namespace AssertHelper.TestBase
             AssertIgnoreWhitespace(expectedMessage, result.Message);
         }
 
-        [TestMethod]
+        [Test]
         public void That_CompareNullableValueToTrue_ReturnSameErrorMessageAsEqual()
         {
             bool? actual = false;
@@ -95,7 +103,7 @@ namespace AssertHelper.TestBase
             AssertIgnoreWhitespace(expectedMessage, result.Message);
         }
 
-        [TestMethod]
+        [Test]
         public void That_CompareNullableValueToNull_ReturnSameErrorMessageAsIsNull()
         {
             bool? actual = false;
@@ -107,7 +115,7 @@ namespace AssertHelper.TestBase
             AssertIgnoreWhitespace(expectedMessage, result.Message);
         }
 
-        [TestMethod]
+        [Test]
         public void That_NotCompareNullableValueToNull_ReturnSameErrorMessageAsNotNull()
         {
             bool? actual = null;
@@ -119,7 +127,7 @@ namespace AssertHelper.TestBase
             AssertIgnoreWhitespace(expectedMessage, result.Message);
         }
 
-        [TestMethod] 
+        [Test] 
         public void That_CompareTwoPlusThreeToFour_ReturnSameErrorMessageAsEqual()
         {
             var a = 2;
@@ -132,7 +140,7 @@ namespace AssertHelper.TestBase
             AssertIgnoreWhitespace(expectedMessage, result.Message);
         }
 
-        [TestMethod]
+        [Test]
         public void That_CompareValueToFalse_ReturnSameErrorMessageAsIsFalse()
         {
             bool actual = true;
@@ -144,7 +152,7 @@ namespace AssertHelper.TestBase
             AssertIgnoreWhitespace(expectedMessage, result.Message);
         }
 
-        [TestMethod]
+        [Test]
         public void That_CheckIfArrayConatainsElement_CollectionAssertContainsCalled()
         {
             var collection = new[] { 1, 2, 3, 4, 5 };
@@ -156,7 +164,7 @@ namespace AssertHelper.TestBase
             AssertIgnoreWhitespace(expectedMessage, result.Message);
         }
 
-        [TestMethod]
+        [Test]
         public void That_CheckIfArrayEqualsToArray_CollectionEqualsCalled()
         {
             var collection1 = new[] { 1, 2, 3, 4, 5 };
@@ -169,7 +177,7 @@ namespace AssertHelper.TestBase
             AssertStringContains(result, expectedMessage, "collection1 == collection2");
         }
 
-        [TestMethod]
+        [Test]
         public void That_CheckIfArrayNotEqualsToArray_CollectionNotEqualsCalled()
         {
             var collection1 = new[] { 1, 2, 3, 4, 5 };
@@ -182,7 +190,7 @@ namespace AssertHelper.TestBase
             AssertStringContains(result, expectedMessage, "collection1 != collection2");
         }
 
-        [TestMethod]
+        [Test]
         public void That_UseIsToCheckType_AssertIsInstaceOfCalled()
         {
             var val = new object();
@@ -195,7 +203,7 @@ namespace AssertHelper.TestBase
         }
 
 
-        [TestMethod]
+        [Test]
         public void That_CompareValueToNull_AssertIsNullCalled()
         {
             var val = new object();
@@ -207,7 +215,7 @@ namespace AssertHelper.TestBase
             AssertIgnoreWhitespace(expectedMessage, result.Message);
         }
 
-        [TestMethod]
+        [Test]
         public void That_CompareValueNotEqualToNull_AssertIsNotNullCalled()
         {
             object val = null;
@@ -219,7 +227,7 @@ namespace AssertHelper.TestBase
             AssertIgnoreWhitespace(expectedMessage, result.Message);
         }
 
-        [TestMethod]
+        [Test]
         public void That_StringContainsCalled_StringAssertContainedUsed()
         {
             var result = AssertEx.Throws<AssertionException>(() => Expect.That(() => "1234".Contains("5")));
@@ -229,7 +237,7 @@ namespace AssertHelper.TestBase
             AssertStringContains(result, expectedMessage, "\"1234\".Contains(\"5\")");
         }
 
-        [TestMethod]
+        [Test]
         public void That_StringStartsWithCalled_StringAssertStartsWithUsed()
         {
             var result = AssertEx.Throws<AssertionException>(() => Expect.That(() => "1234".StartsWith("2")));
@@ -239,7 +247,7 @@ namespace AssertHelper.TestBase
             AssertStringContains(result, expectedMessage, "\"1234\".StartsWith(\"2\")");
         }
 
-        [TestMethod]
+        [Test]
         public void That_StringEndsWithCalled_StringAssertStartsWithUsed()
         {
             var result = AssertEx.Throws<AssertionException>(() => Expect.That(() => "1234".EndsWith("2")));
