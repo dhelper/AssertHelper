@@ -1,6 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using FakeItEasy;
+using FakeItEasy.Core;
 using NUnit.Framework;
 
 namespace AssertHelper.Core.Tests
