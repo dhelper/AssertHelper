@@ -6,6 +6,8 @@ using NUnit.Framework;
 namespace AssertHelper.Core.Tests
 {
     [TestFixture]
+    [Category("Boolean")]
+    [Category("Unit")]
     public class AssertTestsIsFalse : FakeAssertBuilderTests
     {
         [Test]

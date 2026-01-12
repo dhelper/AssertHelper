@@ -6,6 +6,8 @@ using NUnit.Framework;
 namespace AssertHelper.Core.Tests
 {
     [TestFixture]
+    [Category("TypeChecking")]
+    [Category("Unit")]
     public class AssertTestsInstance : FakeAssertBuilderTests
     {
         [Test]

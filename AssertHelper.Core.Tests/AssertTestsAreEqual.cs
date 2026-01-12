@@ -6,6 +6,8 @@ using NUnit.Framework;
 namespace AssertHelper.Core.Tests
 {
     [TestFixture]
+    [Category("Equality")]
+    [Category("Unit")]
     public class AssertTestsAreEqual : FakeAssertBuilderTests
     {
         [TestCase(true)]

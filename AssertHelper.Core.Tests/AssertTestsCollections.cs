@@ -7,6 +7,8 @@ using System.Linq;
 namespace AssertHelper.Core.Tests
 {
     [TestFixture]
+    [Category("Collections")]
+    [Category("Unit")]
     public class AssertTestsCollections : FakeAssertBuilderTests
     {
         [Test]

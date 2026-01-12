@@ -6,6 +6,8 @@ using AssertHelper.Core.AssertBuilders;
 namespace AssertHelper.Core.Tests
 {
     [TestFixture]
+    [Category("Multiple")]
+    [Category("Unit")]
     public class AssertTestMultipleAsserts : FakeAssertBuilderTests
     {
         [Test]
