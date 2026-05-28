@@ -175,3 +175,7 @@ AssertHelper.jmconfig
 *.cache
 AssertHelper.NuGet/AssertHelper.1.0.2.nupkg
 *.nupkg
+
+
+# NuGet packages (restored by dotnet restore)
+packages/
