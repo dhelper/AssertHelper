@@ -31,7 +31,6 @@ namespace AssertHelper.Core.AssertBuilders
             _isFalse = assertFactory.CreateIsFalse();
             _isNull = assertFactory.CreateIsNull();
             _isNotNull = assertFactory.CreateIsNotNull();
-            _isNotNull = assertFactory.CreateIsNotNull();
             _isInstanceOfType = assertFactory.CreateIsInstanceOfType();
             _fail = assertFactory.CreateFail();
 
