@@ -1,110 +1,22 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{83774446-708D-4400-9330-2CB2B3FE01DE}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFrameworks>netstandard2.0;net462</TargetFrameworks>
     <RootNamespace>AssertHelper.Core</RootNamespace>
     <AssemblyName>AssertHelper.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <Version>1.1.0</Version>
+    <Authors>Dror Helper</Authors>
+    <Description>One assert to rule them all - supports NUnit and MSTest</Description>
+    <Copyright>Copyright 2015-2026</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/dhelper/AssertHelper</PackageProjectUrl>
+    <PackageTags>Unit-testing NUnit MSTest</PackageTags>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <InternalsVisibleTo Include="AssertHelper.Core.Tests" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="AssertBuilders\AssertMethods\Base\IUnaryAssertMethod.cs" />
-    <Compile Include="AssertBuilders\AssertMethods\Base\IBinaryAssertMethod.cs" />
-    <Compile Include="AssertBuilders\AssertMethods\Base\AssertMethodBase.cs" />
-    <Compile Include="AssertBuilders\AssertMethods\IsFalse.cs" />
-    <Compile Include="AssertBuilders\AssertMethods\IsTrue.cs" />
-    <Compile Include="AssertBuilders\AssertMethods\IsNotNull.cs" />
-    <Compile Include="AssertBuilders\AssertMethods\IsNull.cs" />
-    <Compile Include="AssertBuilders\AssertMethods\AreEqual.cs" />
-    <Compile Include="AssertBuilders\AssertMethods\AreNotEqual.cs" />
-    <Compile Include="AssertBuilders\AssertMethods\InstaceOfTypeInv.cs" />
-    <Compile Include="AssertBuilders\AssertMethods\InstaceOfType.cs" />
-    <Compile Include="AssertBuilders\AssertMethods\Fail.cs" />
-    <Compile Include="AssertBuilders\AssertMethods\Base\BinaryAssertMethodBase.cs" />
-    <Compile Include="AssertBuilders\AssertMethods\CollectionContainsWithICollection.cs" />
-    <Compile Include="AssertBuilders\AssertMethods\CollectionAreEqualWithICollection.cs" />
-    <Compile Include="AssertBuilders\AssertMethods\CollectionAreNotEqualWithICollection.cs" />
-    <Compile Include="AssertBuilders\AssertMethods\CollectionContainsWithIEnumerable.cs" />
-    <Compile Include="AssertBuilders\AssertMethods\CollectionAreEqualWithIEnumerable.cs" />
-    <Compile Include="AssertBuilders\AssertMethods\CollectionAreNotEqualWithIEnumerable.cs" />
-    <Compile Include="AssertBuilders\AssertBuilder.cs" />
-    <Compile Include="AssertBuilders\NUnit\CreateNUnitCoreBuilderCommand.cs" />
-    <Compile Include="AssertBuilders\MSTest\CreateMsTestBuilderCommand.cs" />
-    <Compile Include="AssertBuilders\NUnit\CreateNUnitBuilderCommand.cs" />
-    <Compile Include="AssertBuilders\IAssertBuilderFactory.cs" />
-    <Compile Include="AssertBuilders\AssertBuilderFactoryBase.cs" />
-    <Compile Include="AssertBuilders\AssertMethods\Base\UnaryAssertMethodBase.cs" />
-    <Compile Include="AssertBuilders\AssertMethods\StringContains.cs" />
-    <Compile Include="AssertBuilders\AssertMethods\StringStartsWith.cs" />
-    <Compile Include="AssertBuilders\AssertMethods\StringEndsWith.cs" />
-    <Compile Include="AssertBuilders\ICreateBuilderCommand.cs" />
-    <Compile Include="AssertBuilders\MSTest\MsTestAssertBuilderFactory.cs" />
-    <Compile Include="AssertBuilders\NUnit\NUnitAssertBuilderFactory.cs" />
-    <Compile Include="Expect.cs" />
-    <Compile Include="AssertBuilders\AssertBuilderFactory.cs" />
-    <Compile Include="AssertBuilders\IAssertBuilder.cs" />
-    <Compile Include="ExpressionConverters\AssertTrueAction.cs" />
-    <Compile Include="ExpressionConverters\BinaryExpressionEquals.cs" />
-    <Compile Include="ExpressionConverters\BinaryExpressionNotEquals.cs" />
-    <Compile Include="ExpressionConverters\BinaryExpressionWithConstantBase.cs" />
-    <Compile Include="ExpressionConverters\BinaryExpressionWithConstantLeftAction.cs" />
-    <Compile Include="ExpressionConverters\BinaryExpressionWithConstantRightAction.cs" />
-    <Compile Include="ExpressionConverters\CollectionContains.cs" />
-    <Compile Include="ExpressionConverters\EnumerableContains.cs" />
-    <Compile Include="ExpressionConverters\EnumerableEquals.cs" />
-    <Compile Include="ExpressionConverters\ExpressionTypeToAction.cs" />
-    <Compile Include="ExpressionConverters\ExpressionTypeToActionBase.cs" />
-    <Compile Include="ExpressionConverters\IExpressionTypeToAction.cs" />
-    <Compile Include="ExpressionConverters\StringContains.cs" />
-    <Compile Include="ExpressionConverters\IsInstanceOf.cs" />
-    <Compile Include="ExpressionConverters\NotInstanceOf.cs" />
-    <Compile Include="ExpressionConverters\StringEndsWith.cs" />
-    <Compile Include="Extensions\ExpressionExtensions.cs" />
-    <Compile Include="Extensions\MethodInfoExtensions.cs" />
-    <Compile Include="Extensions\TypeExtensions.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ExpressionConverters\StringStartsWith.cs" />
-    <Compile Include="UnaryNotExpressionToAction.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>
