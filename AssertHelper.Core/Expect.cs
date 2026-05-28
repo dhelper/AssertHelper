@@ -85,9 +85,21 @@ namespace AssertHelper.Core
 
         private static object digestStackTrace(Exception e)
         {
-            // TODO: clean up exception stack trace
+            var message = e.Message;
+            
+            // Strip internal framework stack frames to show only relevant assertion info
+            var stackTrace = e.StackTrace;
+            if (stackTrace != null)
+            {
+                var lines = stackTrace.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                var relevantLines = lines.Where(line => !line.Contains("AssertHelper.Core")).ToArray();
+                if (relevantLines.Any())
+                {
+                    return message + Environment.NewLine + string.Join(Environment.NewLine, relevantLines);
+                }
+            }
 
-            return e;
+            return message;
         }
 
         private static IEnumerable<Expression<Action>> GetAllAssertExpressions(Expression expression)

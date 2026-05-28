@@ -15,24 +15,31 @@ namespace AssertHelper.Core.AssertBuilders
             new CreateMsTestBuilderCommand()
         };
 
+        private static readonly object _lock = new object();
         protected static IAssertBuilder _assertBuilder;
 
         public static IAssertBuilder GetAssertBuilder()
         {
             if (_assertBuilder == null)
             {
-                var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-
-                var createBuilderCommand = CreateCommands.FirstOrDefault(command => assemblies.Any(assembly => assembly.GetName().Name == command.AssemblyName));
-                if (createBuilderCommand == null)
+                lock (_lock)
                 {
-                    var supportedFrameworks = CreateCommands.Select(command => command.FrameworkName).Distinct();
-                    throw new InvalidOperationException(
-                        "Unit testing framework not found. Currently supported: "
-                        + string.Join(", ", supportedFrameworks));
-                }
+                    if (_assertBuilder == null)
+                    {
+                        var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
-                _assertBuilder = createBuilderCommand.CreateAssertBuilder();
+                        var createBuilderCommand = CreateCommands.FirstOrDefault(command => assemblies.Any(assembly => assembly.GetName().Name == command.AssemblyName));
+                        if (createBuilderCommand == null)
+                        {
+                            var supportedFrameworks = CreateCommands.Select(command => command.FrameworkName).Distinct();
+                            throw new InvalidOperationException(
+                                "Unit testing framework not found. Currently supported: "
+                                + string.Join(", ", supportedFrameworks));
+                        }
+
+                        _assertBuilder = createBuilderCommand.CreateAssertBuilder();
+                    }
+                }
             }
 
             return _assertBuilder;
@@ -40,7 +47,10 @@ namespace AssertHelper.Core.AssertBuilders
 
         protected static void Reset()
         {
-            _assertBuilder = null;
+            lock (_lock)
+            {
+                _assertBuilder = null;
+            }
         }
     }
 }

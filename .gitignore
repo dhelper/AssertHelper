@@ -175,3 +175,7 @@ AssertHelper.jmconfig
 *.cache
 AssertHelper.NuGet/AssertHelper.1.0.2.nupkg
 *.nupkg
+
+
+# NuGet binary - should be installed via tooling, not committed
+.nuget/NuGet.exe
