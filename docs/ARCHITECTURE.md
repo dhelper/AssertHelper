@@ -131,6 +131,8 @@ The converters are checked in the following order. The first converter whose `Is
 | 12 | CollectionContains | `ICollection.Contains(value)` | CollectionAssert.Contains |
 | Fallback | AssertTrueAction | (any unmatched expression) | Assert.IsTrue |
 
+> **Note:** A `NotInstanceOf.cs` file exists in `ExpressionConverters/` but is **not registered** in the `_actionConverters` list in `Expect.cs`. This means it is dead/unused code and will never be reached during expression evaluation. It appears to be an unfinished or abandoned converter for handling `!(x is Type)` expressions.
+
 ---
 
 ## Expression Evaluation Flow
